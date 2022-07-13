@@ -65,12 +65,23 @@
       "Name": "Daraz",
       "Type": "Host",
       "HostCompanyID": "2"
+    }
+  ],
+  "Product": [
+    {
+      "id": "1",
+      "Name": "product1",
+      "SKU": "abc"
     },
     {
-      "id": "NQkWdllT",
-      "Name": "H1pf9_pINgT1LeLASogNDX3DmfTOJ1yuz1tZ5GqqBnInY8m6qcMzsNBN0nmuBNfKHWnXOYl7XctbszWX_alUkwuZ36DNi586r-3Z",
-      "Type": "m0-7b-XU2d4",
-      "HostCompanyID": "B06uOv2-XWdF9OumjtoWhx7j-SA-WLqQ12IwzCVIeHqNRObxyDiLvM-luAQ6vB9gU9d6MuEHI6qNv4OWR8Pn4M6eTDPueVLjauxg"
+      "id": "2",
+      "Name": "product2",
+      "SKU": "abc2"
+    },
+    {
+      "id": "LsWAQU3W",
+      "Name": "PUs0eHUHXGfDwO7KoVVt8xfy_fAntxVoM6SNSU5IO3nbM8Pwulgvm98R6fRLJJsJIBaDVx3xRvoKn-3JbcSVJyMcq_OnkhkgbBZP",
+      "SKU": "lrttDBhEVHpmNP5vHtum87E2"
     }
   ]
 }
