@@ -17,7 +17,7 @@ const optionOpenAPI = require("./openapi.json")
 
 const app = express();
 app.db = db;
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3001;
 const swaggerDocs = swaggerJsDoc(optionOpenAPI);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
