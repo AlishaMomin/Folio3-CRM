@@ -1,21 +1,4 @@
 {
-  "books": [
-    {
-      "id": "iEuOBYkU",
-      "title": "The Little Book of Semaphores",
-      "author": "Allen B. Downey "
-    },
-    {
-      "id": "ukjXyUuM",
-      "title": "The Elements of Programming Style",
-      "author": "Brian W. Kernighan and Phillip J. Plauger"
-    },
-    {
-      "id": "BDUDxb6F",
-      "title": "The New Turing Omnibus",
-      "author": "Alexander K. Dewdney"
-    }
-  ],
   "Role": [
     {
       "id": "1",
@@ -77,11 +60,28 @@
       "id": "2",
       "Name": "product2",
       "SKU": "abc2"
+    }
+  ],
+  "Order": [
+    {
+      "id": "1",
+      "Totalamount": "1000",
+      "Dateoforder": "10-06-2001",
+      "Lastdate": "12-08-1999",
+      "Transactiontype": "ABC",
+      "Referenceno ": "1234",
+      "Name": "ABCD",
+      "Invoicestatus": "ABC"
     },
     {
-      "id": "LsWAQU3W",
-      "Name": "PUs0eHUHXGfDwO7KoVVt8xfy_fAntxVoM6SNSU5IO3nbM8Pwulgvm98R6fRLJJsJIBaDVx3xRvoKn-3JbcSVJyMcq_OnkhkgbBZP",
-      "SKU": "lrttDBhEVHpmNP5vHtum87E2"
+      "id": "2",
+      "Totalamount": "2000",
+      "Dateoforder": "10-06-2001",
+      "Lastdate": "12-08-1999",
+      "Transactiontype": "XYZ",
+      "Referenceno ": "1234",
+      "Name": "WXXY",
+      "Invoicestatus": "XYZ"
     }
   ]
 }

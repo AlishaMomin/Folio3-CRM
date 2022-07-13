@@ -7,12 +7,12 @@ const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
 const adapter = new FileSync("db.json");
 const db = low(adapter);
-db.defaults({ books: [] }).write();
-// const booksRouter = require("./routes/books");
+
 const rolesRouter = require("./routes/roles");
 const usersRouter = require("./routes/users");
 const companyRouter = require("./routes/company");
 const productRouter = require("./routes/product");
+const orderRouter = require("./routes/order");
 
 const optionOpenAPI = require("./openapi.json")
 
@@ -27,7 +27,8 @@ app.use("/Role", rolesRouter);
 app.use("/User", usersRouter);
 app.use("/Company", companyRouter);
 app.use("/Product", productRouter);
-// app.use("/books", booksRouter);
+app.use("/Order", orderRouter);
+
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
