@@ -15,5 +15,42 @@
       "title": "The New Turing Omnibus",
       "author": "Alexander K. Dewdney"
     }
+  ],
+  "Role": [
+    {
+      "id": "1",
+      "RoleName": "Admin"
+    },
+    {
+      "id": "2",
+      "RoleName": "Users"
+    },
+    {
+      "id": "3",
+      "RoleName": "Company"
+    }
+  ],
+  "User": [
+    {
+      "id": "1",
+      "Name": "alisha",
+      "ContactNo": "03365333327",
+      "Email": "abc@gmail.com",
+      "Password": "abc123"
+    },
+    {
+      "id": "2",
+      "Name": "ibrahim",
+      "ContactNo": "03365000000",
+      "Email": "xyz@gmail.com",
+      "Password": "xyz123"
+    },
+    {
+      "id": "3",
+      "Name": "Momin",
+      "ContactNo": "03360000000",
+      "Email": "def@gmail.com",
+      "Password": "def123"
+    }
   ]
 }
