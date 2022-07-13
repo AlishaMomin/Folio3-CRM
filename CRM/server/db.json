@@ -52,5 +52,25 @@
       "Email": "def@gmail.com",
       "Password": "def123"
     }
+  ],
+  "Company": [
+    {
+      "id": "1",
+      "Name": "Folio3",
+      "Type": "Host",
+      "HostCompanyID": "1"
+    },
+    {
+      "id": "2",
+      "Name": "Daraz",
+      "Type": "Host",
+      "HostCompanyID": "2"
+    },
+    {
+      "id": "NQkWdllT",
+      "Name": "H1pf9_pINgT1LeLASogNDX3DmfTOJ1yuz1tZ5GqqBnInY8m6qcMzsNBN0nmuBNfKHWnXOYl7XctbszWX_alUkwuZ36DNi586r-3Z",
+      "Type": "m0-7b-XU2d4",
+      "HostCompanyID": "B06uOv2-XWdF9OumjtoWhx7j-SA-WLqQ12IwzCVIeHqNRObxyDiLvM-luAQ6vB9gU9d6MuEHI6qNv4OWR8Pn4M6eTDPueVLjauxg"
+    }
   ]
 }

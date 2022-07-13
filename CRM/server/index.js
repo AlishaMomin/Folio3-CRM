@@ -11,6 +11,7 @@ db.defaults({ books: [] }).write();
 // const booksRouter = require("./routes/books");
 const rolesRouter = require("./routes/roles");
 const usersRouter = require("./routes/users");
+const companyRouter = require("./routes/company");
 
 const optionOpenAPI = require("./openapi.json")
 
@@ -23,6 +24,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.use("/Role", rolesRouter);
 app.use("/User", usersRouter);
+app.use("/Company", companyRouter);
 // app.use("/books", booksRouter);
 app.use(cors());
 app.use(express.json());
