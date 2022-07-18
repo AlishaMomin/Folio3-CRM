@@ -48,6 +48,7 @@ const HeaderStyle = styled('header')(({ theme }) => ({
 
 const SectionStyle = styled(Card)(({ theme }) => ({
     width: '100%',
+    height: "100%",
     maxWidth: 464,
     display: 'flex',
     flexDirection: 'column',
@@ -110,13 +111,10 @@ export default function AddCompany() {
     return (
         <Page title="Add Host Company">
             <RootStyle>
-                <HeaderStyle>
-                    <Logo />
-                </HeaderStyle>
-
+            
                 {mdUp && (
                     <SectionStyle>
-                        <img src="/static/illustrations/crm.jpg" alt="crm" />
+                        <img src="/static/illustrations/bg.jpg" alt="crm" />
                     </SectionStyle>
                 )}
 
