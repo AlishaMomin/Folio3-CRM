@@ -16,6 +16,7 @@ import AddClientCompany from './pages/AddClientCompany';
 import AdminHome from "./pages/AdminHome";
 import HostDashboard from "./pages/HostDashboard";
 import ClientDashboard from './pages/ClientDashboard';
+import AddCompany from "./pages/AddCompany";
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -31,6 +32,7 @@ export default function Router() {
         { path: 'adminhome', element: <AdminHome /> },
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
+        { path: 'addcompany', element: <AddCompany /> },
         
       ],
     },
