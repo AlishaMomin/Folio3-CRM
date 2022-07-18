@@ -22,6 +22,11 @@ const navConfig = [
     icon: getIcon('eva:pie-chart-2-fill'),
   },
   {
+    title: 'Client Dashboard',
+    path: '/dashboard/clientdashboard',
+    icon: getIcon('eva:pie-chart-2-fill'),
+  },
+  {
     title: 'Add Host Company',
     path: '/addhostcompany',
     icon: getIcon('eva:file-text-fill'),

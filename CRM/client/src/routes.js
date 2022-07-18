@@ -15,6 +15,7 @@ import AddHostCompany from "./pages/AddHostCompany";
 import AddClientCompany from './pages/AddClientCompany';
 import AdminHome from "./pages/AdminHome";
 import HostDashboard from "./pages/HostDashboard";
+import ClientDashboard from './pages/ClientDashboard';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -25,6 +26,7 @@ export default function Router() {
       children: [
         { path: 'app', element: <DashboardApp /> },
         { path: 'hostdashboard', element: <HostDashboard /> },
+        { path: 'clientdashboard', element: <ClientDashboard /> },
         { path: 'user', element: <User /> },
         { path: 'adminhome', element: <AdminHome /> },
         { path: 'products', element: <Products /> },
