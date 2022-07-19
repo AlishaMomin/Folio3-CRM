@@ -14,6 +14,7 @@ export default function App() {
       <ScrollToTop />
       <BaseOptionChartStyle />
       <Router />
+      
     </ThemeProvider>
   );
 }
