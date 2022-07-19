@@ -3,6 +3,7 @@ import Router from './routes';
 // theme
 import ThemeProvider from './theme';
 // components
+// components
 import ScrollToTop from './components/ScrollToTop';
 import { BaseOptionChartStyle } from './components/chart/BaseOptionChart';
 
