@@ -17,8 +17,9 @@ import AdminHome from "./pages/AdminHome";
 import HostDashboard from "./pages/HostDashboard";
 import ClientDashboard from './pages/ClientDashboard';
 import AddCompany from "./pages/AddCompany";
-import ClientTransactions from "./pages/ClientTransactions"
-import ClientRecievables from "./pages/ClientRecievables"
+import ClientTransactions from "./pages/ClientTransactions";
+import ClientRecievables from "./pages/ClientRecievables";
+import HostProduct from "./pages/HostProduct";
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -33,6 +34,7 @@ export default function Router() {
         { path: 'user', element: <User /> },
         { path: 'adminhome', element: <AdminHome /> },
         { path: 'products', element: <Products /> },
+        { path: 'hostproducts', element: <HostProduct /> },
         { path: 'blog', element: <Blog /> },
         { path: 'addhostcompany', element: <AddHostCompany /> },
         { path: 'addclientcompany', element: <AddClientCompany /> },
