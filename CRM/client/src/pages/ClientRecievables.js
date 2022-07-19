@@ -24,18 +24,19 @@ import Label from '../components/Label';
 import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/adminhome';
+import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/clientrecievables';
 // mock
-import USERLIST from '../_mock/company';
+import USERLIST from '../_mock/recievables';
 
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'CompanyName', label: 'Company Name', alignRight: false },
-  { id: 'noofclient', label: 'No. Of Client', alignRight: false},
-  { id: 'nameC1', label: 'Contact Person 1', alignRight: false },
-  { id: 'nameC2', label: 'Contact Person 2', alignRight: false },
-  { id: 'status', label: 'Status',alignRight: false },
+  { id: 'FromCompany', label: 'Recieve From', alignRight: false },  
+  { id: 'OrderName', label: 'Order Name', alignRight: false },
+  { id: 'Amount', label: 'Total Amount', alignRight: false },
+  { id: 'OrderDate', label: 'Date Of Order', alignRight: false },
+  { id: 'LastDate', label: 'Last Date', alignRight: false },
+  { id: 'InvoiceStatus', label: 'Status', alignRight: false },
   { id: '' },
 ];
 
@@ -139,9 +140,6 @@ export default function AdminHome() {
           <Typography variant="h4" gutterBottom>
             User
           </Typography>
-          <Button variant="contained" component={RouterLink} to="/dashboard/addhostcompany" startIcon={<Iconify icon="eva:plus-fill" />}>
-            New Company
-          </Button>
         </Stack>
 
         <Card>
@@ -161,28 +159,26 @@ export default function AdminHome() {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { CompanyName, noofclient, nameC1, phoneC1, nameC2, phoneC2, status} = row;
-                    const isItemSelected = selected.indexOf(CompanyName) !== -1;
+                    const { id,FromCompany,OrderName, Amount,  OrderDate, LastDate, InvoiceStatus} = row;
+                    const isItemSelected = selected.indexOf(FromCompany) !== -1;
 
                     return (
                       <TableRow
                         hover
-                        // key={id}
+                        key={id}
                         tabIndex={-1}
                         role="checkbox"
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
-                        <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, CompanyName)} />
-                        </TableCell>
-                        <TableCell align="left">{CompanyName}</TableCell>
-                        <TableCell align="left">{noofclient}</TableCell>
-                        <TableCell align="left">{nameC1}::{phoneC1}</TableCell>
-                        <TableCell align="left">{nameC2}::{phoneC2}</TableCell>                          
+                        <TableCell align="left">{FromCompany}</TableCell>
+                        <TableCell align="left">{OrderName}</TableCell>
+                        <TableCell align="left">{Amount}</TableCell>
+                        <TableCell align="left">{OrderDate}</TableCell>
+                        <TableCell align="left">{LastDate}</TableCell>                          
                         <TableCell align="left">
-                          <Label variant="ghost" color={(status === 'banned' && 'error') || 'success'}>
-                            {sentenceCase(status)}
+                          <Label variant="ghost" color={(InvoiceStatus === 'Unpaid' && 'error') || 'success'}>
+                            {sentenceCase(InvoiceStatus)}
                           </Label>
                         </TableCell>
 

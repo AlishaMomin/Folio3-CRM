@@ -33,12 +33,22 @@ const navConfig = [
   },
   {
     title: 'Add Host Company',
-    path: '/addhostcompany',
+    path: '/dashboard/addhostcompany',
     icon: getIcon('eva:file-text-fill'),
   },
   {
     title: 'Add Client Company',
-    path: '/addclientcompany',
+    path: '/dashboard/addclientcompany',
+    icon: getIcon('eva:file-text-fill'),
+  },
+  {
+    title: 'Client Transactions',
+    path: '/dashboard/clienttransactions',
+    icon: getIcon('eva:file-text-fill'),
+  },
+  {
+    title: 'Client Recievables',
+    path: '/dashboard/clientrecievables',
     icon: getIcon('eva:file-text-fill'),
   },
   {

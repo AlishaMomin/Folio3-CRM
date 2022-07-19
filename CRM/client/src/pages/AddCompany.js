@@ -73,28 +73,35 @@ export default function AddCompany() {
 
     const mdUp = useResponsive('up', 'md');
     const navigate = useNavigate();
+    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
-    const [showPassword, setShowPassword] = useState(false);
 
-    const LoginSchema = Yup.object().shape({
-        companyName: Yup.string().required('Company name required'),
-        firstName: Yup.string().required('First name required'),
-        lastName: Yup.string().required('Last name required'),
-        email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-        phone: Yup.string().required('phone is required'),
+    const CompanySchema = Yup.object().shape({
+        CompanyName: Yup.string().required('Company name required'),
+        FirstNameC1: Yup.string().required('First name required'),
+        LastNameC1: Yup.string().required('Last name required'),
+        EmailC1: Yup.string().email('Email must be a valid email address').required('Email is required'),
+        PhoneC1: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
+        FirstNameC2: Yup.string().required('First name required'),
+        LastNameC2: Yup.string().required('Last name required'),
+        EmailC2: Yup.string().email('Email must be a valid email address').required('Email is required'),
+        PhoneC2: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
     });
 
     const defaultValues = {
-        companyName: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        remember: true,
+        CompanyName: '',
+        FirstNameC1: '',
+        LastNameC1: '',
+        EmailC1: '',
+        PhoneC1: '',
+        FirstNameC2: '',
+        LastNameC2: '',
+        EmailC2: '',
+        PhoneC2: ''
     };
 
     const methods = useForm({
-        resolver: yupResolver(LoginSchema),
+        resolver: yupResolver(CompanySchema),
         defaultValues,
     });
 
@@ -111,7 +118,7 @@ export default function AddCompany() {
     return (
         <Page title="Add Host Company">
             <RootStyle>
-            
+                
                 {mdUp && (
                     <SectionStyle>
                         <img src="/static/illustrations/bg.jpg" alt="crm" />
@@ -121,43 +128,33 @@ export default function AddCompany() {
                 <Container maxWidth="sm">
                     <ContentStyle>
                         <Typography variant="h4" gutterBottom style={{ textAlignVertical: "center", textAlign: "center", }}>
-                            Contact Form
+                            New Company
                         </Typography>
 
                         <Typography sx={{ color: 'text.secondary', mb: 1 }} style={{ textAlignVertical: "center", textAlign: "center", }}>Enter your details below.</Typography>
                         <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
-                            <h3>Person 1</h3>
                             <Stack spacing={2}>
-                                <RHFTextField name="companyName" label="Company name" />
+                                <RHFTextField name="CompanyName" label="Company name" />
+                                <h3 style={{ textAlignVertical: "center", textAlign: "center", }}>Contact Person 1</h3>
                                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                                    <RHFTextField name="firstName" label="First name" />
-                                    <RHFTextField name="lastName" label="Last name" />
+                                    <RHFTextField name="FirstNameC1" label="First name" />
+                                    <RHFTextField name="LastNameC1" label="Last name" />
                                 </Stack>
-                                <RHFTextField name="email" label="Email address" />
-
-                                <RHFTextField name="phone" label="phone" />
-                            </Stack>
-
-                            <h3>Person 2</h3>
-                            <Stack spacing={2}>
-                                <RHFTextField name="companyName" label="Company name" />
+                                <RHFTextField name="EmailC1" label="Email address" />
+                                <RHFTextField name="PhoneC1" label="Phone Number" />
+                                <h3 style={{ textAlignVertical: "center", textAlign: "center", }}>Contact Person 2</h3>
                                 <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                                    <RHFTextField name="firstName" label="First name" />
-                                    <RHFTextField name="lastName" label="Last name" />
+                                    <RHFTextField name="FirstNameC2" label="First name" />
+                                    <RHFTextField name="LastNameC2" label="Last name" />
                                 </Stack>
-                                <RHFTextField name="email" label="Email address" />
-
-                                <RHFTextField name="phone" label="phone" />
+                                <RHFTextField name="EmailC2" label="Email address" />
+                                <RHFTextField name="PhoneC2" label="Phone Number" />
                             </Stack>
-
-
+                            <br/>
                             <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
                                 SUBMIT
                             </LoadingButton>
                         </FormProvider>
-
-
-
                     </ContentStyle>
 
                 </Container>

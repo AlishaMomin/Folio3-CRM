@@ -17,6 +17,8 @@ import AdminHome from "./pages/AdminHome";
 import HostDashboard from "./pages/HostDashboard";
 import ClientDashboard from './pages/ClientDashboard';
 import AddCompany from "./pages/AddCompany";
+import ClientTransactions from "./pages/ClientTransactions"
+import ClientRecievables from "./pages/ClientRecievables"
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -32,7 +34,11 @@ export default function Router() {
         { path: 'adminhome', element: <AdminHome /> },
         { path: 'products', element: <Products /> },
         { path: 'blog', element: <Blog /> },
+        { path: 'addhostcompany', element: <AddHostCompany /> },
+        { path: 'addclientcompany', element: <AddClientCompany /> },
         { path: 'addcompany', element: <AddCompany /> },
+        { path: 'clienttransactions', element: <ClientTransactions />},
+        { path: 'clientrecievables', element: <ClientRecievables /> },
         
       ],
     },
@@ -43,9 +49,7 @@ export default function Router() {
         { path: '/', element: <Navigate to="/dashboard/app" /> },
         { path: 'login', element: <Login /> },
         { path: 'register', element: <Register /> },
-        { path: 'signin', element: <Signin /> },
-        { path: 'addhostcompany', element: <AddHostCompany /> },
-        { path: 'addclientcompany', element: <AddClientCompany /> },
+        { path: 'signin', element: <Signin /> }, 
         { path: '404', element: <NotFound /> },
         { path: '*', element: <Navigate to="/404" /> },
       ],

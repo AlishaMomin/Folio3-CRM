@@ -1,14 +1,14 @@
 import { Link as RouterLink } from 'react-router-dom';
 // @mui
 import { styled } from '@mui/material/styles';
-import { Card, Link, Container, Typography } from '@mui/material';
+import { Card } from '@mui/material';
 // hooks
 import useResponsive from '../hooks/useResponsive';
 // components
 import Page from '../components/Page';
 import Logo from '../components/Logo';
 // sections
-import { AddHostCompanyForm } from '../sections/auth/addhostcompany';
+import { AddHostCompanyForm } from '../sections/@dashboard/addhostcompany';
 
 // ----------------------------------------------------------------------
 
@@ -43,16 +43,6 @@ const SectionStyle = styled(Card)(({ theme }) => ({
   margin: theme.spacing(2, 0, 2, 2),
 }));
 
-const ContentStyle = styled('div')(({ theme }) => ({
-  maxWidth: 480,
-  margin: 'auto',
-  minHeight: '100vh',
-  display: 'flex',
-  justifyContent: 'center',
-  flexDirection: 'column',
-  padding: theme.spacing(12, 0),
-}));
-
 // ----------------------------------------------------------------------
 
 export default function AddHostCompany() {
@@ -73,18 +63,8 @@ export default function AddHostCompany() {
           </SectionStyle>
         )}
 
-        <Container maxWidth="sm">
-          <ContentStyle>
-            <Typography variant="h4" gutterBottom style={{textAlignVertical: "center",textAlign: "center",}}>
-              Contact Form
-            </Typography>
+        <AddHostCompanyForm />
 
-            <Typography sx={{ color: 'text.secondary', mb: 1 }} style={{textAlignVertical: "center",textAlign: "center",}}>Enter your details below.</Typography>
-
-            <AddHostCompanyForm />
-
-          </ContentStyle>
-        </Container>
       </RootStyle>
     </Page>
   );

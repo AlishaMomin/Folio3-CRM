@@ -18,20 +18,18 @@ export default function SignInForm() {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const RegisterSchema = Yup.object().shape({
-    UserName: Yup.string().required('First name required'),
-    email: Yup.string().email('Email must be a valid email address').required('Email is required'),
+  const SignInSchema = Yup.object().shape({
+    email_username: Yup.string().required('FirstName or Email is required'),
     password: Yup.string().required('Password is required'),
   });
 
   const defaultValues = {
-    UserName: '',
-    email: '',
+    email_username: '',
     password: '',
   };
 
   const methods = useForm({
-    resolver: yupResolver(RegisterSchema),
+    resolver: yupResolver(SignInSchema),
     defaultValues,
   });
 
@@ -41,7 +39,7 @@ export default function SignInForm() {
   } = methods;
 
   const onSubmit = async () => {
-    navigate('/dashboard', { replace: true });
+    navigate('/dashboard/app', { replace: true });
   };
 
   return (
