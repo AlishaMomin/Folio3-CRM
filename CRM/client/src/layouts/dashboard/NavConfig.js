@@ -17,11 +17,6 @@ const navConfig = [
     icon: getIcon('eva:shopping-bag-fill'),
   },
   {
-    title: 'Add Company',
-    path: '/dashboard/addcompany',
-    icon: getIcon('eva:pie-chart-2-fill'),
-  },
-  {
     title: 'Admin Home',
     path: '/dashboard/adminhome',
     icon: getIcon('eva:people-fill'),
@@ -40,16 +35,6 @@ const navConfig = [
     title: 'Client Dashboard',
     path: '/dashboard/clientdashboard',
     icon: getIcon('eva:pie-chart-2-fill'),
-  },
-  {
-    title: 'Add Host Company',
-    path: '/dashboard/addhostcompany',
-    icon: getIcon('eva:file-text-fill'),
-  },
-  {
-    title: 'Add Client Company',
-    path: '/dashboard/addclientcompany',
-    icon: getIcon('eva:file-text-fill'),
   },
   {
     title: 'Client Transactions',
