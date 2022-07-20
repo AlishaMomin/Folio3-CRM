@@ -14,6 +14,7 @@ import Signin from "./pages/Signin";
 import AddHostCompany from "./pages/AddHostCompany";
 import AddClientCompany from './pages/AddClientCompany';
 import AdminHome from "./pages/AdminHome";
+import ClientCompanies from "./pages/ClientCompanies"
 import HostDashboard from "./pages/HostDashboard";
 import ClientDashboard from './pages/ClientDashboard';
 import AddCompany from "./pages/AddCompany";
@@ -33,6 +34,7 @@ export default function Router() {
         { path: 'clientdashboard', element: <ClientDashboard /> },
         { path: 'user', element: <User /> },
         { path: 'adminhome', element: <AdminHome /> },
+        { path: 'clientcompanies', element: <ClientCompanies /> },
         { path: 'products', element: <Products /> },
         { path: 'hostproducts', element: <HostProduct /> },
         { path: 'blog', element: <Blog /> },
@@ -48,7 +50,7 @@ export default function Router() {
       path: '/',
       element: <LogoOnlyLayout />,
       children: [
-        { path: '/', element: <Navigate to="/dashboard/app" /> },
+        { path: '/', element: <Navigate to="/signin" /> },
         { path: 'login', element: <Login /> },
         { path: 'register', element: <Register /> },
         { path: 'signin', element: <Signin /> }, 
