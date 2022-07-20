@@ -172,7 +172,7 @@ export default function AdminHome() {
                                                 </TableCell>
                                                 <TableCell align="left">{name}</TableCell>
                                                 <TableCell align="left">{NoofSoldItems}</TableCell>
-                                                <TableCell align="left">{TotalSale}</TableCell>
+                                                <TableCell align="left">$ {TotalSale}</TableCell>
 
 
                                                 <TableCell align="right">

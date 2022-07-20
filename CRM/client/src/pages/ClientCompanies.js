@@ -34,7 +34,9 @@ const TABLE_HEAD = [
   { id: 'name', label: 'Company Name', alignRight: false },
   { id: 'noofclient', label: 'No. Of Client', alignRight: false},
   { id: 'nameC1', label: 'Contact Person 1', alignRight: false },
+  { id: '' },
   { id: 'nameC2', label: 'Contact Person 2', alignRight: false },
+  { id: '' },
   { id: 'status', label: 'Status',alignRight: false },
   { id: '' },
 ];
@@ -178,8 +180,10 @@ export default function ClientCompanies() {
                         </TableCell>
                         <TableCell align="left">{name}</TableCell>
                         <TableCell align="left">{noofclient}</TableCell>
-                        <TableCell align="left">{nameC1}::{phoneC1}</TableCell>
-                        <TableCell align="left">{nameC2}::{phoneC2}</TableCell>                          
+                        <TableCell align="left">{nameC1}</TableCell>
+                        <TableCell align="left">{phoneC1}</TableCell>
+                        <TableCell align="left">{nameC2}</TableCell>
+                        <TableCell align="left">{phoneC2}</TableCell>                        
                         <TableCell align="left">
                           <Label variant="ghost" color={(status === 'banned' && 'error') || 'success'}>
                             {sentenceCase(status)}
