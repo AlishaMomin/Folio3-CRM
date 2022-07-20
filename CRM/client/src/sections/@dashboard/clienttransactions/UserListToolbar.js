@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import { Toolbar, Tooltip, IconButton, Typography, OutlinedInput, InputAdornment } from '@mui/material';
 // component
+import {PaymentPopover} from '../Popovers';
 import Iconify from '../../../components/Iconify';
 
 // ----------------------------------------------------------------------
@@ -64,9 +65,7 @@ export default function UserListToolbar({ numSelected, filterName, onFilterName 
 
       {numSelected > 0 ? (
         <Tooltip title="Pay" href="/dashboard">
-          <IconButton>
-            <Iconify icon="fa6-brands:cc-amazon-pay"/>
-          </IconButton>
+          <PaymentPopover/>
         </Tooltip>
       ) : (
         <Tooltip title="Filter list">

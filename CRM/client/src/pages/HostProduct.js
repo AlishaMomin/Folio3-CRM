@@ -135,7 +135,7 @@ export default function AdminHome() {
             <Container>
                 <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
                     <Typography variant="h4" gutterBottom>
-                        User
+                        PRODUCTS
                     </Typography>
                 </Stack>
 

@@ -139,8 +139,8 @@ export default function ClientCompanies() {
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            User
-          </Typography>
+            COMPANIES
+          </Typography> 
           <Button variant="contained" component={RouterLink} to="/dashboard/addclientcompany" startIcon={<Iconify icon="eva:plus-fill" />}>
             New Company
           </Button>

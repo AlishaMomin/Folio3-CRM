@@ -12,7 +12,7 @@ const navConfig = [
     icon: getIcon('eva:pie-chart-2-fill'),
   },
   {
-    title: 'Hostproduct',
+    title: 'Host Products',
     path: '/dashboard/hostproducts',
     icon: getIcon('eva:shopping-bag-fill'),
   },
