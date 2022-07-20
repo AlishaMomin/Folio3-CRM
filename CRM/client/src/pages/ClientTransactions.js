@@ -31,7 +31,7 @@ import USERLIST from '../_mock/order';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'OrderName', label: 'Order Name', alignRight: false },
+  { id: 'name', label: 'Order Name', alignRight: false },
   { id: 'Amount', label: 'Total Amount', alignRight: false },
   { id: 'OrderDate', label: 'Date Of Order', alignRight: false },
   { id: 'LastDate', label: 'Last Date', alignRight: false },
@@ -158,8 +158,8 @@ export default function AdminHome() {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { OrderName, Amount,  OrderDate, LastDate, InvoiceStatus} = row;
-                    const isItemSelected = selected.indexOf(OrderName) !== -1;
+                    const { name, Amount,  OrderDate, LastDate, InvoiceStatus} = row;
+                    const isItemSelected = selected.indexOf(name) !== -1;
 
                     return (
                       <TableRow
@@ -171,9 +171,9 @@ export default function AdminHome() {
                         aria-checked={isItemSelected}
                       >
                         <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, OrderName)} />
+                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, name)} />
                         </TableCell>
-                        <TableCell align="left">{OrderName}</TableCell>
+                        <TableCell align="left">{name}</TableCell>
                         <TableCell align="left">{Amount}</TableCell>
                         <TableCell align="left">{OrderDate}</TableCell>
                         <TableCell align="left">{LastDate}</TableCell>                          

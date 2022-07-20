@@ -5,7 +5,7 @@ import { sample } from 'lodash';
 
 const Orders = [...Array(30)].map((_, index) => ({
   id: faker.datatype.uuid(),
-  ProductName: sample(['Nike Air Force 1 NDESTRUKT',
+  name: sample(['Nike Air Force 1 NDESTRUKT',
   'Nike Space Hippie 04',
   'Nike Air Zoom Pegasus 37 A.I.R. Chaz Bear',
   'Nike Blazer Low 77 Vintage',

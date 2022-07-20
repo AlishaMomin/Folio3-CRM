@@ -31,7 +31,7 @@ import USERLIST from '../_mock/hostproducts';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-    { id: 'ProductName', label: 'Product Name', alignRight: false },
+    { id: 'name', label: 'Product Name', alignRight: false },
     { id: 'NoofSoldItems', label: 'No of Sold Items', alignRight: false },
     { id: 'TotalSale', label: 'Total Sale', alignRight: false },
     { id: '' },
@@ -156,8 +156,8 @@ export default function AdminHome() {
                                 />
                                 <TableBody>
                                     {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                                        const { id, ProductName, NoofSoldItems, TotalSale } = row;
-                                        const isItemSelected = selected.indexOf(ProductName) !== -1;
+                                        const { id, name, NoofSoldItems, TotalSale } = row;
+                                        const isItemSelected = selected.indexOf(name) !== -1;
 
                                         return (
                                             <TableRow
@@ -168,9 +168,9 @@ export default function AdminHome() {
                                                 selected={isItemSelected}
                                                 aria-checked={isItemSelected}
                                             ><TableCell padding="checkbox">
-                                                    <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, ProductName)} />
+                                                    <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, name)} />
                                                 </TableCell>
-                                                <TableCell align="left">{ProductName}</TableCell>
+                                                <TableCell align="left">{name}</TableCell>
                                                 <TableCell align="left">{NoofSoldItems}</TableCell>
                                                 <TableCell align="left">{TotalSale}</TableCell>
 

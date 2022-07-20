@@ -31,7 +31,7 @@ import USERLIST from '../_mock/company';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'CompanyName', label: 'Company Name', alignRight: false },
+  { id: 'name', label: 'Company Name', alignRight: false },
   { id: 'noofclient', label: 'No. Of Client', alignRight: false},
   { id: 'nameC1', label: 'Contact Person 1', alignRight: false },
   { id: 'nameC2', label: 'Contact Person 2', alignRight: false },
@@ -161,22 +161,22 @@ export default function AdminHome() {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { CompanyName, noofclient, nameC1, phoneC1, nameC2, phoneC2, status} = row;
-                    const isItemSelected = selected.indexOf(CompanyName) !== -1;
+                    const { id, name, noofclient, nameC1, phoneC1, nameC2, phoneC2, status} = row;
+                    const isItemSelected = selected.indexOf(name) !== -1;
 
                     return (
                       <TableRow
                         hover
-                        // key={id}
+                        key={id}
                         tabIndex={-1}
                         role="checkbox"
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
                         <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, CompanyName)} />
+                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, name)} />
                         </TableCell>
-                        <TableCell align="left">{CompanyName}</TableCell>
+                        <TableCell align="left">{name}</TableCell>
                         <TableCell align="left">{noofclient}</TableCell>
                         <TableCell align="left">{nameC1}::{phoneC1}</TableCell>
                         <TableCell align="left">{nameC2}::{phoneC2}</TableCell>                          

@@ -31,7 +31,7 @@ import USERLIST from '../_mock/recievables';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'FromCompany', label: 'Recieve From', alignRight: false },  
+  { id: 'name', label: 'Recieve From', alignRight: false },  
   { id: 'OrderName', label: 'Order Name', alignRight: false },
   { id: 'Amount', label: 'Total Amount', alignRight: false },
   { id: 'OrderDate', label: 'Date Of Order', alignRight: false },
@@ -159,8 +159,8 @@ export default function AdminHome() {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id,FromCompany,OrderName, Amount,  OrderDate, LastDate, InvoiceStatus} = row;
-                    const isItemSelected = selected.indexOf(FromCompany) !== -1;
+                    const { id,name,OrderName, Amount,  OrderDate, LastDate, InvoiceStatus} = row;
+                    const isItemSelected = selected.indexOf(name) !== -1;
 
                     return (
                       <TableRow
@@ -171,7 +171,7 @@ export default function AdminHome() {
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
-                        <TableCell align="left">{FromCompany}</TableCell>
+                        <TableCell align="left">{name}</TableCell>
                         <TableCell align="left">{OrderName}</TableCell>
                         <TableCell align="left">{Amount}</TableCell>
                         <TableCell align="left">{OrderDate}</TableCell>

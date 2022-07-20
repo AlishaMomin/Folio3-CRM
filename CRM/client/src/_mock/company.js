@@ -5,7 +5,7 @@ import { sample } from 'lodash';
 
 const companies = [...Array(24)].map((_, index) => ({
   id: faker.datatype.uuid(),
-  CompanyName: faker.company.companyName(),
+  name: faker.company.companyName(),
   noofclient: faker.datatype.number(),
   nameC1: faker.name.findName(),
   nameC2: faker.name.findName(),
