@@ -15,15 +15,13 @@ import { FormProvider, RHFTextField } from '../../../components/hook-form';
 
 export default function PaymentForm() {
   const navigate = useNavigate();
-  const [product,setProduct] = useState({productId:0,productName:'',productCategory:'',productPrice:0});
   const ClientTransactionsSchema = Yup.object().shape({
     ReferenceNo : Yup.string().required('Reference Number is Required'),
-    TransactionType: Yup.string().required('Transaction Type is Required'),
   });
 
   const defaultValues = {
-    email_username: '',
-    password: '',
+    ReferenceNo: '',
+    TransactionType: '',
   };
 
   const methods = useForm({
@@ -41,21 +39,17 @@ export default function PaymentForm() {
   const onSubmit = async () => {
     navigate('/dashboard/clienttransactions', { replace: true });
   };
-  function favTutorial() {  
-    const mylist = document.getElementById("myList");  
-    document.getElementById("favourite").value = mylist.options[mylist.selectedIndex].text;  
-    }
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
       
-      <select id = "myList" onChange = "favTutorial()" >  
-      <option> TRANSACTION TYPE</option>  
-      <option> CASH </option>  
-      <option> CHEQUE </option>  
-      <option> ONLINE </option>
+      <select name = "TransactionType">  
+      <option value = "" >Transaction Type</option>
+      <option value = "cash"> CASH </option>  
+      <option value = "cheque"> CHEQUE </option>  
+      <option value = "online"> ONLINE </option>
       </select>
-        <RHFTextField name="ReferenceNo" label="ReferenceNo" />
+        <RHFTextField name="ReferenceNo" label="Reference" />
         <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
           PAY
         </LoadingButton>
