@@ -1,8 +1,8 @@
 {
-  "name": "@minimal/material-kit-react",
-  "author": "minimals.cc",
-  "licence": "MIT",
-  "version": "1.5.0",
+  "name": "team-3",
+  "author": "team3.cc",
+  "licence": "Nahi Hai",
+  "version": "1.0.0",
   "private": false,
   "scripts": {
     "start": "react-scripts start",
