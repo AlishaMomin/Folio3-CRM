@@ -17,15 +17,14 @@ export default function SignInForm() {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
-
   const SignInSchema = Yup.object().shape({
-    email_username: Yup.string().required('FirstName or Email is required'),
-    password: Yup.string().required('Password is required'),
+    EmailUsername: Yup.string().required('FirstName or Email is required'),
+    Password: Yup.string().required('Password is required'),
   });
 
   const defaultValues = {
-    email_username: '',
-    password: '',
+    EmailUsername: '',
+    Password: '',
   };
 
   const methods = useForm({
@@ -39,17 +38,19 @@ export default function SignInForm() {
   } = methods;
 
   const onSubmit = async () => {
-    navigate('/dashboard/app', { replace: true });
+    
+      navigate('/dashboard/app', { replace: true });  
+    
   };
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
 
-        <RHFTextField name="email_username" label="Email address/UserName" />
+        <RHFTextField name="EmailUsername" label="Email address/UserName" id = "EmailUserName"/>
 
         <RHFTextField
-          name="password"
+          name="Password"
           label="Password"
           type={showPassword ? 'text' : 'password'}
           InputProps={{
