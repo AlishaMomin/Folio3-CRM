@@ -24,7 +24,7 @@ export default function Logo({ disabledLink = false, sx }) {
   // const logo = <Box component="img" src="/static/logo.svg" sx={{ width: 40, height: 40, ...sx }} />
 
   const logo = (
-    <Box sx={{ width: 60, height: 60, ...sx }}>
+    <Box sx={{ width: 80, height: 80, ...sx }}>
       <img  src = "/static/icons/crm.png" alt = "photoURL"/>
     </Box>
   );
