@@ -42,13 +42,12 @@ export default function PaymentForm() {
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
-      
-      <select name = "TransactionType">  
-      <option value = "" >Transaction Type</option>
-      <option value = "cash"> CASH </option>  
-      <option value = "cheque"> CHEQUE </option>  
-      <option value = "online"> ONLINE </option>
-      </select>
+        <select name = "TransactionType">  
+        <option value = "" >Transaction Type</option>
+        <option value = "cash"> CASH </option>  
+        <option value = "cheque"> CHEQUE </option>  
+        <option value = "online"> ONLINE </option>
+        </select>
         <RHFTextField name="ReferenceNo" label="Reference" />
         <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
           PAY
