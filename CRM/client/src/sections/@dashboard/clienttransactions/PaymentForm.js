@@ -49,7 +49,6 @@ export default function PaymentForm() {
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
       
-      <b> Select you favourite tutorial site using dropdown list </b>  
       <select id = "myList" onChange = "favTutorial()" >  
       <option> TRANSACTION TYPE</option>  
       <option> CASH </option>  

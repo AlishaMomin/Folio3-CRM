@@ -46,11 +46,11 @@ const navConfig = [
     path: '/dashboard/clientrecievables',
     icon: getIcon('eva:file-text-fill'),
   },
-  // {
-  //   title: 'Signin',
-  //   path: '/signin',
-  //   icon: getIcon('eva:lock-fill'),
-  // },
+  {
+    title: 'LogOut',
+    path: '/signin',
+    icon: getIcon('eva:lock-fill'),
+  },
   // {
   //   title: 'user',
   //   path: '/dashboard/user',
@@ -76,11 +76,11 @@ const navConfig = [
   //   path: '/register',
   //   icon: getIcon('eva:person-add-fill'),
   // },
-  {
-    title: 'Not found',
-    path: '/404',
-    icon: getIcon('eva:alert-triangle-fill'),
-  },
+  // {
+  //   title: 'Not found',
+  //   path: '/404',
+  //   icon: getIcon('eva:alert-triangle-fill'),
+  // },
 ];
 
 export default navConfig;
