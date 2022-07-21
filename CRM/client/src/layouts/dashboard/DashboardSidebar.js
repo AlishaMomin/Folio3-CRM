@@ -12,9 +12,14 @@ import useResponsive from '../../hooks/useResponsive';
 import Logo from '../../components/Logo';
 import Scrollbar from '../../components/Scrollbar';
 import NavSection from '../../components/NavSection';
+import AdminNavSection from '../../components/AdminNavSection';
+import HostNavSection from '../../components/HostNavSection';
+import ClientNavSection from '../../components/ClientNavSection';
 //
 import navConfig from './NavConfig';
-
+import adminNavConfig from './adminNavConfig';
+import hostNavConfig from './hostNavConfig';
+import clientNavConfig from './clientNavConfig';
 // ----------------------------------------------------------------------
 
 const DRAWER_WIDTH = 280;
@@ -79,8 +84,11 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
           </AccountStyle>
         </Link>
       </Box>
-
-      <NavSection navConfig={navConfig} />
+      {/* if Condition */}
+      <ClientNavSection clientNavConfig={clientNavConfig}/>
+      {/* <HostNavSection hostNavConfig={hostNavConfig}/> */}
+      {/* <AdminNavSection adminNavConfig={adminNavConfig} /> */}
+      {/* <NavSection navConfig={navConfig} /> */}
 
       <Box sx={{ flexGrow: 1 }} />
     </Scrollbar>

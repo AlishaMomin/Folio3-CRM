@@ -16,21 +16,23 @@ const navConfig = [
     path: '/dashboard/adminhome',
     icon: getIcon('eva:people-fill'),
   },
+  // Company dashboard
+  {
+    title: 'Host Dashboard',
+    path: '/dashboard/hostdashboard',
+    icon: getIcon('eva:pie-chart-2-fill'),
+  },
   {
     title: 'Host Products',
     path: '/dashboard/hostproducts',
     icon: getIcon('eva:shopping-bag-fill'),
   },
   {
-    title: 'Client Companies',
-    path: '/dashboard/clientcompanies',
-    icon: getIcon('eva:people-fill'),
+    title: 'Client Recievables',
+    path: '/dashboard/clientrecievables',
+    icon: getIcon('eva:file-text-fill'),
   },
-  {
-    title: 'Host Dashboard',
-    path: '/dashboard/hostdashboard',
-    icon: getIcon('eva:pie-chart-2-fill'),
-  },
+  // Client dashboard
   {
     title: 'Client Dashboard',
     path: '/dashboard/clientdashboard',
@@ -42,9 +44,9 @@ const navConfig = [
     icon: getIcon('eva:file-text-fill'),
   },
   {
-    title: 'Client Recievables',
-    path: '/dashboard/clientrecievables',
-    icon: getIcon('eva:file-text-fill'),
+    title: 'Client Companies',
+    path: '/dashboard/clientcompanies',
+    icon: getIcon('eva:people-fill'),
   },
   {
     title: 'LogOut',
