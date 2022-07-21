@@ -63,9 +63,9 @@ export default function UserListToolbar({ numSelected, filterName, onFilterName 
       )}
 
       {numSelected > 0 ? (
-        <Tooltip title="Pay" href="/dashboard">
+        <Tooltip title="Delete">
           <IconButton>
-            <Iconify icon="fa6-brands:cc-amazon-pay"/>
+            <Iconify icon="eva:trash-2-fill" />
           </IconButton>
         </Tooltip>
       ) : (
