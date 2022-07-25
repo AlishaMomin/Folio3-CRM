@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { orderline } from "src/orderline/entity/orderline.entity";
+import { user } from "src/user/entity/user.entity";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 
 export enum transactiontype{
@@ -47,9 +49,18 @@ export class order{
     Invoicestatus: invoicestatus
 
     // foreign key
-    @Column()
-    sellerid: number;
+    @OneToMany(()=>orderline,(Orderline)=>Orderline.Order)
+    Orderline:orderline[]
 
-    @Column()
-    buyerid: number;
+
+    // @Column()
+    // sellerid: number;
+
+    // @Column()
+    // buyerid: number;
+    @ManyToOne(()=>user,(Buyer)=>Buyer.Order)
+    Buyer:user[]
+
+    @ManyToOne(()=>user,(Seller)=>Seller.Orders)
+    Seller:user[]
 }

@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { product } from "src/product/entity/product.entity";
+import { user } from "src/user/entity/user.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 
 export enum TYPE {
@@ -36,5 +38,12 @@ export class company{
     // FOREIGN KEY
     @Column()
     hostcompanyid: number
+
+    @OneToMany(()=>user,(User)=>User.Company)
+    User:user[]
+
+    @OneToMany(()=>product,(Product)=>Product.Company)
+    Product:product[]
+
 
 }

@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { order } from "src/order/entity/order.entity";
+import { product } from "src/product/entity/product.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity()
@@ -15,11 +17,13 @@ export class orderline{
     @Column()
     quantity: number;
 
-    // foreign key
-    @Column()
-    productid: number;
+// foreign key
+// productid
+    @ManyToOne(()=>product,(Product)=>Product.Orderline)
+    Product:product[]
 
-    @Column()
-    orderid: number;
+// orderid
+    @ManyToOne(()=>order,(Order)=>Order.Orderline)
+    Order:order[]
 
 }

@@ -1,4 +1,7 @@
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { company } from "src/company/entity/company.entity";
+import { order } from "src/order/entity/order.entity";
+import { role } from "src/role/entity/role.entity";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity()
@@ -19,10 +22,20 @@ export class user {
     @Column()
     password: string;
 
-   // foreign key 
-    @Column()
-    companyid: number;
+// foreign key 
 
-    @Column()
-    roleid: number;
+// companyid
+    @ManyToOne(()=>company, (Company)=>Company.User)
+    Company:company[]
+// roleid
+    @ManyToOne(()=>role, (Role)=>Role.User)
+    Role:role[]
+
+    @OneToMany(()=>order,(Order)=>Order.Buyer)
+    Order:order[]
+
+    @OneToMany(()=>order,(Order)=>Order.Seller)
+    Orders:order[]
+
+    
 }
