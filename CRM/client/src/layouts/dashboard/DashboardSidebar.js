@@ -88,6 +88,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       <ClientNavSection clientNavConfig={clientNavConfig}/>
       {/* <HostNavSection hostNavConfig={hostNavConfig}/> */}
       {/* <AdminNavSection adminNavConfig={adminNavConfig} /> */}
+      
       {/* <NavSection navConfig={navConfig} /> */}
 
       <Box sx={{ flexGrow: 1 }} />
@@ -104,6 +105,8 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             sx: { width: DRAWER_WIDTH },
           }}
         >
+          {/* if condition */}
+          
           {renderContent}
         </Drawer>
       )}
