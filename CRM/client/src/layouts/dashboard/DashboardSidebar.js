@@ -84,12 +84,49 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
           </AccountStyle>
         </Link>
       </Box>
+
+      {(() => {
+
+if (account.email[0] === 'demo@admin.com') {
+
+  return (
+
+    <ClientNavSection clientNavConfig={clientNavConfig}/>
+
+  )
+
+}
+// else if (userType == 2) {
+
+//   return (
+
+//     <div>You are a Manager.</div>
+
+//   )
+
+// } else {
+
+//   return (
+
+//     <div>You are a User.</div>
+
+//   )
+
+// }
+
+})()}
+
+
       {/* if Condition */}
-      <ClientNavSection clientNavConfig={clientNavConfig}/>
+      {/* <ClientNavSection clientNavConfig={clientNavConfig}/> */}
       {/* <HostNavSection hostNavConfig={hostNavConfig}/> */}
       {/* <AdminNavSection adminNavConfig={adminNavConfig} /> */}
+<<<<<<< HEAD
       
       {/* <NavSection navConfig={navConfig} /> */}
+=======
+      {/* <NavSection clientNavConfig={clientNavConfig}/> */}
+>>>>>>> 69ddaa372b997a9dec2a9e65aa9e246213bc0fe0
 
       <Box sx={{ flexGrow: 1 }} />
     </Scrollbar>
@@ -123,6 +160,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             },
           }}
         >
+          
           {renderContent}
         </Drawer>
       )}

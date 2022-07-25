@@ -1,8 +1,8 @@
 // ----------------------------------------------------------------------
 
 const account = {
-  displayName: 'Admin',
-  email: ['demo@admin.com'],
+  displayName: ['Admin','Host','Client'],
+  email: ['demo@admin.com','demo@host.com','demo@client.com'],
   photoURL: '/static/mock-images/avatars/avatar_default.jpg',
 };
 
