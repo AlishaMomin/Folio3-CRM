@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { company } from './entity/company.entity';
-import { role } from './entity/role.entity';
+import { CompanyModule } from './company/company.module';
+
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -15,7 +15,7 @@ import { role } from './entity/role.entity';
     database: 'crm',
     entities: [],
     synchronize: true,
-  }),
+  }), CompanyModule, 
   ],
   controllers: [AppController],
   providers: [AppService],
