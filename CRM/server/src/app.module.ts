@@ -2,7 +2,13 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { role } from './role/entity/role.entity';
+import { RoleModule } from './role/role.module';
+import { company } from './company/entity/company.entity';
 import { CompanyModule } from './company/company.module';
+import { ProductModule } from './product/product.module';
+import { product } from './product/entity/product.entity';
 
 
 @Module({
@@ -13,9 +19,9 @@ import { CompanyModule } from './company/company.module';
     username: 'root',
     password: 'Yaaliallah786!',
     database: 'crm',
-    entities: [],
+    entities: [role, company, product],
     synchronize: true,
-  }), CompanyModule, 
+  }), CompanyModule, RoleModule, ProductModule
   ],
   controllers: [AppController],
   providers: [AppService],
