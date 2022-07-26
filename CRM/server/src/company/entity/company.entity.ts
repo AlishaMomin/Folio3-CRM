@@ -1,6 +1,6 @@
 import { product } from "src/product/entity/product.entity";
 import { user } from "src/user/entity/user.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 
 export enum TYPE {
@@ -36,14 +36,17 @@ export class company{
 
 
     // FOREIGN KEY
-    @Column()
-    hostcompanyid: number
-
+    
     @OneToMany(()=>user,(User)=>User.Company)
     User:user[]
 
     @OneToMany(()=>product,(Product)=>Product.Company)
     Product:product[]
 
+// hostcompanyid
+    @OneToMany(()=>company,(hostcompany)=>hostcompany.HostCompany)
+    hostcompany: company[]
+    @ManyToOne(()=>company,(HostCompany)=>HostCompany.hostcompany)
+    HostCompany:company[]
 
 }
