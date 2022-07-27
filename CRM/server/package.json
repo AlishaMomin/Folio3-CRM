@@ -2,7 +2,7 @@
   "name": "server",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Alisha",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -23,9 +23,11 @@
   "dependencies": {
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
-    "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/platform-express": "^9.0.5",
+    "@nestjs/sequelize": "^9.0.0",
     "@nestjs/typeorm": "^9.0.0",
     "mysql2": "^2.3.3",
+    "nodemon": "^2.0.19",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",

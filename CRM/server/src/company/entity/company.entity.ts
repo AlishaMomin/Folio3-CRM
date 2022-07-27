@@ -36,14 +36,13 @@ export class company{
 
 
     // FOREIGN KEY
-    
     @OneToMany(()=>user,(User)=>User.Company)
     User:user[]
 
     @OneToMany(()=>product,(Product)=>Product.Company)
     Product:product[]
 
-// hostcompanyid
+// hostcompanyid - self referencing 
     @OneToMany(()=>company,(hostcompany)=>hostcompany.HostCompany)
     hostcompany: company[]
     @ManyToOne(()=>company,(HostCompany)=>HostCompany.hostcompany)

@@ -52,12 +52,6 @@ export class order{
     @OneToMany(()=>orderline,(Orderline)=>Orderline.Order)
     Orderline:orderline[]
 
-
-    // @Column()
-    // sellerid: number;
-
-    // @Column()
-    // buyerid: number;
     @ManyToOne(()=>user,(Buyer)=>Buyer.Order)
     Buyer:user[]
 

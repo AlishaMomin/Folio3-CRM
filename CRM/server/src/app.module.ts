@@ -27,16 +27,16 @@ import { UserService } from './user/user.service';
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: 'mysql',
-    host: 'localhost',
+    host: '127.0.0.2',
     port: 3306,
     username: 'root',
-    password: 'Yaaliallah786!',
+    password: '1234',
     database: 'crm',
     entities: [role, company, product, order,orderline,user],
     synchronize: true,
   }), CompanyModule, RoleModule, ProductModule, OrderModule, OrderlineModule, UserModule
   ],
   controllers: [AppController],
-  providers: [UserService],
+  providers: [],
 })
 export class AppModule { }
