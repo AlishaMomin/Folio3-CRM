@@ -3,7 +3,7 @@ export class orderUpdateDto{
     // dateoforder: string;
     // lastdate: string;
     // referenceno: number;
-    name: string;
+    Name: string;
     // Transactiontype: Enumerator;
     // Invoicestatus:Enumerator;
 }

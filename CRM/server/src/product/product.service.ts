@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { InjectConnection, InjectRepository } from '@nestjs/typeorm';
-import { Connection, Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { product } from './entity/product.entity';
 import { Request } from 'express';
 import { productCreateDto } from './dto/product-create.dto';
@@ -10,7 +10,6 @@ export class ProductService {
     constructor(
         @InjectRepository(product)
         private productRepository: Repository<product>,
-        @InjectConnection() private readonly connection:Connection,
     ){}
 
     getP():Promise<product[]>{
@@ -19,14 +18,14 @@ export class ProductService {
     createP(ProductCreateDto:productCreateDto){
         return this.productRepository.save(ProductCreateDto);
     }
-    updateP(ProductUpdatedDto:productUpdateDto,id:number){
-        return this.productRepository.update(id,ProductUpdatedDto);
+    updateP(ProductUpdatedDto:productUpdateDto,Id:number){
+        return this.productRepository.update(Id,ProductUpdatedDto);
     }
-    showPById(id:number){
-        return this.productRepository.findOne({where:{id}});
+    showPById(Id:number){
+        return this.productRepository.findOne({where:{Id}});
     }
-    deleteP(id:number){
-        return this.productRepository.delete(id);
+    deleteP(Id:number){
+        return this.productRepository.delete(Id);
     }
 
 

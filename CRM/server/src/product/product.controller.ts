@@ -17,21 +17,20 @@ export class ProductController {
     postproduct(@Body() ProductCreateDto:productCreateDto){
         return this.productservice.createP(ProductCreateDto);
     }
-    @Patch('/:id')
+    @Patch('/:Id')
     update(@Body() ProductUpdatedDto:productUpdateDto,
-    @Param('id',ParseIntPipe) id:number){
-        return this.productservice.updateP(productUpdateDto,id);
+    @Param('Id',ParseIntPipe) Id:number){
+        return this.productservice.updateP(ProductUpdatedDto,Id);
     }
 
-    @Get('/:id')
-    getProductById(@Param('id')id:number){
-        return this.productservice.showPById(id);
+    @Get('/:Id')
+    getProductById(@Param('Id')Id:number){
+        return this.productservice.showPById(Id);
     }
 
-    @Delete('/:id')
-    deleteProduct(@Param('id',ParseIntPipe)id:number){
-        return this.productservice.deleteP(id);
+    @Delete('/:Id')
+    deleteProduct(@Param('Id',ParseIntPipe)Id:number){
+        return this.productservice.deleteP(Id);
     }
-
 
 }

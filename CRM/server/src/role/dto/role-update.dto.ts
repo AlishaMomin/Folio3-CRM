@@ -1,3 +1,3 @@
 export class roleUpdatedDto {
-    rolename: string
+    RoleName: string
 }

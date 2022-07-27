@@ -17,36 +17,36 @@ export enum invoicestatus{
 @Entity()
 export class order{
     @PrimaryGeneratedColumn()
-    id:number
+    Id:number
 
     @Column({ type: 'numeric', precision: 65, scale: 2 })
-    totalamount: number;
+    TotalAmount: number;
 
     @Column({ type: 'date' })
-    dateoforder: string;
+    DateOfOrder: string;
 
     @Column({ type: 'date' })
-    lastdate: string;
+    LastDate: string;
 
     @Column({
         type: "enum",
         enum: transactiontype,
         default: transactiontype.ONLINE,
     })
-    Transactiontype: transactiontype
+    TransactionType: transactiontype
 
     @Column()
-    referenceno: number;
+    ReferenceNo: string;
 
     @Column()
-    name: string;
+    Name: string;
 
     @Column({
         type: "enum",
         enum: invoicestatus,
         default: invoicestatus.PAID,
     })
-    Invoicestatus: invoicestatus
+    InvoiceStatus: invoicestatus
 
     // foreign key
     @OneToMany(()=>orderline,(Orderline)=>Orderline.Order)

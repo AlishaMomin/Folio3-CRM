@@ -29,6 +29,12 @@ export class UserController {
         return this.userService.showUById(id);
     }
 
+
+    @Get(':Email')
+    getUserByEmail(@Param('Email') Email: string) {
+      return this.userService.showUByEmail(Email);
+    }
+
     @Delete('/:id')
     deleteuser(@Param('id',ParseIntPipe)id:number){
         return this.userService.deleteU(id);

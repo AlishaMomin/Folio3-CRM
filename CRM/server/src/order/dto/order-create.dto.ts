@@ -14,15 +14,24 @@ export enum invoicestatus{
 
 export class orderCreateDto{
 
-    id: number;
+    Id: number;
+
     @IsInt()
-    totalamount: number;
+    TotalAmount: number;
+
     @IsString()
-    dateoforder: string;
-    lastdate: string;
+    DateOfOrder: string;
+
+    @IsString()
+    LastDate: string;
+
     @IsInt()
-    referenceno: number;
-    name: string;
-    Transactiontype: transactiontype;
-    Invoicestatus:invoicestatus;
+    ReferenceNo: string;
+
+    @IsString()
+    Name: string;
+
+
+    TransactionType: transactiontype;
+    InvoiceStatus:invoicestatus;
 }

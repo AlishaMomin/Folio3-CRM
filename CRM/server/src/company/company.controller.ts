@@ -16,18 +16,18 @@ export class CompanyController {
     postcompany(@Body() CompanyCreateDto:companyCreateDto){
         return this.companyservice.createC(CompanyCreateDto);
     }
-    @Patch('/:id')
+    @Patch('/:Id')
     update(@Body() CompanyUpdatedDto:companyUpdateDto,
-    @Param('id',ParseIntPipe) id:number){
-        return this.companyservice.updateC(CompanyUpdatedDto,id);
+    @Param('Id',ParseIntPipe) Id:number){
+        return this.companyservice.updateC(CompanyUpdatedDto,Id);
     }
-    @Get('/:id')
-    getcompanyById(@Param('id')id:number){
-        return this.companyservice.showCById(id);
+    @Get('/:Id')
+    getcompanyById(@Param('Id')Id:number){
+        return this.companyservice.showCById(Id);
     }
-    @Delete('/:id')
-    deletecompany(@Param('id',ParseIntPipe)id:number){
-        return this.companyservice.deleteC(id);
+    @Delete('/:Id')
+    deletecompany(@Param('Id',ParseIntPipe)Id:number){
+        return this.companyservice.deleteC(Id);
     }
 
 

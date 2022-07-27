@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { InjectConnection, InjectRepository } from '@nestjs/typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Request } from 'express';
-import { Connection, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { companyUpdateDto } from './dto/company-update.dto';
 import { companyCreateDto } from './dto/company-create.dto';
 import { company } from './entity/company.entity';
@@ -11,7 +11,6 @@ export class CompanyService {
     constructor(
         @InjectRepository(company)
         private companyRepository: Repository<company>,
-        @InjectConnection() private readonly connection:Connection,
     ){}
     getC():Promise<company[]>{
         return this.companyRepository.find();
@@ -19,13 +18,13 @@ export class CompanyService {
     createC(CompanyCreateDto:companyCreateDto){
         return this.companyRepository.save(CompanyCreateDto);
     }
-    updateC(CompanyUpdatedDto:companyUpdateDto,id:number){
-        return this.companyRepository.update(id,CompanyUpdatedDto);
+    updateC(CompanyUpdatedDto:companyUpdateDto,Id:number){
+        return this.companyRepository.update(Id,CompanyUpdatedDto);
     }
-    showCById(id:number){
-        return this.companyRepository.findOne({where:{id}});
+    showCById(Id:number){
+        return this.companyRepository.findOne({where:{Id}});
     }
-    deleteC(id:number){
-        return this.companyRepository.delete(id);
+    deleteC(Id:number){
+        return this.companyRepository.delete(Id);
     }
 }

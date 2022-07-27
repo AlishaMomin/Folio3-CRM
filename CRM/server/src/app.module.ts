@@ -20,7 +20,8 @@ import { OrderlineModule } from './orderline/orderline.module';
 import { user } from './user/entity/user.entity';
 import { UserModule } from './user/user.module';
 import { UserService } from './user/user.service';
-
+//author
+import { AuthModule } from './auth/auth.module';
 
 
 
@@ -34,8 +35,7 @@ import { UserService } from './user/user.service';
     database: 'crm',
     entities: [role, company, product, order,orderline,user],
     synchronize: true,
-  }), CompanyModule, RoleModule, ProductModule, OrderModule, OrderlineModule, UserModule
-  ],
+  }), CompanyModule, RoleModule, ProductModule, OrderModule, OrderlineModule, UserModule, AuthModule,],
   controllers: [AppController],
   providers: [],
 })

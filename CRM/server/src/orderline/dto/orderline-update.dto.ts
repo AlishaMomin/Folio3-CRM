@@ -1,5 +1,14 @@
+import {IsInt} from 'class-validator';
+
+
 export class orderlineUpdateDto{
-    perunitprice: number;
-    amount: number;
-    quantity: number;
+    
+    @IsInt()
+    PerUnitPrice: number;
+
+    @IsInt()
+    Amount: number;
+
+    @IsInt()
+    Quantity: number;
 }

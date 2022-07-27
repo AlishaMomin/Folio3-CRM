@@ -18,20 +18,20 @@ export class RoleController {
         return this.roleService.createR(RoleCreateDto);
     }
 
-    @Patch('/:id')
+    @Patch('/:Id')
     update(@Body() RoleUpdatedDto:roleUpdatedDto,
-    @Param('id',ParseIntPipe) id:number){
-        return this.roleService.updateR(RoleUpdatedDto,id);
+    @Param('Id',ParseIntPipe) Id:number){
+        return this.roleService.updateR(RoleUpdatedDto,Id);
     }
 
-    @Get('/:id')
-    getRoleById(@Param('id')id:number){
-        return this.roleService.showRById(id);
+    @Get('/:Id')
+    getRoleById(@Param('Id')Id:number){
+        return this.roleService.showRById(Id);
     }
 
-    @Delete('/:id')
-    deleterole(@Param('id',ParseIntPipe)id:number){
-        return this.roleService.deleteR(id);
+    @Delete('/:Id')
+    deleterole(@Param('Id',ParseIntPipe)Id:number){
+        return this.roleService.deleteR(Id);
     }
     
 }

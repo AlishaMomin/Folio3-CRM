@@ -1,4 +1,4 @@
 export class roleCreateDto {
-    id: number;
-    rolename: string;
+    Id: number;
+    RoleName: string;
 }

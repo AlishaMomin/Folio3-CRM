@@ -8,19 +8,19 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedCo
 export class user {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    Id: number;
 
     @Column()
-    name: string;
+    Name: string;
 
     @Column()
-    contactnumber: string;
+    ContactNumber: string;
 
     @Column()
-    email: string;
+    Email: string;
 
     @Column()
-    password: string;
+    Password: string;
 
 // foreign key 
 

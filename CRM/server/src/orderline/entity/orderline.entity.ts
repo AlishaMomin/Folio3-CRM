@@ -6,16 +6,16 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class orderline{
     @PrimaryGeneratedColumn()
-    id: number;
+    Id: number;
 
     @Column({ type: 'numeric', precision: 65, scale: 2 })
-    perunitprice: number;
+    PerUnitPrice: number;
 
     @Column({ type: 'numeric', precision: 65, scale: 2 })
-    amount: number;
+    Amount: number;
 
     @Column()
-    quantity: number;
+    Quantity: number;
 
 // foreign key
 // productid

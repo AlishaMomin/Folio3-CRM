@@ -20,13 +20,13 @@ export class OrderlineService {
     createOL(OrderlineCreateDto:orderlineCreateDto){
         return this.orderlineRepository.save(OrderlineCreateDto);
     }
-    updateOL(OrderlineUpdatedDto:orderlineUpdateDto,id:number){
-        return this.orderlineRepository.update(id,OrderlineUpdatedDto);
+    updateOL(OrderlineUpdatedDto:orderlineUpdateDto,Id:number){
+        return this.orderlineRepository.update(Id,OrderlineUpdatedDto);
     }
-    showOLById(id:number){
-        return this.orderlineRepository.findOne({where:{id}});
+    showOLById(Id:number){
+        return this.orderlineRepository.findOne({where:{Id}});
     }
-    deleteOL(id:number){
-        return this.orderlineRepository.delete(id);
+    deleteOL(Id:number){
+        return this.orderlineRepository.delete(Id);
     }
 }

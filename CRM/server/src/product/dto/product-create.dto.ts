@@ -1,5 +1,12 @@
+import {IsString} from 'class-validator';
+
 export class productCreateDto{
-    id:number;
-    name: string;
-    sku: string;
+
+    Id:number;
+
+    @IsString()
+    Name: string;
+
+    @IsString()
+    Sku: string;
 }

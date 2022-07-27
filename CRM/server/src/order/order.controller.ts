@@ -16,17 +16,17 @@ export class OrderController {
     postorder(@Body() OrderCreateDto:orderCreateDto){
         return this.orderservice.createO(OrderCreateDto);
     }
-    @Patch('/:id')
+    @Patch('/:Id')
     update(@Body() OrderUpdatedDto:orderUpdateDto,
-    @Param('id',ParseIntPipe) id:number){
-        return this.orderservice.updateO(OrderUpdatedDto,id);
+    @Param('Id',ParseIntPipe) Id:number){
+        return this.orderservice.updateO(OrderUpdatedDto,Id);
     }
-    @Get('/:id')
-    getorderById(@Param('id')id:number){
-        return this.orderservice.showOById(id);
+    @Get('/:Id')
+    getorderById(@Param('Id')Id:number){
+        return this.orderservice.showOById(Id);
     }
-    @Delete('/:id')
-    deleteorder(@Param('id',ParseIntPipe)id:number){
-        return this.orderservice.deleteO(id);
+    @Delete('/:Id')
+    deleteorder(@Param('Id',ParseIntPipe)Id:number){
+        return this.orderservice.deleteO(Id);
     }
 }

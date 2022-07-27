@@ -16,18 +16,18 @@ export class OrderlineController {
     postorderline(@Body() OrderlineCreateDto:orderlineCreateDto){
         return this.orderlineservice.createOL(OrderlineCreateDto);
     }
-    @Patch('/:id')
+    @Patch('/:Id')
     update(@Body() OrderlineUpdatedDto:orderlineUpdateDto,
-    @Param('id',ParseIntPipe) id:number){
-        return this.orderlineservice.updateOL(OrderlineUpdatedDto,id);
+    @Param('Id',ParseIntPipe) Id:number){
+        return this.orderlineservice.updateOL(OrderlineUpdatedDto,Id);
     }
-    @Get('/:id')
-    getorderlineById(@Param('id')id:number){
-        return this.orderlineservice.showOLById(id);
+    @Get('/:Id')
+    getorderlineById(@Param('Id')Id:number){
+        return this.orderlineservice.showOLById(Id);
     }
-    @Delete('/:id')
-    deleteorderline(@Param('id',ParseIntPipe)id:number){
-        return this.orderlineservice.deleteOL(id);
+    @Delete('/:Id')
+    deleteorderline(@Param('Id',ParseIntPipe)Id:number){
+        return this.orderlineservice.deleteOL(Id);
     }
 
 }

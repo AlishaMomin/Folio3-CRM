@@ -6,13 +6,13 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "ty
 @Entity()
 export class product {
     @PrimaryGeneratedColumn()
-    id: number;
+    Id: number;
 
     @Column()
-    name: string;
+    Name: string;
 
     @Column()
-    sku: string;
+    Sku: string;
 
 // Foreign key
 // companyid

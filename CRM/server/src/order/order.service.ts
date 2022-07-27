@@ -21,14 +21,14 @@ export class OrderService {
     createO(OrderCreateDto:orderCreateDto){
         return this.orderRepository.save(OrderCreateDto);
     }
-    updateO(OrderUpdatedDto:orderUpdateDto,id:number){
-        return this.orderRepository.update(id,OrderUpdatedDto);
+    updateO(OrderUpdatedDto:orderUpdateDto,Id:number){
+        return this.orderRepository.update(Id,OrderUpdatedDto);
     }
-    showOById(id:number){
-        return this.orderRepository.findOne({where:{id}});
+    showOById(Id:number){
+        return this.orderRepository.findOne({where:{Id}});
     }
-    deleteO(id:number){
-        return this.orderRepository.delete(id);
+    deleteO(Id:number){
+        return this.orderRepository.delete(Id);
     }
 
 }

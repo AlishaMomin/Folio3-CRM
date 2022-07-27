@@ -15,24 +15,24 @@ export enum ISDELETE{
 @Entity()
 export class company{
     @PrimaryGeneratedColumn()
-    id: number;
+    Id: number;
 
     @Column()
-    name: string;
+    Name: string;
 
     @Column({
         type: "enum",
         enum: TYPE,
         default: TYPE.HOST,
     })
-    type: TYPE
+    Type: TYPE
 
     @Column({
         type: "enum",
         enum: ISDELETE,
         default: ISDELETE.ACTIVE,
     })
-    isdelete: ISDELETE
+    Isdelete: ISDELETE
 
 
     // FOREIGN KEY

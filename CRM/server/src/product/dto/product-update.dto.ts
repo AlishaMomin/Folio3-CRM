@@ -1,3 +1,6 @@
+import {IsString} from 'class-validator';
+
 export class productUpdateDto{
-    name:string;
+    @IsString()
+    Name: string;
 }

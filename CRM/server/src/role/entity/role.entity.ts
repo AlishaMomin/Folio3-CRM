@@ -6,10 +6,10 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class role{
     @PrimaryGeneratedColumn()
-    id: number;
+    Id: number;
 
     @Column()
-    rolename: string;
+    RoleName: string;
 
     @OneToMany(()=>user, (User)=>User.Role)
     User: user[]

@@ -11,9 +11,9 @@ export enum TYPE {
 
 export class companyUpdateDto{
     @IsString()
-    name: string;
+    Name: string;
 
-    type:TYPE;
+    Type:TYPE;
     
-    isdelete:ISDELETE;
+    Isdelete:ISDELETE;
 }

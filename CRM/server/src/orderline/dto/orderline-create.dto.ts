@@ -1,6 +1,14 @@
+import {IsInt} from 'class-validator';
 export class orderlineCreateDto{
-    id: number;
-    perunitprice: number;
-    amount: number;
-    quantity: number;
+
+    Id: number;
+
+    @IsInt()
+    PerUnitPrice: number;
+
+    @IsInt()
+    Amount: number;
+
+    @IsInt()
+    Quantity: number;
 }
