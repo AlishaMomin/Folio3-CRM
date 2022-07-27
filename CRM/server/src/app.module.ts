@@ -27,7 +27,7 @@ import { UserService } from './user/user.service';
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: 'mysql',
-    host: '127.0.0.2',
+    host: 'localhost',
     port: 3306,
     username: 'root',
     password: '1234',
