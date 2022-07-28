@@ -35,6 +35,7 @@ import { AuthModule } from './auth/auth.module';
     database: 'crm',
     entities: [role, company, product, order,orderline,user],
     synchronize: true,
+    logging:true,
   }), CompanyModule, RoleModule, ProductModule, OrderModule, OrderlineModule, UserModule, AuthModule,],
   controllers: [AppController],
   providers: [],

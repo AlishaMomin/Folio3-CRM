@@ -9,9 +9,9 @@ export enum TYPE {
 }
 
 export class companyCreateDto{
-    Id: number;
     @IsString()
     Name: string;
     Type:TYPE;
     Isdelete:ISDELETE;
+    hostCompany:number;
 }

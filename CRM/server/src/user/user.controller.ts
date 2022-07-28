@@ -8,7 +8,7 @@ import { UserService } from './user.service';
 @Controller('user')
 export class UserController {
     constructor(private userService: UserService){}
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @Get()
     getuser(){
         return this.userService.getU();

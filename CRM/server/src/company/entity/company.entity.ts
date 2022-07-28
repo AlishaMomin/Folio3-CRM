@@ -42,10 +42,10 @@ export class company{
     @OneToMany(()=>product,(Product)=>Product.Company)
     Product:product[]
 
-// hostcompanyid - self referencing 
-    @OneToMany(()=>company,(hostcompany)=>hostcompany.HostCompany)
-    hostcompany: company[]
-    @ManyToOne(()=>company,(HostCompany)=>HostCompany.hostcompany)
-    HostCompany:company[]
+// hostcompanyid - self referencing
+    @ManyToOne(()=>company,(HostCompany)=>HostCompany.ClientCompany)
+    HostCompany: company[]
+    @OneToMany(()=>company,(ClientCompany)=>ClientCompany.HostCompany)
+    ClientCompany:company[]
 
 }
