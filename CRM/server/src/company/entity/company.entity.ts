@@ -44,7 +44,7 @@ export class company{
 
 // hostcompanyid - self referencing
     @ManyToOne(()=>company,(HostCompany)=>HostCompany.ClientCompany)
-    HostCompany: company[]
+    HostCompany: company
     @OneToMany(()=>company,(ClientCompany)=>ClientCompany.HostCompany)
     ClientCompany:company[]
 

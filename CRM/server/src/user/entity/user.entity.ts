@@ -26,10 +26,10 @@ export class user {
 
 // companyid
     @ManyToOne(()=>company, (Company)=>Company.User)
-    Company:company[]
+    Company:company
 // roleid
     @ManyToOne(()=>role, (Role)=>Role.User)
-    Role:role[]
+    Role:role
 
     @OneToMany(()=>order,(Order)=>Order.Buyer)
     Order:order[]

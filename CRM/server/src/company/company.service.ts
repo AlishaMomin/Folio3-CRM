@@ -13,9 +13,12 @@ export class CompanyService {
         private companyRepository: Repository<company>,
     ){}
     async getC():Promise<any>{
-        const query = this.companyRepository.createQueryBuilder('c')
-        .leftJoinAndSelect(user, 'u', 'c.Id = u.companyId')
-        .getMany();
+        // const query = this.companyRepository.createQueryBuilder('company')
+        // .leftJoinAndSelect(user, 'user', 'company.Id = user.companyId')
+        // .getMany();
+        const query = this.companyRepository.find({
+            relations: ['User']
+        })
         return query;
         // const query = this.companyRepository.find();
         return query;

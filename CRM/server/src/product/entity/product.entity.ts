@@ -17,7 +17,7 @@ export class product {
 // Foreign key
 // companyid
     @ManyToOne(()=>company,(Company)=>Company.Product)
-    Company:company[]
+    Company:company
 
     @OneToMany(()=>orderline,(Orderline)=>Orderline.Product)
     Orderline: orderline[]

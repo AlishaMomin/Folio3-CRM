@@ -53,8 +53,8 @@ export class order{
     Orderline:orderline[]
 
     @ManyToOne(()=>user,(Buyer)=>Buyer.Order)
-    Buyer:user[]
+    Buyer:user
 
     @ManyToOne(()=>user,(Seller)=>Seller.Orders)
-    Seller:user[]
+    Seller:user
 }

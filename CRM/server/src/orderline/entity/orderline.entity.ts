@@ -20,10 +20,10 @@ export class orderline{
 // foreign key
 // productid
     @ManyToOne(()=>product,(Product)=>Product.Orderline)
-    Product:product[]
+    Product:product
 
 // orderid
     @ManyToOne(()=>order,(Order)=>Order.Orderline)
-    Order:order[]
+    Order:order
 
 }
