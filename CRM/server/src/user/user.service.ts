@@ -18,8 +18,8 @@ export class UserService {
     createU(UserCreateDto:userCreateDto){
         return this.userRepository.save(UserCreateDto);
     }
-    updateU(UserUpdatedDto:userUpdateDto,id:number){
-        return this.userRepository.update(id,UserUpdatedDto);
+    updateU(UserUpdatedDto:userUpdateDto,Id:number){
+        return this.userRepository.update(Id,UserUpdatedDto);
     }
     showUByEmail(Email: string): Promise<user> {
         return this.userRepository.findOne({where :{Email: Email}});

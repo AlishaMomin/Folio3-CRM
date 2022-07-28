@@ -21,16 +21,16 @@ export class UserController {
     }
 
     @UseGuards(AuthGuard('jwt'))
-    @Patch('/:id')
+    @Patch('/:Id')
     update(@Body() UserUpdatedDto:userUpdateDto,
-    @Param('id',ParseIntPipe) id:number){
-        return this.userService.updateU(UserUpdatedDto,id);
+    @Param('Id',ParseIntPipe) Id:number){
+        return this.userService.updateU(UserUpdatedDto,Id);
     }
 
     @UseGuards(AuthGuard('jwt'))
-    @Get('/:id')
-    getuserById(@Param('id')id:number){
-        return this.userService.showUById(id);
+    @Get('/:Id')
+    getuserById(@Param('Id')Id:number){
+        return this.userService.showUById(Id);
     }
 
 
@@ -40,9 +40,9 @@ export class UserController {
     }
 
     @UseGuards(AuthGuard('jwt'))
-    @Delete('/:id')
-    deleteuser(@Param('id',ParseIntPipe)id:number){
-        return this.userService.deleteU(id);
+    @Delete('/:Id')
+    deleteuser(@Param('Id',ParseIntPipe)Id:number){
+        return this.userService.deleteU(Id);
     }
 
 }
