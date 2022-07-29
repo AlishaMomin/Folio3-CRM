@@ -8,6 +8,6 @@ import { UserModule } from 'src/user/user.module';
 @Module({
   controllers: [CompanyController],
   providers: [CompanyService],
-  imports:[UserModule,TypeOrmModule.forFeature([company])],
+  imports:[TypeOrmModule.forFeature([company])],
 })
 export class CompanyModule {}

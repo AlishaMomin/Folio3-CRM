@@ -12,6 +12,7 @@ export class CompanyController {
     getcompany(){
         return this.companyservice.getC();
     }
+    
     @Post()
     postcompany(@Body() CompanyCreateDto:companyCreateDto){
         return this.companyservice.createC(CompanyCreateDto);
