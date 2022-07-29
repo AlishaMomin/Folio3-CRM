@@ -14,5 +14,5 @@ export class companyCreateDto{
     Name: string;
     Type:TYPE;
     Isdelete:ISDELETE;
-    HostCompany:company;
+    hostCompany:number;
 }
