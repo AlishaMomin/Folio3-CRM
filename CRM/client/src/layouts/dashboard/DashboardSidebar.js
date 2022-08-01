@@ -121,12 +121,9 @@ if (account.email[0] === 'demo@admin.com') {
       {/* <ClientNavSection clientNavConfig={clientNavConfig}/> */}
       {/* <HostNavSection hostNavConfig={hostNavConfig}/> */}
       {/* <AdminNavSection adminNavConfig={adminNavConfig} /> */}
-<<<<<<< HEAD
-      
+
       {/* <NavSection navConfig={navConfig} /> */}
-=======
-      {/* <NavSection clientNavConfig={clientNavConfig}/> */}
->>>>>>> 69ddaa372b997a9dec2a9e65aa9e246213bc0fe0
+
 
       <Box sx={{ flexGrow: 1 }} />
     </Scrollbar>
