@@ -17,9 +17,8 @@ export class CompanyController {
         return this.companyservice.getC();
     }
     
-    @Post('/addclient')
+    @Post()
     postcompany(@Body() CompanyCreateDto:companyCreateDto){
-        console.log('checking');
         return this.companyservice.createC(CompanyCreateDto);
     }
     @Patch('/:Id')

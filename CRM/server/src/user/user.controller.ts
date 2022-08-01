@@ -22,16 +22,16 @@ export class UserController {
     // @UseGuards(AuthGuard('jwt'))
     @Post('/addcompany')
     async postuser(@Body(ValidationPipe) UserCreateDto:userCreateDto){
-        return await this.userService.createU(UserCreateDto);
+        return await this.userService.addcompany(UserCreateDto);
     }
 
     @Post('/signin')
     async signin(@Body() UserSigninDto:userSigninDto){
-        return await this.userService.signinU(UserSigninDto);
+        return await this.userService.SignIn(UserSigninDto);
 
     }
     
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @Patch('/:Id')
     update(@Body() UserUpdatedDto:userUpdateDto,
     @Param('Id',ParseIntPipe) Id:number){

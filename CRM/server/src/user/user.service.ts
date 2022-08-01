@@ -21,7 +21,7 @@ export class UserService {
     }
 
 
-    async createU(UserCreateDto:userCreateDto):Promise<user>{
+    async addcompany(UserCreateDto:userCreateDto):Promise<user>{
 
         const exist = await this.userRepository.findOne({where: {Email: UserCreateDto.Email}});
         if(!exist){
@@ -29,12 +29,12 @@ export class UserService {
         }
         else if(exist){
             console.log("exist");
-            return;      
+            return ;  
         }
         
     }
 
-    async signinU(UserSigninDto:userSigninDto):Promise<user>{
+    async SignIn(UserSigninDto:userSigninDto):Promise<user>{
 
         return await this.userRepository.findOne({where: {Email: UserSigninDto.Email, Password:UserSigninDto.Password}})
         .then((result)=>{
