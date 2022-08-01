@@ -5,7 +5,7 @@ import { userCreateDto } from './dto/user-create.dto';
 import { userUpdateDto } from './dto/user-update.dto';
 import { UserService } from './user.service';
 import { HttpExceptionFilter } from 'src/exception-filters/http-exception.filter';
-import { ValidationPipe } from 'src/pipes/validation.pipe';
+import { ValidationPipe } from '@nestjs/common';
 import { userSigninDto } from './dto/user-signin.dto';
 
 
@@ -22,18 +22,7 @@ export class UserController {
     // @UseGuards(AuthGuard('jwt'))
     @Post('/addcompany')
     async postuser(@Body(ValidationPipe) UserCreateDto:userCreateDto){
-        const response = await this.userService.createU(UserCreateDto);
-        if(response === undefined) {
-            throw new HttpException({
-                status: HttpStatus.FORBIDDEN,
-                error: 'Email already exists',
-            }, HttpStatus.FORBIDDEN);
-        }
-        else{
-            console.log("Yes");
-            return "posted"
-        }
-
+        return await this.userService.createU(UserCreateDto);
     }
 
     @Post('/signin')
