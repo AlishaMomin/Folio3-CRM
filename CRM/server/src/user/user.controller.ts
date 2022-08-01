@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Req, UseGuards , HttpException, HttpStatus } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
 import { userCreateDto } from './dto/user-create.dto';
@@ -9,16 +9,27 @@ import { UserService } from './user.service';
 export class UserController {
     
     constructor(private userService: UserService){}
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @Get()
     getuser(){
         return this.userService.getU();
     }
 
-    @UseGuards(AuthGuard('jwt'))
-    @Post()
-    postuser(@Body() UserCreateDto:userCreateDto){
-        return this.userService.createU(UserCreateDto);
+    // @UseGuards(AuthGuard('jwt'))
+    @Post('/signin')
+    async postuser(@Body() UserCreateDto:userCreateDto){
+        const response = await this.userService.createU(UserCreateDto);
+        if(response === undefined) {
+            throw new HttpException({
+                status: HttpStatus.FORBIDDEN,
+                error: 'Email already exists',
+            }, HttpStatus.FORBIDDEN);
+        }
+        else{
+            console.log("Yes");
+            return "posted"
+        }
+
     }
 
     @UseGuards(AuthGuard('jwt'))
@@ -40,7 +51,7 @@ export class UserController {
       return this.userService.showUByEmail(Email);
     }
 
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @Delete('/:Id')
     deleteuser(@Param('Id',ParseIntPipe)Id:number){
         return this.userService.deleteU(Id);
