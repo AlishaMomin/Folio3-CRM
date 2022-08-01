@@ -1,9 +1,13 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Req, UseGuards , HttpException, HttpStatus } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Req, UseGuards , HttpException, HttpStatus, UseFilters } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
 import { userCreateDto } from './dto/user-create.dto';
 import { userUpdateDto } from './dto/user-update.dto';
 import { UserService } from './user.service';
+import { HttpExceptionFilter } from 'src/exception-filters/http-exception.filter';
+import { ValidationPipe } from 'src/pipes/validation.pipe';
+import { userSigninDto } from './dto/user-signin.dto';
+
 
 @Controller('user')
 export class UserController {
@@ -16,8 +20,8 @@ export class UserController {
     }
 
     // @UseGuards(AuthGuard('jwt'))
-    @Post('/signin')
-    async postuser(@Body() UserCreateDto:userCreateDto){
+    @Post('/addcompany')
+    async postuser(@Body(ValidationPipe) UserCreateDto:userCreateDto){
         const response = await this.userService.createU(UserCreateDto);
         if(response === undefined) {
             throw new HttpException({
@@ -32,6 +36,12 @@ export class UserController {
 
     }
 
+    @Post('/signin')
+    async signin(@Body() UserSigninDto:userSigninDto){
+        return await this.userService.signinU(UserSigninDto);
+
+    }
+    
     @UseGuards(AuthGuard('jwt'))
     @Patch('/:Id')
     update(@Body() UserUpdatedDto:userUpdateDto,
