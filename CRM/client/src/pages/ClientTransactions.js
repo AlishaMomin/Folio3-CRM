@@ -183,9 +183,9 @@ export default function AdminHome() {
                           </Label>
                         </TableCell>
 
-                        <TableCell align="right">
+                        {/* <TableCell align="right">
                           <UserMoreMenu />
-                        </TableCell>
+                        </TableCell> */}
                       </TableRow>
                     );
                   })}

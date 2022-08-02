@@ -166,18 +166,18 @@ export default function AdminHome() {
                                                 tabIndex={-1}
                                                 role="checkbox"
                                                 selected={isItemSelected}
-                                                aria-checked={isItemSelected}
-                                            ><TableCell padding="checkbox">
+                                                aria-checked={isItemSelected}>
+                                                {/* <TableCell padding="checkbox">
                                                     <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, name)} />
-                                                </TableCell>
+                                                </TableCell> */}
                                                 <TableCell align="left">{name}</TableCell>
                                                 <TableCell align="left">{NoofSoldItems}</TableCell>
                                                 <TableCell align="left">$ {TotalSale}</TableCell>
 
 
-                                                <TableCell align="right">
+                                                {/* <TableCell align="right">
                                                     <UserMoreMenu />
-                                                </TableCell>
+                                                </TableCell> */}
                                             </TableRow>
                                         );
                                     })}

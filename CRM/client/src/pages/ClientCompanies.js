@@ -175,9 +175,9 @@ export default function ClientCompanies() {
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
-                        <TableCell padding="checkbox">
+                        {/* <TableCell padding="checkbox">
                           <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, name)} />
-                        </TableCell>
+                        </TableCell> */}
                         <TableCell align="left">{name}</TableCell>
                         <TableCell align="left">{noofclient}</TableCell>
                         <TableCell align="left">{nameC1}</TableCell>
