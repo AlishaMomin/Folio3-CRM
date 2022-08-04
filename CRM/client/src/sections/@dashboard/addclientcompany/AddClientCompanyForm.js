@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 // form
 import { useForm } from 'react-hook-form';
@@ -21,41 +22,73 @@ export default function AddClientCompanyForm() {
 
 
     const CompanySchema = Yup.object().shape({
-        CompanyName: Yup.string().required('Company name required'),
-        FirstNameC1: Yup.string().required('First name required'),
-        LastNameC1: Yup.string().required('Last name required'),
-        EmailC1: Yup.string().email('Email must be a valid email address').required('Email is required'),
-        PhoneC1: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
-        FirstNameC2: Yup.string().required('First name required'),
-        LastNameC2: Yup.string().required('Last name required'),
-        EmailC2: Yup.string().email('Email must be a valid email address').required('Email is required'),
-        PhoneC2: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
+        Company: Yup.object().shape({
+            Name: Yup.string().required('Company name required')
+        }),
+
+        Contact1: Yup.object().shape({
+            Name: Yup.string().required('First name required'),
+            // LastNameC1: Yup.string().required('Last name required'),
+            Email: Yup.string().email('Email must be a valid email address').required('Email is required'),
+            ContactNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
+
+        }),
+        Contact2: Yup.object().shape({
+            Name: Yup.string().required('First name required'),
+            // LastNameC1: Yup.string().required('Last name required'),
+            Email: Yup.string().email('Email must be a valid email address').required('Email is required'),
+            ContactNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
+
+        })
     });
 
     const defaultValues = {
-        CompanyName: '',
-        FirstNameC1: '',
-        LastNameC1: '',
-        EmailC1: '',
-        PhoneC1: '',
-        FirstNameC2: '',
-        LastNameC2: '',
-        EmailC2: '',
-        PhoneC2: ''
+        Company: { Name: '' },
+        Contact1: {
+            Name: '',
+            Email: '',
+            ContactNumber: ''
+        },
+
+        Contact2: {
+            Name: '',
+            Email: '',
+            ContactNumber: ''
+        }
     };
 
     const methods = useForm({
         resolver: yupResolver(CompanySchema),
         defaultValues,
     });
+    const postData = async (body) => {
+        console.log(body);
+        axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+        try {
+            await axios.post("http://localhost:5000/user/addcompany", body)
+                .then((response) => {
+                    console.log("Data recieved");
+                    console.log(response.data);
+                    const results = response.data;
+                })
+
+        } catch (err) {
+            console.log(err);
+        }
+
+    };
+
 
     const {
         handleSubmit,
         formState: { isSubmitting },
     } = methods;
 
-    const onSubmit = async () => {
-        navigate('/dashboard/hostdashboard', { replace: true });
+    const onSubmit = async (data) => {
+        console.log(data);
+        postData(data);
+        // navigate('/dashboard/hostdashboard', { replace: true });
     };
 
     const ContentStyle = styled('div')(({ theme }) => ({
@@ -66,7 +99,7 @@ export default function AddClientCompanyForm() {
         justifyContent: 'center',
         flexDirection: 'column',
         padding: theme.spacing(12, 0),
-      }));
+    }));
     return (
         <Container maxWidth="sm">
             <ContentStyle>
@@ -77,29 +110,29 @@ export default function AddClientCompanyForm() {
                 <Typography sx={{ color: 'text.secondary', mb: 1 }} style={{ textAlignVertical: "center", textAlign: "center", }}>Enter your details below.</Typography>
                 <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
                     <Stack spacing={2}>
-                        <RHFTextField name="CompanyName" label="Company name" />
+                        <RHFTextField name="Company.Name" label="Company name" />
                         <h3 style={{ textAlignVertical: "center", textAlign: "center", }}>Contact Person 1</h3>
                         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                            <RHFTextField name="FirstNameC1" label="First name" />
-                            <RHFTextField name="LastNameC1" label="Last name" />
+                            <RHFTextField name="Contact1.Name" label="First name" />
+                            {/* <RHFTextField name="LastNameC1" label="Last name" /> */}
                         </Stack>
-                        <RHFTextField name="EmailC1" label="Email address" />
-                        <RHFTextField name="PhoneC1" label="Phone Number" />
+                        <RHFTextField name="Contact1.Email" label="Email address" />
+                        <RHFTextField name="Contact1.ContactNumber" label="Phone Number" />
                         <h3 style={{ textAlignVertical: "center", textAlign: "center", }}>Contact Person 2</h3>
                         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                            <RHFTextField name="FirstNameC2" label="First name" />
-                            <RHFTextField name="LastNameC2" label="Last name" />
+                            <RHFTextField name="Contact2.Name" label="First name" />
+                            {/* <RHFTextField name="LastNameC2" label="Last name" /> */}
                         </Stack>
-                        <RHFTextField name="EmailC2" label="Email address" />
-                        <RHFTextField name="PhoneC2" label="Phone Number" />
+                        <RHFTextField name="Contact2.Email" label="Email address" />
+                        <RHFTextField name="Contact2.ContactNumber" label="Phone Number" />
                     </Stack>
-                    <br/>
+                    <br />
                     <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
                         SUBMIT
                     </LoadingButton>
                 </FormProvider>
             </ContentStyle>
 
-         </Container>
+        </Container>
     );
 }
