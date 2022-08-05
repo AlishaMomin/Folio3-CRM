@@ -42,9 +42,20 @@ export default function SignInForm() {
           console.log(response.data);
           const results = response.data;
           // const answer = Object.values(JSON.parse(JSON.stringify(response)));
-          // console.log(response.Role.Id);
+          console.log("role: ",response.data[0].role);
+          localStorage.setItem('ROLE',response.data[0].role)
           // condition to check roles
-          navigate('/dashboard/app', { replace: true });
+          if (response.data[0].role==="admin"){
+            navigate('/dashboard/AdminHome', { replace: true });
+          }
+          else if (response.data[0].role==="host"){
+            navigate('/dashboard/HostDashboard', { replace: true });
+          }
+          else if (response.data[0].role==="client"){
+            navigate('/dashboard/ClientDashboard', { replace: true });
+          }
+
+          
         })
 
     } catch (err) {

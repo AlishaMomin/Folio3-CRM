@@ -46,10 +46,11 @@ DashboardSidebar.propTypes = {
   onCloseSidebar: PropTypes.func,
 };
 
-export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
+export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar, userRole }) {
   const { pathname } = useLocation();
 
   const isDesktop = useResponsive('up', 'lg');
+  console.log('userRole', userRole);
 
   useEffect(() => {
     if (isOpenSidebar) {
@@ -57,7 +58,21 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
+  const getNav = () => {
+    console.log("CHECKKK", userRole);
+    if (userRole === "admin") {
+      return (
+        <AdminNavSection adminNavConfig={adminNavConfig} />
+      )
 
+    }
+    if (userRole === "host") {
+      return (<HostNavSection hostNavConfig={hostNavConfig} />)
+    }
+    if (userRole === "client") {
+      return (<ClientNavSection clientNavConfig={clientNavConfig} />)
+    }
+  }
   const renderContent = (
     <Scrollbar
       sx={{
@@ -84,37 +99,24 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
           </AccountStyle>
         </Link>
       </Box>
+      {getNav()}
 
-      {(() => {
+      {/* {(() => {
+        console.log("CHECKKK",userRole);
+        if (userRole === "admin") {
+          return (
+            <AdminNavSection adminNavConfig={adminNavConfig} />
+          )
 
-if (account.email[0] === 'demo@admin.com') {
+        }
+        if (userRole === "host") {
+          return (<HostNavSection hostNavConfig={hostNavConfig} />)
+        }
+        if (userRole === "client") {
+          return (<ClientNavSection clientNavConfig={clientNavConfig} />)
+        }
+      })()} */}
 
-  return (
-
-    <ClientNavSection clientNavConfig={clientNavConfig}/>
-
-  )
-
-}
-// else if (userType == 2) {
-
-//   return (
-
-//     <div>You are a Manager.</div>
-
-//   )
-
-// } else {
-
-//   return (
-
-//     <div>You are a User.</div>
-
-//   )
-
-// }
-
-})()}
 
 
       {/* if Condition */}
@@ -140,7 +142,7 @@ if (account.email[0] === 'demo@admin.com') {
           }}
         >
           {/* if condition */}
-          
+
           {renderContent}
         </Drawer>
       )}
@@ -157,7 +159,7 @@ if (account.email[0] === 'demo@admin.com') {
             },
           }}
         >
-          
+
           {renderContent}
         </Drawer>
       )}
