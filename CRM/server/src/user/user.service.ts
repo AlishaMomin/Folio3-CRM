@@ -27,7 +27,7 @@ export class UserService {
     }
 
 
-    async addcompany(CompanyCreateDto:any):Promise<any>{
+    async addcompany(CompanyCreateDto:any):Promise <any>{
         
         const companyExist = await this.companyRepository.findOne({where: {Name:CompanyCreateDto.Name}});
         // const exist = await this.userRepository.findOne({where: {Email: UserCreateDto.Email}});
@@ -37,7 +37,8 @@ export class UserService {
             return companySave;
         }
         else if(companyExist){
-            console.log(" NOT EXISTS");
+            console.log("EXISTS");
+            return null;
         }
         
     }
@@ -51,8 +52,10 @@ export class UserService {
             const userSave = this.userRepository.save(UserCreateDto);
             return userSave;
         }
-        else if(userExist){
-            console.log(" NOT EXISTS");
+        else if(userExist)
+        {
+            console.log("EXISTS");
+            return null;
         }
         
     }
@@ -88,7 +91,13 @@ export class UserService {
     showUById(Id:number){
         return this.userRepository.findOne({where:{Id}});
     }
+
+
     deleteU(Id:number){
         return this.userRepository.delete(Id);
+    }
+
+    deleteC(Id:number){
+        return this.companyRepository.delete(Id);
     }
 }

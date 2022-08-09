@@ -24,12 +24,42 @@ export class UserController {
     @Post('/addcompany')
     async postcompanywithuser(@Body(ValidationPipe) CompanyDetailsDto:any){
         const newCompanyData = await this.userService.addcompany(CompanyDetailsDto["Company"]);
-        CompanyDetailsDto["Contact1"]["Company"] = newCompanyData.Id;
-        CompanyDetailsDto["Contact2"]["Company"] = newCompanyData.Id;
-        const newUser1Data = await this.userService.adduser(CompanyDetailsDto["Contact1"]);
-        const newUser2Data = await this.userService.adduser(CompanyDetailsDto["Contact2"]);
-        console.log(newCompanyData,"aur yahan pe")
-        return;
+        if (newCompanyData != null)
+        {
+            CompanyDetailsDto["Contact1"]["Company"] = newCompanyData.Id;
+            CompanyDetailsDto["Contact2"]["Company"] = newCompanyData.Id;
+
+            const newUser1Data = await this.userService.adduser(CompanyDetailsDto["Contact1"]);
+            const newUser2Data = await this.userService.adduser(CompanyDetailsDto["Contact2"]);
+            if (newUser1Data != null && newUser2Data != null)
+            {
+                return { status:true, message:""};
+            }
+            else
+            {
+                if (newUser1Data != null)
+                {
+                    const deletedUser1 = await this.userService.deleteU(newUser1Data.Id)
+                    const deletedCompany = await this.userService.deleteC(newCompanyData.Id)
+                    return {status:false, message:"User 2 email already exists"};
+                }
+                else if (newUser2Data != null)
+                {
+                    const deletedUser2 = await this.userService.deleteU(newUser2Data.Id)
+                    const deletedCompany = await this.userService.deleteC(newCompanyData.Id)
+                    return {status:false, message:"User 1 email already exists"};
+                }
+                else
+                {
+                    const deletedCompany = await this.userService.deleteC(newCompanyData.Id)
+                    return {status:false, message:"Both users email already exists"};
+                }
+            }
+        }
+        else
+        {
+            return {status:false, message:"Company name already exists"};
+        }
     }
 
     @Post('/signin')

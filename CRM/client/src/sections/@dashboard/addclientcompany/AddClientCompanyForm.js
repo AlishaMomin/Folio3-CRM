@@ -86,7 +86,14 @@ export default function AddClientCompanyForm() {
                     console.log("Data recieved");
                     console.log(response.data);
                     const results = response.data;
-                
+                    if (results.status)
+                    {
+                        navigate('/dashboard/hostdashboard', { replace: true });
+                    }
+                    else
+                    {
+                        window.alert(results.message);
+                    }
                 })
 
         } catch (err) {
@@ -104,7 +111,6 @@ export default function AddClientCompanyForm() {
     const onSubmit = async (data) => {
         console.log(data);
         postData(data);
-        navigate('/dashboard/hostdashboard', { replace: true });
     };
 
     const ContentStyle = styled('div')(({ theme }) => ({
