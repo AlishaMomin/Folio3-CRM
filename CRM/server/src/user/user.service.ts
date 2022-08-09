@@ -27,16 +27,31 @@ export class UserService {
     }
 
 
-    async addcompany(CompanyDetailsDto:any):Promise<any>{
+    async addcompany(CompanyCreateDto:any):Promise<any>{
         
-        const companyExist = await this.companyRepository.findOne({where: {Name:CompanyDetailsDto["Company"].Name}});
+        const companyExist = await this.companyRepository.findOne({where: {Name:CompanyCreateDto.Name}});
         // const exist = await this.userRepository.findOne({where: {Email: UserCreateDto.Email}});
         if(!companyExist){
-            console.log(CompanyDetailsDto["Company"])
-            const companysave = this.companyRepository.save(CompanyDetailsDto["Company"]);
-           return companysave;
+            console.log(CompanyCreateDto)
+            const companySave = this.companyRepository.save(CompanyCreateDto);
+            return companySave;
         }
         else if(companyExist){
+            console.log(" NOT EXISTS");
+        }
+        
+    }
+
+
+    async adduser(UserCreateDto:any):Promise<any>{
+        
+        const userExist = await this.userRepository.findOne({where: {Email:UserCreateDto.Email}});
+        if(!userExist){
+            console.log(UserCreateDto)
+            const userSave = this.userRepository.save(UserCreateDto);
+            return userSave;
+        }
+        else if(userExist){
             console.log(" NOT EXISTS");
         }
         

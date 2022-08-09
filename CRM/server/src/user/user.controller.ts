@@ -22,8 +22,14 @@ export class UserController {
 
     // @UseGuards(AuthGuard('jwt'))
     @Post('/addcompany')
-    async postuser(@Body(ValidationPipe) CompanyDetailsDto:any){
-        return await this.userService.addcompany(CompanyDetailsDto);
+    async postcompanywithuser(@Body(ValidationPipe) CompanyDetailsDto:any){
+        const newCompanyData = await this.userService.addcompany(CompanyDetailsDto["Company"]);
+        CompanyDetailsDto["Contact1"]["Company"] = newCompanyData.Id;
+        CompanyDetailsDto["Contact2"]["Company"] = newCompanyData.Id;
+        const newUser1Data = await this.userService.adduser(CompanyDetailsDto["Contact1"]);
+        const newUser2Data = await this.userService.adduser(CompanyDetailsDto["Contact2"]);
+        console.log(newCompanyData,"aur yahan pe")
+        return;
     }
 
     @Post('/signin')
