@@ -23,46 +23,57 @@ export default function AddClientCompanyForm() {
 
     const CompanySchema = Yup.object().shape({
         Company: Yup.object().shape({
-            Name: Yup.string().required('Company name required')
+            Name: Yup.string().required('Company name required'),
+            Type: Yup.number(),
+            Isdelete: Yup.number(),
+            // id get 
+            HostCompany: Yup.number()
         }),
 
-        Contact1: Yup.object().shape({
-            Name: Yup.string().required('First name required'),
-            // LastNameC1: Yup.string().required('Last name required'),
-            Email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-            ContactNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
+        // Contact1: Yup.object().shape({
+        //     Name: Yup.string().required('Full name required'),
+        //     // LastNameC1: Yup.string().required('Last name required'),
+        //     Email: Yup.string().email('Email must be a valid email address').required('Email is required'),
+        //     ContactNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
 
-        }),
-        Contact2: Yup.object().shape({
-            Name: Yup.string().required('First name required'),
-            // LastNameC1: Yup.string().required('Last name required'),
-            Email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-            ContactNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
+        // }),
+        // Contact2: Yup.object().shape({
+        //     Name: Yup.string().required('Full name required'),
+        //     // LastNameC1: Yup.string().required('Last name required'),
+        //     Email: Yup.string().email('Email must be a valid email address').required('Email is required'),
+        //     ContactNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
 
-        })
+        // })
     });
 
     const defaultValues = {
-        Company: { Name: '' },
-        Contact1: {
-            Name: '',
-            Email: '',
-            ContactNumber: ''
+        Company: {
+            Name: "",
+            Type: 1,
+            Isdelete: 0,
+            HostCompany: localStorage.getItem('ID'),
         },
+        
+        // Contact1: {
+        //     Name: '',
+        //     Email: '',
+        //     ContactNumber: ''
+        // },
 
-        Contact2: {
-            Name: '',
-            Email: '',
-            ContactNumber: ''
-        }
+        // Contact2: {
+        //     Name: '',
+        //     Email: '',
+        //     ContactNumber: ''
+        // }
     };
-
+    
     const methods = useForm({
         resolver: yupResolver(CompanySchema),
         defaultValues,
     });
+    
     const postData = async (body) => {
-        console.log(body);
+        console.log(body,"mai pagal hogaye ho");
         axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
         axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
         try {
@@ -71,6 +82,7 @@ export default function AddClientCompanyForm() {
                     console.log("Data recieved");
                     console.log(response.data);
                     const results = response.data;
+                
                 })
 
         } catch (err) {
@@ -113,18 +125,18 @@ export default function AddClientCompanyForm() {
                         <RHFTextField name="Company.Name" label="Company name" />
                         <h3 style={{ textAlignVertical: "center", textAlign: "center", }}>Contact Person 1</h3>
                         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                            <RHFTextField name="Contact1.Name" label="First name" />
+                            {/* <RHFTextField name="Contact1.Name" label="Full name" /> */}
                             {/* <RHFTextField name="LastNameC1" label="Last name" /> */}
                         </Stack>
-                        <RHFTextField name="Contact1.Email" label="Email address" />
-                        <RHFTextField name="Contact1.ContactNumber" label="Phone Number" />
+                        {/* <RHFTextField name="Contact1.Email" label="Email address" /> */}
+                        {/* <RHFTextField name="Contact1.ContactNumber" label="Phone Number" /> */}
                         <h3 style={{ textAlignVertical: "center", textAlign: "center", }}>Contact Person 2</h3>
                         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                            <RHFTextField name="Contact2.Name" label="First name" />
+                            {/* <RHFTextField name="Contact2.Name" label="Full name" /> */}
                             {/* <RHFTextField name="LastNameC2" label="Last name" /> */}
                         </Stack>
-                        <RHFTextField name="Contact2.Email" label="Email address" />
-                        <RHFTextField name="Contact2.ContactNumber" label="Phone Number" />
+                        {/* <RHFTextField name="Contact2.Email" label="Email address" /> */}
+                        {/* <RHFTextField name="Contact2.ContactNumber" label="Phone Number" /> */}
                     </Stack>
                     <br />
                     <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>

@@ -39,11 +39,11 @@ export default function SignInForm() {
       await axios.post("http://localhost:5000/auth/login", body)
         .then((response) => {
           console.log("Data recieved");
-          console.log(response.data);
-          const results = response.data;
-          // const answer = Object.values(JSON.parse(JSON.stringify(response)));
-          console.log("role: ",response.data[0].role);
-          localStorage.setItem('ROLE',response.data[0].role)
+          const results = response.data; 
+
+          localStorage.setItem('ROLE',response.data[0].role);
+          localStorage.setItem('ID',response.data[0].id);
+          
           // condition to check roles
           if (response.data[0].role==="admin"){
             navigate('/dashboard/AdminHome', { replace: true });

@@ -10,7 +10,7 @@ export enum TYPE {
 }
 
 export class companyCreateDto{
-    @IsString()
+    // @IsString()
     Name: string;
     Type:TYPE;
     Isdelete:ISDELETE;

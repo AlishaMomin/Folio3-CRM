@@ -9,5 +9,6 @@ import { UserModule } from 'src/user/user.module';
   controllers: [CompanyController],
   providers: [CompanyService],
   imports:[TypeOrmModule.forFeature([company])],
+  exports:[CompanyService]
 })
 export class CompanyModule {}

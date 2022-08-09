@@ -4,32 +4,40 @@ import { Request } from 'express';
 import { role } from 'src/role/entity/role.entity';
 import { Repository } from 'typeorm';
 import { userCreateDto } from './dto/user-create.dto';
+import { companyCreateDto } from '../company/dto/company-create.dto';
 import { userUpdateDto } from './dto/user-update.dto';
 import { user } from './entity/user.entity';
 import { validator } from 'validator';
 import { userSigninDto } from './dto/user-signin.dto';
+import { company } from 'src/company/entity/company.entity';
 @Injectable()
 export class UserService {
     constructor(
         @InjectRepository(user)
         private userRepository: Repository<user>,
+        @InjectRepository(company)
+        private companyRepository: Repository<company>,
+
     ){}
 
-    
     getU():Promise<user[]>{
-        return this.userRepository.find();
+        return this.userRepository.find({
+            relations: ['Company']
+        });
     }
 
 
-    async addcompany(UserCreateDto:userCreateDto):Promise<user>{
-
-        const exist = await this.userRepository.findOne({where: {Email: UserCreateDto.Email}});
-        if(!exist){
-            return this.userRepository.save(UserCreateDto);
+    async addcompany(CompanyDetailsDto:any):Promise<any>{
+        
+        const companyExist = await this.companyRepository.findOne({where: {Name:CompanyDetailsDto["Company"].Name}});
+        // const exist = await this.userRepository.findOne({where: {Email: UserCreateDto.Email}});
+        if(!companyExist){
+            console.log(CompanyDetailsDto["Company"])
+            const companysave = this.companyRepository.save(CompanyDetailsDto["Company"]);
+           return companysave;
         }
-        else if(exist){
-            console.log("exist");
-            return ;  
+        else if(companyExist){
+            console.log(" NOT EXISTS");
         }
         
     }
@@ -57,7 +65,7 @@ export class UserService {
     }
     async showUByEmail(Email: string): Promise<user> {
         const query =  await this.userRepository.findOne({where :{Email: Email},
-            relations: ['Role']
+            relations: ['Role','Company']
         });
         return query;
     }
