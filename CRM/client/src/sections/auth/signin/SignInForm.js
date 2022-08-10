@@ -41,21 +41,18 @@ export default function SignInForm() {
           console.log("Data recieved");
           const results = response.data; 
 
-          localStorage.setItem('ROLE',response.data[0].role);
-          localStorage.setItem('ID',response.data[0].id);
-          
+          localStorage.setItem('ROLE',response.data[0].roleId);
+          localStorage.setItem('ID',response.data[0].companyId);
           // condition to check roles
-          if (response.data[0].role==="admin"){
+          if (response.data[0].roleId > 0 && response.data[0].roleId <2){
             navigate('/dashboard/AdminHome', { replace: true });
           }
-          else if (response.data[0].role==="host"){
+          else if (response.data[0].roleId > 1 && response.data[0].roleId <3){
             navigate('/dashboard/HostDashboard', { replace: true });
           }
-          else if (response.data[0].role==="client"){
+          else if (response.data[0].roleId > 2 && response.data[0].roleId <4){
             navigate('/dashboard/ClientDashboard', { replace: true });
           }
-
-          
         })
 
     } catch (err) {

@@ -8,7 +8,7 @@ import useResponsive from '../hooks/useResponsive';
 import Page from '../components/Page';
 import Logo from '../components/Logo';
 // sections
-import { AddClientCompanyForm } from '../sections/@dashboard/addclientcompany';
+import { AddCompanyForm } from '../sections/@dashboard/addcompany';
 
 // ----------------------------------------------------------------------
 
@@ -63,7 +63,7 @@ export default function AddClientCompany() {
             <img src="/static/illustrations/crm.jpg" alt="crm" />
           </SectionStyle>
         )}
-        <AddClientCompanyForm />
+        <AddCompanyForm />
       </RootStyle>
     </Page>
   );

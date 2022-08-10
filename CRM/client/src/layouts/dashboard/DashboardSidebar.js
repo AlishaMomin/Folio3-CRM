@@ -60,16 +60,19 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar, userRo
   }, [pathname]);
   const getNav = () => {
     console.log("CHECKKK", userRole);
-    if (userRole === "admin") {
+    if (userRole > 0 && userRole < 2) {
       return (
         <AdminNavSection adminNavConfig={adminNavConfig} />
       )
 
     }
-    if (userRole === "host") {
-      return (<HostNavSection hostNavConfig={hostNavConfig} />)
+    if (userRole > 1 && userRole < 3) {
+      console.log("skcbsisc")
+      return (
+        <HostNavSection hostNavConfig={hostNavConfig} />
+      )
     }
-    if (userRole === "client") {
+    if (userRole > 2 && userRole < 4) {
       return (<ClientNavSection clientNavConfig={clientNavConfig} />)
     }
   }
@@ -101,32 +104,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar, userRo
       </Box>
       {getNav()}
 
-      {/* {(() => {
-        console.log("CHECKKK",userRole);
-        if (userRole === "admin") {
-          return (
-            <AdminNavSection adminNavConfig={adminNavConfig} />
-          )
-
-        }
-        if (userRole === "host") {
-          return (<HostNavSection hostNavConfig={hostNavConfig} />)
-        }
-        if (userRole === "client") {
-          return (<ClientNavSection clientNavConfig={clientNavConfig} />)
-        }
-      })()} */}
-
-
-
-      {/* if Condition */}
-      {/* <ClientNavSection clientNavConfig={clientNavConfig}/> */}
-      {/* <HostNavSection hostNavConfig={hostNavConfig}/> */}
-      {/* <AdminNavSection adminNavConfig={adminNavConfig} /> */}
-
-      {/* <NavSection navConfig={navConfig} /> */}
-
-
       <Box sx={{ flexGrow: 1 }} />
     </Scrollbar>
   );
@@ -141,8 +118,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar, userRo
             sx: { width: DRAWER_WIDTH },
           }}
         >
-          {/* if condition */}
-
           {renderContent}
         </Drawer>
       )}
@@ -159,7 +134,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar, userRo
             },
           }}
         >
-
           {renderContent}
         </Drawer>
       )}

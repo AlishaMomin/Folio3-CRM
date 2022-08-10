@@ -8,7 +8,7 @@ import useResponsive from '../hooks/useResponsive';
 import Page from '../components/Page';
 import Logo from '../components/Logo';
 // sections
-import { AddHostCompanyForm } from '../sections/@dashboard/addhostcompany';
+import { AddCompanyForm } from '../sections/@dashboard/addcompany';
 
 // ----------------------------------------------------------------------
 
@@ -63,7 +63,7 @@ export default function AddHostCompany() {
           </SectionStyle>
         )}
 
-        <AddHostCompanyForm />
+        <AddCompanyForm />
 
       </RootStyle>
     </Page>

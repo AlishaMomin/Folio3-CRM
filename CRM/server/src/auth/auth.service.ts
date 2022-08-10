@@ -22,10 +22,21 @@ export class AuthService {
 
     async login( User: any ){
         const payload = { Email: User.Email, sub: User.Id,RoleName: User.Role.RoleName};  
-        return[{
-            access_token: this.jwtService.sign(payload),
-            role: User.Role.RoleName,
-            id : User.Company.Id
-        }]
+        if (User.Company != null)
+        {
+            return[{
+                access_token: this.jwtService.sign(payload),
+                roleId: User.Role.Id,
+                companyId : User.Company.Id,
+            }]
+        }
+        else
+        {
+            return[{
+                access_token: this.jwtService.sign(payload),
+                roleId: User.Role.Id,
+                companyId : 0
+            }]
+        }
     }
 }

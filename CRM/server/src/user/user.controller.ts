@@ -33,7 +33,7 @@ export class UserController {
             const newUser2Data = await this.userService.adduser(CompanyDetailsDto["Contact2"]);
             if (newUser1Data != null && newUser2Data != null)
             {
-                return { status:true, message:""};
+                return { status:true, message:"",type:newCompanyData.Type };
             }
             else
             {
@@ -41,24 +41,24 @@ export class UserController {
                 {
                     const deletedUser1 = await this.userService.deleteU(newUser1Data.Id)
                     const deletedCompany = await this.userService.deleteC(newCompanyData.Id)
-                    return {status:false, message:"User 2 email already exists"};
+                    return {status:false, message:"User 2 email already exists",type:0};
                 }
                 else if (newUser2Data != null)
                 {
                     const deletedUser2 = await this.userService.deleteU(newUser2Data.Id)
                     const deletedCompany = await this.userService.deleteC(newCompanyData.Id)
-                    return {status:false, message:"User 1 email already exists"};
+                    return {status:false, message:"User 1 email already exists",type:0};
                 }
                 else
                 {
                     const deletedCompany = await this.userService.deleteC(newCompanyData.Id)
-                    return {status:false, message:"Both users email already exists"};
+                    return {status:false, message:"Both users email already exists",type:0};
                 }
             }
         }
         else
         {
-            return {status:false, message:"Company name already exists"};
+            return {status:false, message:"Company name already exists",type:0};
         }
     }
 

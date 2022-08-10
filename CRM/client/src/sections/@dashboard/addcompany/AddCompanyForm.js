@@ -15,7 +15,7 @@ import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hoo
 
 // ----------------------------------------------------------------------
 
-export default function AddHostCompanyForm() {
+export default function AddCompanyForm() {
     const navigate = useNavigate();
 
     const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4})[ \\-])?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
@@ -48,9 +48,9 @@ export default function AddHostCompanyForm() {
     const defaultValues = {
         Company: {
             Name: "",
-            Type: 0,
+            Type: parseInt(localStorage.getItem('ROLE'),10) - (1),
             Isdelete: 0,
-            HostCompany: null,
+            HostCompany: localStorage.getItem('ID'),
         },
         
         Contact1: {
@@ -58,7 +58,7 @@ export default function AddHostCompanyForm() {
             Email: '',
             ContactNumber: '',
             Password:'1234',
-            Role: 2
+            Role: parseInt(localStorage.getItem('ROLE'),10) + (1)
         },
 
         Contact2: {
@@ -66,7 +66,7 @@ export default function AddHostCompanyForm() {
             Email: '',
             ContactNumber: '',
             Password:'1234',
-            Role: 2
+            Role: parseInt(localStorage.getItem('ROLE'),10) + (1)
         }
     };
 
@@ -87,7 +87,12 @@ export default function AddHostCompanyForm() {
                     const results = response.data;
                     if (results.status)
                     {
-                        navigate('/dashboard/adminhome', { replace: true });
+                        if (results.type === 0){
+                            navigate('/dashboard/AdminHome', { replace: true });
+                          }
+                          else if (results.type === 1){
+                            navigate('/dashboard/HostDashboard', { replace: true });
+                          }
                     }
                     else
                     {

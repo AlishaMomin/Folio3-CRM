@@ -33,6 +33,10 @@ export class UserService {
         // const exist = await this.userRepository.findOne({where: {Email: UserCreateDto.Email}});
         if(!companyExist){
             console.log(CompanyCreateDto)
+            if (CompanyCreateDto['HostCompany'] == 0)
+            {
+                delete CompanyCreateDto['HostCompany']
+            }
             const companySave = this.companyRepository.save(CompanyCreateDto);
             return companySave;
         }
