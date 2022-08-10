@@ -1,7 +1,9 @@
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+
+import axios from 'axios';
 // material
 import {
   Card,
@@ -18,6 +20,7 @@ import {
   TableContainer,
   TablePagination,
 } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid'
 // components
 import Page from '../components/Page';
 import Label from '../components/Label';
@@ -25,24 +28,39 @@ import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/adminhome';
-// mock
-import USERLIST from '../_mock/company';
-
 // ----------------------------------------------------------------------
-
 const TABLE_HEAD = [
-  { id: 'name', label: 'Company Name', alignRight: false },
-  { id: 'noofclient', label: 'No. Of Client', alignRight: false},
-  { id: 'nameC1', label: 'Contact Person 1', alignRight: false },
+  { id: 'Name', label: 'Company Name', alignRight: false },
+  { id: 'User1Name', label: 'Contact Person 1', alignRight: false },
   { id: '' },
-  { id: 'nameC2', label: 'Contact Person 2', alignRight: false },
+  { id: 'User2Name', label: 'Contact Person 2', alignRight: false },
   { id: '' },
-  { id: 'status', label: 'Status',alignRight: false },
+  { id: 'Isdelete', label: 'Status',alignRight: false },
   { id: '' },
 ];
-
 // ----------------------------------------------------------------------
-
+// const columns = [
+//   { field: 'Name', headerName: 'Company Name', width: 200 },
+//   {
+//     field: 'User[0].Name',
+//     headerName: 'Contact Person 1',
+//     // description: 'This column has a value getter and is not sortable.',
+//     sortable: true,
+//     width: 200,
+//     valueGetter: (params) =>
+//       params.row.User[0].Name,
+//   },
+//   {
+//     field: 'User2Name',
+//     headerName: 'Contact Person 2',
+//     // description: 'This column has a value getter and is not sortable.',
+//     sortable: true,
+//     width: 200,
+//     valueGetter: (params) =>
+//     params.row.User[1].Name,
+//   },
+// ];
+//---------------------------------------------------------------------------------
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -67,7 +85,7 @@ function applySortFilter(array, comparator, query) {
     return a[1] - b[1];
   });
   if (query) {
-    return filter(array, (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    return filter(array, (_user) => _user.Name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
   }
   return stabilizedThis.map((el) => el[0]);
 }
@@ -90,10 +108,32 @@ export default function AdminHome() {
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
+  const [Company, setCompany] = useState([]);
+  /* eslint-disable no-debugger */ 
+  // debugger
+  useEffect(() => {
+    getData();
+    console.log("Company ka data", Company);
+  }, []);
+  const getData = async () => {
 
+    try {
+       const response = await axios.get("http://localhost:5000/company/")
+        // {/*.then((response)/*} => {
+          console.log("Data recieved");
+          console.log(response.data);
+          setCompany(response.data);
+          console.log(response.data);
+          console.log(Company,"Line125")
+        // })
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = USERLIST.map((n) => n.name);
+      const newSelecteds = Company.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -125,18 +165,30 @@ export default function AdminHome() {
   };
 
   const handleFilterByName = (event) => {
+    
     setFilterName(event.target.value);
   };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - Company.length) : 0;
 
-  const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
+  const filteredUsers = applySortFilter(Company, getComparator(order, orderBy), filterName);
 
   const isUserNotFound = filteredUsers.length === 0;
-
   return (
+    
     <Page title="Admin Home">
       <Container>
+      {/* <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
+      <DataGrid
+        rows={Company}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
+        getRowId = {(row) => row.Id}
+        autoHeight
+        auto
+        // checkboxSelection
+      /> */}
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             HOME
@@ -156,15 +208,27 @@ export default function AdminHome() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={USERLIST.length}
+                  rowCount={Company.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, noofclient, nameC1, phoneC1, nameC2, phoneC2, status} = row;
-                    const isItemSelected = selected.indexOf(name) !== -1;
+                    row.User1Name = row.User[0].Name;
+                    row.User2Name = row.User[1].Name;
+                    row.User1ContactNumber = row.User[0].ContactNumber;
+                    row.User2ContactNumber = row.User[1].ContactNumber;
+                    if (row.Isdelete === 0 || row.Isdelete === "active")
+                    {
+                      row.Isdelete = "active"
+                    }
+                    else
+                    {
+                      row.Isdelete = "banned"
+                    }
+                    const {id,Name,User1Name,User1ContactNumber,User2Name,User2ContactNumber,Isdelete} = row;
+                    const isItemSelected = selected.indexOf(Name) !== -1;
 
                     return (
                       <TableRow
@@ -176,17 +240,17 @@ export default function AdminHome() {
                         aria-checked={isItemSelected}
                       >
                         <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, name)} />
+                        <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, Name)} />
                         </TableCell>
-                        <TableCell align="left">{name}</TableCell>
-                        <TableCell align="left">{noofclient}</TableCell>
-                        <TableCell align="left">{nameC1}</TableCell>
-                        <TableCell align="left">{phoneC1}</TableCell>
-                        <TableCell align="left">{nameC2}</TableCell>
-                        <TableCell align="left">{phoneC2}</TableCell>                          
+                        <TableCell align="left">{Name}</TableCell>
+                        {/* <TableCell align="left">{noofclient}</TableCell> */}
+                        <TableCell align="left">{User1Name}</TableCell>
+                        <TableCell align="left">{User1ContactNumber}</TableCell>
+                        <TableCell align="left">{User2Name}</TableCell>
+                        <TableCell align="left">{User2ContactNumber}</TableCell>
                         <TableCell align="left">
-                          <Label variant="ghost" color={(status === 'banned' && 'error') || 'success'}>
-                            {sentenceCase(status)}
+                          <Label variant="ghost" color={(Isdelete === "banned" && 'error') || 'success'}>
+                           {Isdelete}
                           </Label>
                         </TableCell>
 
@@ -219,7 +283,7 @@ export default function AdminHome() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={USERLIST.length}
+            count={Company.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

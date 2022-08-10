@@ -10,11 +10,11 @@ import { Roles } from 'src/auth/roles.decorator';
 @Controller('company')
 export class CompanyController {
     constructor(private companyservice: CompanyService){}
-    @Roles(Role.Admin)
-    @UseGuards(AuthGuard('jwt'),RolesGuard)
+    // @Roles(Role.Admin)
+    // @UseGuards(AuthGuard('jwt'),RolesGuard)
     @Get()
-    getcompany(){
-        return this.companyservice.getC();
+    async getcompany(){
+        return await this.companyservice.getC();
     }
     
     @Post()

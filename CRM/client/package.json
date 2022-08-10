@@ -46,6 +46,7 @@
     "@iconify/react": "^3.2.2",
     "@mui/lab": "^5.0.0-alpha.88",
     "@mui/material": "^5.8.6",
+    "@mui/x-data-grid": "^5.15.1",
     "@testing-library/jest-dom": "^5.16.4",
     "antd": "^4.22.3",
     "apexcharts": "^3.35.3",

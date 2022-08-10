@@ -31,14 +31,12 @@ export default function AddCompanyForm() {
 
         Contact1: Yup.object().shape({
             Name: Yup.string().required('Full name required'),
-            // LastNameC1: Yup.string().required('Last name required'),
             Email: Yup.string().email('Email must be a valid email address').required('Email is required'),
             ContactNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
 
         }),
         Contact2: Yup.object().shape({
             Name: Yup.string().required('Full name required'),
-            // LastNameC1: Yup.string().required('Last name required'),
             Email: Yup.string().email('Email must be a valid email address').required('Email is required'),
             ContactNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid')
 
@@ -140,14 +138,12 @@ export default function AddCompanyForm() {
                         <h3 style={{ textAlignVertical: "center", textAlign: "center", }}>Contact Person 1</h3>
                         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                             <RHFTextField name="Contact1.Name" label="Full name" />
-                            {/* <RHFTextField name="LastNameC1" label="Last name" /> */}
                         </Stack>
                         <RHFTextField name="Contact1.Email" label="Email address" />
                         <RHFTextField name="Contact1.ContactNumber" label="Phone Number" />
                         <h3 style={{ textAlignVertical: "center", textAlign: "center", }}>Contact Person 2</h3>
                         <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                             <RHFTextField name="Contact2.Name" label="Full name" />
-                            {/* <RHFTextField name="LastNameC2" label="Last name" /> */}
                         </Stack>
                         <RHFTextField name="Contact2.Email" label="Email address" />
                         <RHFTextField name="Contact2.ContactNumber" label="Phone Number" />
