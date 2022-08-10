@@ -1,6 +1,6 @@
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
-import { useState } from 'react';
+import { useState  } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import {
@@ -26,17 +26,17 @@ import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/clientrecievables';
 // mock
-import USERLIST from '../_mock/recievables';
+import USERLIST from '../_mock/orderline';
 
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Recieve From', alignRight: false },  
-  { id: 'OrderName', label: 'Order Name', alignRight: false },
-  { id: 'Amount', label: 'Total Amount', alignRight: false },
-  { id: 'OrderDate', label: 'Date Of Order', alignRight: false },
-  { id: 'LastDate', label: 'Last Date', alignRight: false },
-  { id: 'InvoiceStatus', label: 'Status', alignRight: false },
+//   { id: 'name', label: 'name', alignRight: false },  
+  { id: 'PricePerUnit', label: 'Price Per Unit', alignRight: false },
+  { id: 'Amount', label: 'Amount', alignRight: false },
+  { id: 'Quantity', label: 'Quantity', alignRight: false },
+  { id: 'ProductId', label: 'Product Id', alignRight: false },
+  { id: 'OrderId', label: 'Order Id', alignRight: false },
   { id: '' },
 ];
 
@@ -71,7 +71,7 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function AdminHome() {
+export default function Orderline() {
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -134,11 +134,11 @@ export default function AdminHome() {
   const isUserNotFound = filteredUsers.length === 0;
 
   return (
-    <Page title="Client Recievables">
+    <Page title="Orderline">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            RECIEVABLES
+            ORDERLINE
           </Typography>
         </Stack>
 
@@ -159,8 +159,8 @@ export default function AdminHome() {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id,name,OrderName, Amount,  OrderDate, LastDate, InvoiceStatus} = row;
-                    const isItemSelected = selected.indexOf(name) !== -1;
+                    const { id,PricePerUnit, Amount,  Quantity, ProductId, OrderId} = row;
+                    const isItemSelected = selected.indexOf(id) !== -1;
 
                     return (
                       <TableRow
@@ -171,21 +171,19 @@ export default function AdminHome() {
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
-                        <TableCell align="left">{name}</TableCell>
-                        <TableCell align="left">{OrderName}</TableCell>
+                        <TableCell align="left">{PricePerUnit}</TableCell>
                         <TableCell align="left">{Amount}</TableCell>
-                        <TableCell align="left">{OrderDate}</TableCell>
-                        <TableCell align="left">{LastDate}</TableCell>                          
-                        <TableCell align="left">
-                          <Label variant="ghost" color={(InvoiceStatus === 'Unpaid' && 'error') || 'success'}>
-                            {sentenceCase(InvoiceStatus)}
-                          </Label>
-                        </TableCell>
+                        <TableCell align="left">{Quantity}</TableCell>
+                        <TableCell align="left">{ProductId}</TableCell>                          
+                        <TableCell align="left">{OrderId}</TableCell>
 
-                        <TableCell align="right">
+                        {/* <TableCell align="right">
                           <UserMoreMenu />
-                        </TableCell>
+                        </TableCell> */}
                       </TableRow>
+
+                      
+                      
                     );
                   })}
                   {emptyRows > 0 && (
@@ -218,6 +216,15 @@ export default function AdminHome() {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Card>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+          <Typography variant="h6" gutterBottom>
+            Total amount = 1000
+          </Typography> 
+          <Button variant="contained" component={RouterLink} to="" startIcon={<Iconify icon="eva:plus-fill" />}>
+            Print Invoice
+          </Button>
+        </Stack>
+
       </Container>
     </Page>
   );
