@@ -22,9 +22,9 @@ export class CompanyController {
         return this.companyservice.createC(CompanyCreateDto);
     }
     @Patch('/:Id')
-    update(@Body() CompanyUpdatedDto:companyUpdateDto,
+    updateIsDelete(@Body() CompanyUpdatedDto:any,
     @Param('Id',ParseIntPipe) Id:number){
-        return this.companyservice.updateC(CompanyUpdatedDto,Id);
+        return this.companyservice.updateIsDeleteC(CompanyUpdatedDto,Id);
     }
     @Get('/:Id')
     getcompanyById(@Param('Id')Id:number){

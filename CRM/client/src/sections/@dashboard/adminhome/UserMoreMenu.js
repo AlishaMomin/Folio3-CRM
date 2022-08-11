@@ -1,5 +1,7 @@
 import { useRef, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import axios from 'axios';
+import PropTypes from 'prop-types';
 // material
 import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText } from '@mui/material';
 // component
@@ -7,10 +9,68 @@ import Iconify from '../../../components/Iconify';
 
 // ----------------------------------------------------------------------
 
-export default function UserMoreMenu() {
+UserMoreMenu.propTypes = {
+  ID: PropTypes.number,
+  action: PropTypes.string,
+};
+export default function UserMoreMenu({ ID, action }) {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
+  const onSubmit = (e) => {
+    console.log(ID,action)
+    const updateIsDelete = {Isdelete:1};
+    if (action === "banned")
+    {
+      updateIsDelete.Isdelete = 0;
+    }
+    
+    try {
+      axios.patch(`http://localhost:5000/company/${ID}`,updateIsDelete)
+        .then((response) => {
+          console.log("Data recieved");
+          console.log(response.data);
+          if (action === "banned")
+          {
+            alert("Company activated.");
+          }
+          else
+          {
+            alert("Company banned.");
+          }
+          window.location.reload();
+        })
 
+    } catch (err) {
+      console.log(err);
+    }
+
+  };
+  const popup = () => {
+    if (action === "banned")
+    {
+      return (
+      
+        <MenuItem sx={{ color: 'text.secondary' }} onClick={() => {onSubmit()}}>
+          <ListItemIcon>
+            <Iconify icon="eva:bulb-outline" width={24} height={24} />
+          </ListItemIcon>
+          <ListItemText primary="Activate" primaryTypographyProps={{ variant: 'body2' }} />
+        </MenuItem>
+      )
+    }
+    if (action === "active")
+    {
+      return (
+      
+        <MenuItem sx={{ color: 'text.secondary' }} onClick={() => {onSubmit()}}>
+          <ListItemIcon>
+            <Iconify icon="eva:slash-outline" width={24} height={24} />
+          </ListItemIcon>
+          <ListItemText primary="Ban" primaryTypographyProps={{ variant: 'body2' }} />
+        </MenuItem>
+      )
+    }
+  }
   return (
     <>
       <IconButton ref={ref} onClick={() => setIsOpen(true)}>
@@ -27,19 +87,7 @@ export default function UserMoreMenu() {
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
-        <MenuItem sx={{ color: 'text.secondary' }}>
-          <ListItemIcon>
-            <Iconify icon="eva:trash-2-outline" width={24} height={24} />
-          </ListItemIcon>
-          <ListItemText primary="Delete" primaryTypographyProps={{ variant: 'body2' }} />
-        </MenuItem>
-
-        {/* <MenuItem component={RouterLink} to="#" sx={{ color: 'text.secondary' }}>
-          <ListItemIcon>
-            <Iconify icon="eva:edit-fill" width={24} height={24} />
-          </ListItemIcon>
-          <ListItemText primary="Edit" primaryTypographyProps={{ variant: 'body2' }} />
-        </MenuItem> */}
+        {popup()}
       </Menu>
     </>
   );

@@ -215,6 +215,7 @@ export default function AdminHome() {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                    row.ID = row.id
                     row.User1Name = row.User[0].Name;
                     row.User2Name = row.User[1].Name;
                     row.User1ContactNumber = row.User[0].ContactNumber;
@@ -227,13 +228,13 @@ export default function AdminHome() {
                     {
                       row.Isdelete = "banned"
                     }
-                    const {id,Name,User1Name,User1ContactNumber,User2Name,User2ContactNumber,Isdelete} = row;
+                    const {Id,Name,User1Name,User1ContactNumber,User2Name,User2ContactNumber,Isdelete} = row;
                     const isItemSelected = selected.indexOf(Name) !== -1;
 
                     return (
                       <TableRow
                         hover
-                        key={id}
+                        key={Id}
                         tabIndex={-1}
                         role="checkbox"
                         selected={isItemSelected}
@@ -255,7 +256,10 @@ export default function AdminHome() {
                         </TableCell>
 
                         <TableCell align="right">
-                          <UserMoreMenu />
+                          <UserMoreMenu 
+                          ID={Id}
+                          action={Isdelete}
+                          />
                         </TableCell>
                       </TableRow>
                     );
