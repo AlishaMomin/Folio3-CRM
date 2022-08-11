@@ -9,10 +9,9 @@ import Login from './pages/Login';
 import NotFound from './pages/Page404';
 import Register from './pages/Register';
 import Products from './pages/Products';
-import DashboardApp from './pages/DashboardApp';
+// import DashboardApp from './pages/DashboardApp';
 import Signin from "./pages/Signin";
-import AddHostCompany from "./pages/AddHostCompany";
-import AddClientCompany from './pages/AddClientCompany';
+import AddCompany from "./pages/AddCompany";
 import CompaniesList from "./pages/companiesList";
 import HostDashboard from "./pages/HostDashboard";
 import ClientDashboard from './pages/ClientDashboard';
@@ -36,8 +35,8 @@ export default function Router() {
         { path: 'products', element: <Products /> },
         { path: 'hostproducts', element: <HostProduct /> },
         { path: 'blog', element: <Blog /> },
-        { path: 'addhostcompany', element: <AddHostCompany /> },
-        { path: 'addclientcompany', element: <AddClientCompany /> },
+        { path: 'addhostcompany', element: <AddCompany /> },
+        { path: 'addclientcompany', element: <AddCompany /> },
         { path: 'clienttransactions', element: <ClientTransactions />},
         { path: 'clientrecievables', element: <ClientRecievables /> },
         
