@@ -25,8 +25,7 @@ import Label from '../components/Label';
 import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/hostproduct';
-
+import {UserListHead,UserListToolbar } from '../sections/@dashboard/frequentComponents';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
@@ -183,6 +182,9 @@ export default function AdminHome() {
                                                 selected={isItemSelected}
                                                 aria-checked={isItemSelected}>
                                                 
+                                                <TableCell padding="checkbox">
+                                                {/* <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, Name)} /> */}
+                                                </TableCell>
                                                 <TableCell align="left">{Name}</TableCell>
                                                 <TableCell align="left">{Sku}</TableCell>
                                                

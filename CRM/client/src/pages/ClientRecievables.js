@@ -25,8 +25,8 @@ import Label from '../components/Label';
 import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/clientrecievables';
-
+import { UserMoreMenu } from '../sections/@dashboard/clientrecievables';
+import {UserListHead,UserListToolbar} from '../sections/@dashboard/frequentComponents';
 
 // ----------------------------------------------------------------------
 
@@ -184,10 +184,12 @@ export default function ClientRecievables() {
                         tabIndex={-1}
                         role="checkbox"
                         selected={isItemSelected}
-                        aria-checked={isItemSelected}
-                      >
+                        aria-checked={isItemSelected}>
+
+                        <TableCell padding="checkbox">
+                        {/* <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, Name)} /> */}
+                        </TableCell>
                         <TableCell align="left">{Name}</TableCell>
-                        {/* <TableCell align="left">{OrderName}</TableCell> */}
                         <TableCell align="left">{TotalAmount}</TableCell>
                         <TableCell align="left">{DateOfOrder}</TableCell>
                         <TableCell align="left">{LastDate}</TableCell>                          

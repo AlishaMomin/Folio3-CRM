@@ -26,7 +26,7 @@ import Label from '../components/Label';
 import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
-import { UserListHead, UserMoreMenu } from '../sections/@dashboard/orderline';
+import { UserListHead } from '../sections/@dashboard/frequentComponents';
 
 // mock
 // import USERLIST from '../_mock/orderline';
@@ -195,6 +195,9 @@ export default function Orderline({ ID }) {
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
+                        <TableCell padding="checkbox">
+                        {/* <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, Name)} /> */}
+                        </TableCell>
                         <TableCell align="left">{ProductName}</TableCell>
                         <TableCell align="left">{Quantity}</TableCell>
                         <TableCell align="left">$ {PerUnitPrice}</TableCell>

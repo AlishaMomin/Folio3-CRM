@@ -27,7 +27,8 @@ import Label from '../components/Label';
 import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/companiesList';
+import { UserMoreMenu } from '../sections/@dashboard/companiesList';
+import {UserListHead,UserListToolbar,} from '../sections/@dashboard/frequentComponents';
 // ----------------------------------------------------------------------
 const TABLE_HEAD = [
   { id: 'Name', label: 'Company Name', alignRight: false },
@@ -228,7 +229,7 @@ export default function CompaniesList() {
                         aria-checked={isItemSelected}
                       >
                         <TableCell padding="checkbox">
-                        <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, Name)} />
+                        {/* <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, Name)} /> */}
                         </TableCell>
                         <TableCell align="left">{Name}</TableCell>
                         {/* <TableCell align="left">{noofclient}</TableCell> */}
