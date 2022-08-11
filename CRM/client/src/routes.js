@@ -13,11 +13,9 @@ import DashboardApp from './pages/DashboardApp';
 import Signin from "./pages/Signin";
 import AddHostCompany from "./pages/AddHostCompany";
 import AddClientCompany from './pages/AddClientCompany';
-import AdminHome from "./pages/AdminHome";
-import ClientCompanies from "./pages/ClientCompanies"
+import CompaniesList from "./pages/companiesList";
 import HostDashboard from "./pages/HostDashboard";
 import ClientDashboard from './pages/ClientDashboard';
-import AddCompany from "./pages/AddCompany";
 import ClientTransactions from "./pages/ClientTransactions";
 import ClientRecievables from "./pages/ClientRecievables";
 import HostProduct from "./pages/HostProduct";
@@ -29,18 +27,17 @@ export default function Router() {
       path: '/dashboard',
       element: <DashboardLayout />,
       children: [
-        { path: 'app', element: <DashboardApp /> },
+        // { path: 'app', element: <DashboardApp /> },
         { path: 'hostdashboard', element: <HostDashboard /> },
         { path: 'clientdashboard', element: <ClientDashboard /> },
         { path: 'user', element: <User /> },
-        { path: 'adminhome', element: <AdminHome /> },
-        { path: 'clientcompanies', element: <ClientCompanies /> },
+        { path: 'adminhome', element: <CompaniesList /> },
+        { path: 'clientcompanies', element: <CompaniesList /> },
         { path: 'products', element: <Products /> },
         { path: 'hostproducts', element: <HostProduct /> },
         { path: 'blog', element: <Blog /> },
         { path: 'addhostcompany', element: <AddHostCompany /> },
         { path: 'addclientcompany', element: <AddClientCompany /> },
-        { path: 'addcompany', element: <AddCompany /> },
         { path: 'clienttransactions', element: <ClientTransactions />},
         { path: 'clientrecievables', element: <ClientRecievables /> },
         

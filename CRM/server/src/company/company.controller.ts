@@ -7,15 +7,22 @@ import { RolesGuard } from 'src/auth/roles.guard';
 import { AuthGuard } from '@nestjs/passport';
 import { Role } from 'src/auth/role.enum';
 import { Roles } from 'src/auth/roles.decorator';
+
 @Controller('company')
 export class CompanyController {
     constructor(private companyservice: CompanyService){}
     // @Roles(Role.Admin)
     // @UseGuards(AuthGuard('jwt'),RolesGuard)
-    @Get()
-    async getcompany(){
-        return await this.companyservice.getC();
+    @Get('/h')
+    async gethostcompany(){
+        return await this.companyservice.getHC();
     }
+    
+    @Get('/c')
+    async getclientcompany(){
+        return await this.companyservice.getCC();
+    }
+    
     
     @Post()
     postcompany(@Body() CompanyCreateDto:companyCreateDto){

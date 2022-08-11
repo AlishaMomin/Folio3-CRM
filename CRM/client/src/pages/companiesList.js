@@ -27,7 +27,7 @@ import Label from '../components/Label';
 import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/adminhome';
+import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/companiesList';
 // ----------------------------------------------------------------------
 const TABLE_HEAD = [
   { id: 'Name', label: 'Company Name', alignRight: false },
@@ -39,28 +39,7 @@ const TABLE_HEAD = [
   { id: '' },
 ];
 // ----------------------------------------------------------------------
-// const columns = [
-//   { field: 'Name', headerName: 'Company Name', width: 200 },
-//   {
-//     field: 'User[0].Name',
-//     headerName: 'Contact Person 1',
-//     // description: 'This column has a value getter and is not sortable.',
-//     sortable: true,
-//     width: 200,
-//     valueGetter: (params) =>
-//       params.row.User[0].Name,
-//   },
-//   {
-//     field: 'User2Name',
-//     headerName: 'Contact Person 2',
-//     // description: 'This column has a value getter and is not sortable.',
-//     sortable: true,
-//     width: 200,
-//     valueGetter: (params) =>
-//     params.row.User[1].Name,
-//   },
-// ];
-//---------------------------------------------------------------------------------
+
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -90,7 +69,7 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function AdminHome() {
+export default function CompaniesList() {
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -103,6 +82,16 @@ export default function AdminHome() {
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+
+  //-----------------------------------------------------
+  const [Title, setTitle] = useState('');
+  const [Navigation,setNavigation] = useState("");
+
+
+
+
+
+  //------------------------------------------------------
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -112,21 +101,29 @@ export default function AdminHome() {
   /* eslint-disable no-debugger */ 
   // debugger
   useEffect(() => {
-    getData();
     console.log("Company ka data", Company);
+    
+    getData();
   }, []);
   const getData = async () => {
-
+    let Urlo = "";
+    if (parseInt(localStorage.getItem('ROLE'),10) === 1)
+    {
+      setTitle("Home")
+      Urlo = "http://localhost:5000/company/h";
+      setNavigation("/dashboard/addhostcompany"); 
+    }
+    else
+    {
+      setTitle("Companies")
+      Urlo = "http://localhost:5000/company/c";
+      setNavigation("/dashboard/addclientcompany"); 
+    }
     try {
-       const response = await axios.get("http://localhost:5000/company/")
-        // {/*.then((response)/*} => {
+       const response = await axios.get(Urlo)
           console.log("Data recieved");
           console.log(response.data);
           setCompany(response.data);
-          console.log(response.data);
-          console.log(Company,"Line125")
-        // })
-
     } catch (err) {
       console.log(err);
     }
@@ -174,26 +171,16 @@ export default function AdminHome() {
   const filteredUsers = applySortFilter(Company, getComparator(order, orderBy), filterName);
 
   const isUserNotFound = filteredUsers.length === 0;
+
   return (
     
-    <Page title="Admin Home">
+    <Page title={Title}>
       <Container>
-      {/* <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
-      <DataGrid
-        rows={Company}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        getRowId = {(row) => row.Id}
-        autoHeight
-        auto
-        // checkboxSelection
-      /> */}
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+      <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            HOME
+            {Title}
           </Typography>
-          <Button variant="contained" component={RouterLink} to="/dashboard/addhostcompany" startIcon={<Iconify icon="eva:plus-fill" />}>
+          <Button variant="contained" component={RouterLink} to={Navigation} startIcon={<Iconify icon="eva:plus-fill" />}>
             New Company
           </Button>
         </Stack>

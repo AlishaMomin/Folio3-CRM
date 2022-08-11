@@ -63,7 +63,7 @@ export default function AddHostCompany() {
           </SectionStyle>
         )}
 
-        <AddCompanyForm />
+    <AddCompanyForm />
 
       </RootStyle>
     </Page>
