@@ -1,6 +1,6 @@
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import {
@@ -18,6 +18,7 @@ import {
   TableContainer,
   TablePagination,
 } from '@mui/material';
+import axios from 'axios';
 // components
 import Page from '../components/Page';
 import Label from '../components/Label';
@@ -25,16 +26,14 @@ import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/clientrecievables';
-// mock
-import USERLIST from '../_mock/recievables';
+
 
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Recieve From', alignRight: false },  
-  { id: 'OrderName', label: 'Order Name', alignRight: false },
-  { id: 'Amount', label: 'Total Amount', alignRight: false },
-  { id: 'OrderDate', label: 'Date Of Order', alignRight: false },
+  { id: 'Name', label: 'Name', alignRight: false },  
+  { id: 'TotalAmount', label: 'Total Amount', alignRight: false },
+  { id: 'DateOfOrder', label: 'Date Of Order', alignRight: false },
   { id: 'LastDate', label: 'Last Date', alignRight: false },
   { id: 'InvoiceStatus', label: 'Status', alignRight: false },
   { id: '' },
@@ -66,12 +65,12 @@ function applySortFilter(array, comparator, query) {
     return a[1] - b[1];
   });
   if (query) {
-    return filter(array, (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+    return filter(array, (_user) => _user.Name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
   }
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function AdminHome() {
+export default function ClientRecievables() {
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -89,21 +88,37 @@ export default function AdminHome() {
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
+  const [Recievables, setRecievables] = useState([]);
+    useEffect(() => {
+        console.log("Product ka data", Recievables);
+
+        getData();
+    }, []);
+    const getData = async () => {
+        try {
+           const response = await axios.get("http://localhost:5000/order")
+              console.log("Data recieved");
+              console.log(response.data);
+              setRecievables(response.data);
+        } catch (err) {
+          console.log(err);
+        }
+      }
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = USERLIST.map((n) => n.name);
+      const newSelecteds = Recievables.map((n) => n.Name);
       setSelected(newSelecteds);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, Name) => {
+    const selectedIndex = selected.indexOf(Name);
     let newSelected = [];
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, Name);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -127,9 +142,9 @@ export default function AdminHome() {
     setFilterName(event.target.value);
   };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - Recievables.length) : 0;
 
-  const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
+  const filteredUsers = applySortFilter(Recievables, getComparator(order, orderBy), filterName);
 
   const isUserNotFound = filteredUsers.length === 0;
 
@@ -152,15 +167,15 @@ export default function AdminHome() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={USERLIST.length}
+                  rowCount={Recievables.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id,name,OrderName, Amount,  OrderDate, LastDate, InvoiceStatus} = row;
-                    const isItemSelected = selected.indexOf(name) !== -1;
+                    const { id,Name, TotalAmount,  DateOfOrder, LastDate, InvoiceStatus} = row;
+                    const isItemSelected = selected.indexOf(Name) !== -1;
 
                     return (
                       <TableRow
@@ -171,10 +186,10 @@ export default function AdminHome() {
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
-                        <TableCell align="left">{name}</TableCell>
-                        <TableCell align="left">{OrderName}</TableCell>
-                        <TableCell align="left">{Amount}</TableCell>
-                        <TableCell align="left">{OrderDate}</TableCell>
+                        <TableCell align="left">{Name}</TableCell>
+                        {/* <TableCell align="left">{OrderName}</TableCell> */}
+                        <TableCell align="left">{TotalAmount}</TableCell>
+                        <TableCell align="left">{DateOfOrder}</TableCell>
                         <TableCell align="left">{LastDate}</TableCell>                          
                         <TableCell align="left">
                           <Label variant="ghost" color={(InvoiceStatus === 'Unpaid' && 'error') || 'success'}>
@@ -211,7 +226,7 @@ export default function AdminHome() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={USERLIST.length}
+            count={Recievables.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

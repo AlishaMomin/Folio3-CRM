@@ -26,16 +26,12 @@ import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/hostproduct';
-// mock
-// import USERLIST from '../_mock/hostproducts';
-
 
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
     { id: 'Name', label: 'Product Name', alignRight: false },
     { id: 'Sku', label: 'SKU', alignRight: false },
-    // { id: 'TotalSale', label: 'Total Sale', alignRight: false },
     { id: '' },
 ];
 
