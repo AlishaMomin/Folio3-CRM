@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 // material
 import { alpha } from '@mui/material/styles';
-import { Box, MenuItem, Stack, IconButton } from '@mui/material';
+import { Box, MenuItem, Stack, IconButton,ListItemText } from '@mui/material';
 // components
 import Iconify from '../../../components/Iconify';
 import { PaymentForm } from '../clienttransactions';
@@ -30,15 +30,18 @@ export default function OrderlinePopover() {
         onClick={handleOpen}
         sx={{
           padding: 0,
-          width: 44,
+          width: "100%",
           height: 44,
           ...(open && {
             bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.action.focusOpacity),
           }),
         }}
       >
+        <>
         
-            <Iconify icon="eva:eye-outline"/>
+        <ListItemText primary="View" primaryTypographyProps={{ variant: 'body2' }} />
+            <Iconify icon="eva:eye-outline" />
+            </>
       </IconButton>
 
       <MenuPopover

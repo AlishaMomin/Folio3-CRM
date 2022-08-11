@@ -24,7 +24,7 @@ import Label from '../components/Label';
 import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
-import { UserListHead, UserListToolbar, UserMoreMenu } from '../sections/@dashboard/clientrecievables';
+import { UserListHead, UserMoreMenu } from '../sections/@dashboard/orderline';
 // mock
 import USERLIST from '../_mock/orderline';
 
@@ -143,8 +143,7 @@ export default function Orderline() {
         </Stack>
 
         <Card>
-          <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
-
+          
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
@@ -215,8 +214,7 @@ export default function Orderline() {
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
-        </Card>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+          <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h6" gutterBottom>
             Total amount = 1000
           </Typography> 
@@ -224,6 +222,8 @@ export default function Orderline() {
             Print Invoice
           </Button>
         </Stack>
+        </Card>
+        
 
       </Container>
     </Page>

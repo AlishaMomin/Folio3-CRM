@@ -33,7 +33,7 @@ export default function UserMoreMenu() {
         
         <MenuItem component={RouterLink} to="#" sx={{ color: 'text.secondary' }}>
           
-          <ListItemText primary="View" primaryTypographyProps={{ variant: 'body2' }} />
+          {/* <ListItemText primary="View" primaryTypographyProps={{ variant: 'body2' }} /> */}
           <OrderlinePopover/>
         </MenuItem>
       </Menu>
