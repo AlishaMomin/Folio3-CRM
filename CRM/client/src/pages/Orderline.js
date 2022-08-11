@@ -19,6 +19,7 @@ import {
   TablePagination,
 } from '@mui/material';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 // components
 import Page from '../components/Page';
 import Label from '../components/Label';
@@ -34,9 +35,10 @@ import { UserListHead, UserMoreMenu } from '../sections/@dashboard/orderline';
 
 const TABLE_HEAD = [
 //   { id: 'name', label: 'name', alignRight: false },  
-  { id: 'PricePerUnit', label: 'Price Per Unit', alignRight: false },
-  { id: 'Amount', label: 'Amount', alignRight: false },
+  { id: 'ProductName', label: 'Product', alignRight: false },
   { id: 'Quantity', label: 'Quantity', alignRight: false },
+  { id: 'PerUnitPrice', label: 'Price Per Unit', alignRight: false },
+  { id: 'Amount', label: 'Amount', alignRight: false },
   { id: '' },
 ];
 
@@ -71,8 +73,13 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function Orderline() {
+Orderline.propTypes = {
+  ID: PropTypes.number,
+};
+export default function Orderline({ ID }) {
   const [page, setPage] = useState(0);
+
+  const [TotalAmount,setTotalAmount] = useState(0);
 
   const [order, setOrder] = useState('asc');
 
@@ -89,18 +96,18 @@ export default function Orderline() {
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
-  const [Orderline, setOrderline] = useState([]);
+  const [OrderLine, setOrderLine] = useState([]);
     useEffect(() => {
-        console.log("Orderline ka data", Orderline);
-
         getData();
+        console.log("Orderline ka data", OrderLine);
     }, []);
     const getData = async () => {
         try {
-           const response = await axios.get("http://localhost:5000/product")
+           const response = await axios.get(`http://localhost:5000/order/${ID}`)
               console.log("Data recieved");
               console.log(response.data);
-              setOrderline(response.data);
+              setTotalAmount(response.data.TotalAmount);
+              setOrderLine(response.data.Orderline);
         } catch (err) {
           console.log(err);
         }
@@ -109,18 +116,18 @@ export default function Orderline() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = Orderline.map((n) => n.name);
+      const newSelecteds = OrderLine.map((n) => n.ProductName);
       setSelected(newSelecteds);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, ProductName) => {
+    const selectedIndex = selected.indexOf(ProductName);
     let newSelected = [];
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, ProductName);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -146,7 +153,7 @@ export default function Orderline() {
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - Orderline.length) : 0;
 
-  const filteredUsers = applySortFilter(Orderline, getComparator(order, orderBy), filterName);
+  const filteredUsers = applySortFilter(OrderLine, getComparator(order, orderBy), filterName);
 
   const isUserNotFound = filteredUsers.length === 0;
 
@@ -168,14 +175,15 @@ export default function Orderline() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={Orderline.length}
+                  rowCount={OrderLine.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id,PricePerUnit, Amount,  Quantity} = row;
+                    row.ProductName = row.Product.Name
+                    const { id,ProductName, Quantity, PerUnitPrice, Amount,} = row;
                     const isItemSelected = selected.indexOf(id) !== -1;
 
                     return (
@@ -187,9 +195,10 @@ export default function Orderline() {
                         selected={isItemSelected}
                         aria-checked={isItemSelected}
                       >
-                        <TableCell align="left">{PricePerUnit}</TableCell>
-                        <TableCell align="left">{Amount}</TableCell>
+                        <TableCell align="left">{ProductName}</TableCell>
                         <TableCell align="left">{Quantity}</TableCell>
+                        <TableCell align="left">$ {PerUnitPrice}</TableCell>
+                        <TableCell align="left">$ {Amount}</TableCell>
 
                         {/* <TableCell align="right">
                           <UserMoreMenu />
@@ -223,7 +232,7 @@ export default function Orderline() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={Orderline.length}
+            count={OrderLine.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -231,7 +240,7 @@ export default function Orderline() {
           />
           <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h6" gutterBottom>
-            Total amount = 1000
+            Total amount = $ {TotalAmount}
           </Typography> 
           
         </Stack>

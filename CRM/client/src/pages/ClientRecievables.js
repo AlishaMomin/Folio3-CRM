@@ -174,13 +174,13 @@ export default function ClientRecievables() {
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id,Name, TotalAmount,  DateOfOrder, LastDate, InvoiceStatus} = row;
+                    const { Id,Name, TotalAmount,  DateOfOrder, LastDate, InvoiceStatus} = row;
                     const isItemSelected = selected.indexOf(Name) !== -1;
 
                     return (
                       <TableRow
                         hover
-                        key={id}
+                        key={Id}
                         tabIndex={-1}
                         role="checkbox"
                         selected={isItemSelected}
@@ -198,7 +198,9 @@ export default function ClientRecievables() {
                         </TableCell>
 
                         <TableCell align="right">
-                          <UserMoreMenu />
+                          <UserMoreMenu  
+                          ID = {Id}
+                          />
                         </TableCell>
                       </TableRow>
                     );

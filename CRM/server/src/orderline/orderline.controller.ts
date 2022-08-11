@@ -23,7 +23,7 @@ export class OrderlineController {
     }
     @Get('/:Id')
     getorderlineById(@Param('Id')Id:number){
-        return this.orderlineservice.showOLById(Id);
+        return this.orderlineservice.getOLById(Id);
     }
     @Delete('/:Id')
     deleteorderline(@Param('Id',ParseIntPipe)Id:number){

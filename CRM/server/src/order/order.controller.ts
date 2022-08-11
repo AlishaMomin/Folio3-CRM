@@ -23,7 +23,7 @@ export class OrderController {
     }
     @Get('/:Id')
     getorderById(@Param('Id')Id:number){
-        return this.orderservice.showOById(Id);
+        return this.orderservice.getOById(Id);
     }
     @Delete('/:Id')
     deleteorder(@Param('Id',ParseIntPipe)Id:number){

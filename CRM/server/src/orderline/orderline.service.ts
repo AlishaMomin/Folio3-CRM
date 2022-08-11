@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { InjectConnection, InjectRepository } from '@nestjs/typeorm';
+import {InjectRepository } from '@nestjs/typeorm';
 import { Request } from 'express';
-import { Connection, Repository } from 'typeorm';
+import {Repository } from 'typeorm';
 import { orderlineCreateDto } from './dto/orderline-create.dto';
 import { orderlineUpdateDto } from './dto/orderline-update.dto';
 import { orderline } from './entity/orderline.entity';
@@ -11,11 +11,12 @@ export class OrderlineService {
     constructor(
         @InjectRepository(orderline)
         private orderlineRepository: Repository<orderline>,
-        @InjectConnection() private readonly connection:Connection,
     ){}
 
     getOL():Promise<orderline[]>{
-        return this.orderlineRepository.find();
+        return this.orderlineRepository.find({
+            relations:['Product']
+        });
     }
     createOL(OrderlineCreateDto:orderlineCreateDto){
         return this.orderlineRepository.save(OrderlineCreateDto);
@@ -23,8 +24,14 @@ export class OrderlineService {
     updateOL(OrderlineUpdatedDto:orderlineUpdateDto,Id:number){
         return this.orderlineRepository.update(Id,OrderlineUpdatedDto);
     }
-    showOLById(Id:number){
-        return this.orderlineRepository.findOne({where:{Id}});
+    getOLById(Id:number){
+        return this.orderlineRepository.findOne({
+            where:{
+                Id
+            },
+            relations:['Product']
+
+        });
     }
     deleteOL(Id:number){
         return this.orderlineRepository.delete(Id);
