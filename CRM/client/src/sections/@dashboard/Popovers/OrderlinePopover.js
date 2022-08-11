@@ -1,13 +1,15 @@
 import { useRef, useState } from 'react';
+
+import { Link as RouterLink } from 'react-router-dom';
 // material
 import { alpha } from '@mui/material/styles';
-import { Box, MenuItem, Stack, IconButton,ListItemText } from '@mui/material';
+import { Box, MenuItem, Stack, Button, IconButton,ListItemText } from '@mui/material';
+import {useReactToPrint} from "react-to-print" ;
 // components
 import Iconify from '../../../components/Iconify';
 import { PaymentForm } from '../clienttransactions';
 import MenuPopover from '../../../components/MenuPopover';
 import Orderline from '../../../pages/Orderline';
-
 
 // ----------------------------------------------------------------------
 
@@ -22,6 +24,10 @@ export default function OrderlinePopover() {
   const handleClose = () => {
     setOpen(false);
   };
+  const componentRef=useRef();
+  const handleprint =useReactToPrint({
+    content:()=>componentRef.current,
+  });
 
   return (
     <>
@@ -56,6 +62,10 @@ export default function OrderlinePopover() {
         }}
       >
         <Orderline/>
+        {/* <Orderline ref={componentRef}/> */}
+        <Button variant="contained" onClick= {handleprint} component={RouterLink} to="" startIcon={<Iconify icon="eva:plus-fill" />}>
+            Print Invoice
+          </Button>
         {/* <PaymentForm/> */}
       </MenuPopover>
     </>
