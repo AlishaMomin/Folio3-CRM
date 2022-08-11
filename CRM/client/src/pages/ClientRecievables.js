@@ -192,7 +192,7 @@ export default function ClientRecievables() {
                         <TableCell align="left">{DateOfOrder}</TableCell>
                         <TableCell align="left">{LastDate}</TableCell>                          
                         <TableCell align="left">
-                          <Label variant="ghost" color={(InvoiceStatus === 'Unpaid' && 'error') || 'success'}>
+                          <Label variant="ghost" color={(InvoiceStatus === 'unpaid' && 'error') || 'success'}>
                             {sentenceCase(InvoiceStatus)}
                           </Label>
                         </TableCell>
