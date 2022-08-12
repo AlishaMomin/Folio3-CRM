@@ -1,59 +1,71 @@
-import { Navigate, useRoutes } from 'react-router-dom';
+import { Navigate} from 'react-router-dom';
 // layouts
 import DashboardLayout from './layouts/dashboard';
-import LogoOnlyLayout from './layouts/LogoOnlyLayout';
+// Routes components
+import publicRoutes from './allRoutes/publicRoutes';
+import adminRoutes from './allRoutes/adminRoutes';
+import hostRoutes from './allRoutes/hostRoutes';
+import clientRoutes from './allRoutes/clientRoutes';
+
 //
 import Blog from './pages/Blog';
 import User from './pages/User';
-import Login from './pages/Login';
-import NotFound from './pages/Page404';
-import Register from './pages/Register';
 import Products from './pages/Products';
 // import DashboardApp from './pages/DashboardApp';
 import Signin from "./pages/Signin";
-import AddCompany from "./pages/AddCompany";
-import CompaniesList from "./pages/companiesList";
-import HostDashboard from "./pages/HostDashboard";
-import ClientDashboard from './pages/ClientDashboard';
-import ClientRecievables from "./pages/ClientRecievables";
-import HostProduct from "./pages/HostProduct";
+// import AddCompany from "./pages/AddCompany";
+// import CompaniesList from "./pages/companiesList";
+// import ClientRecievables from "./pages/ClientRecievables";
+// import ClientDashboard from './pages/ClientDashboard';
+
+// import HostDashboard from "./pages/HostDashboard";
+// import HostProduct from "./pages/HostProduct";
 // ----------------------------------------------------------------------
 
-export default function Router() {
+// export default function Router() {
   
-    return useRoutes([
+const routes = [
       {
         path: '/dashboard',
         element: <DashboardLayout />,
         children: [
-          // { path: 'app', element: <DashboardApp /> },
-          { path: 'hostdashboard', element: <HostDashboard /> },
-          { path: 'clientdashboard', element: <ClientDashboard /> },
+          ...adminRoutes,
+          ...hostRoutes,
+          ...clientRoutes,
+
           { path: 'user', element: <User /> },
-          { path: 'adminhome', element: <CompaniesList /> },
-          { path: 'clientcompanies', element: <CompaniesList /> },
           { path: 'products', element: <Products /> },
-          { path: 'hostproducts', element: <HostProduct /> },
           { path: 'blog', element: <Blog /> },
-          { path: 'addhostcompany', element: <AddCompany /> },
-          { path: 'addclientcompany', element: <AddCompany /> },
-          { path: 'clienttransactions', element: <ClientRecievables />},
-          { path: 'clientrecievables', element: <ClientRecievables /> },
           
         ],
       },
-      {
-        path: '/',
-        element: <LogoOnlyLayout />,
-        children: [
-          { path: '/', element: <Navigate to="/signin" /> },
-          { path: 'login', element: <Login /> },
-          { path: 'register', element: <Register /> },
-          { path: 'signin', element: <Signin /> }, 
-          { path: '404', element: <NotFound /> },
-          { path: '*', element: <Navigate to="/404" /> },
-        ],
-      },
-      { path: '*', element: <Navigate to="/404" replace /> },
-    ]);  
-}
+      ...publicRoutes
+      // {
+      //   path: '/',
+      //   element: <LogoOnlyLayout />,
+      //   children: [
+      //     { path: '/', element: <Navigate to="/signin" /> },
+      //     { path: 'login', element: <Login /> },
+      //     { path: 'register', element: <Register /> },
+      //     { path: 'signin', element: <Signin /> }, 
+      //     { path: '404', element: <NotFound /> },
+      //     { path: '*', element: <Navigate to="/404" /> },
+      //   ],
+      // },
+      // { path: '*', element: <Navigate to="/404" replace /> },
+];  
+// const routes = [
+//   {
+//     element: (
+//       <AuthGuard>
+//         <MatxLayout />
+//       </AuthGuard>
+//     ),
+//     children: [...dashboardRoutes, ...chartsRoute, ...materialRoutes],
+//   },
+//   ...sessionRoutes,
+//   { path: '/', element: <Navigate to="dashboard/default" /> },
+//   { path: '*', element: <NotFound /> },
+// ];
+
+export default routes;
