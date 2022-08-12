@@ -1,15 +1,6 @@
 import { IsString, IsInt} from 'class-validator';
-
-export enum transactiontype{
-    CASH = 'cash',
-    CHEQUE = 'cheque',
-    ONLINE = 'online',
-}
-
-export enum invoicestatus{
-    PAID = 'paid',
-    UNPAID = 'unpaid',
-}
+import { invoicestatus } from "../enums/invoicestatus.enum";
+import { transactiontype } from "../enums/transactiontype.enum";
 
 
 export class orderCreateDto{

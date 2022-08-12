@@ -1,13 +1,6 @@
 import { IsString} from 'class-validator';
-export enum TYPE {
-    HOST = 0,
-    CLIENT = 1,
- }
- export enum ISDELETE{
-    ACTIVE = 0,
-    DELETE = 1,
-}
-
+import {TYPE} from "../enums/type.enum";
+import { ISDELETE } from "../enums/Isdelete.enum";
 
 export class companyUpdateDto{
     @IsString()

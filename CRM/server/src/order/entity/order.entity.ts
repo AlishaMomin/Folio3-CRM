@@ -1,18 +1,8 @@
 import { orderline } from "src/orderline/entity/orderline.entity";
 import { user } from "src/user/entity/user.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-
-
-export enum transactiontype{
-    CASH = 'cash',
-    CHEQUE = 'cheque',
-    ONLINE = 'online',
-}
-
-export enum invoicestatus{
-    PAID = 'paid',
-    UNPAID = 'unpaid',
-}
+import { invoicestatus } from "../enums/invoicestatus.enum";
+import { transactiontype } from "../enums/transactiontype.enum";
 
 @Entity()
 export class order{

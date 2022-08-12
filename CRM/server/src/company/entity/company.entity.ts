@@ -1,16 +1,10 @@
 import { product } from "src/product/entity/product.entity";
 import { user } from "src/user/entity/user.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {TYPE} from "../enums/type.enum";
+import { ISDELETE } from "../enums/Isdelete.enum";
 
 
-export enum TYPE {
-   HOST = 0,
-   CLIENT = 1,
-}
-export enum ISDELETE{
-    ACTIVE = 0,
-    DELETE = 1,
-}
 
 @Entity()
 export class company{

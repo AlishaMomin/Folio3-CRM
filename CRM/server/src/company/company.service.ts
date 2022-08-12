@@ -6,10 +6,7 @@ import { companyUpdateDto } from './dto/company-update.dto';
 import { companyCreateDto } from './dto/company-create.dto';
 import { company } from './entity/company.entity';
 import { user } from 'src/user/entity/user.entity';
-export enum TYPE {
-    HOST = 0,
-    CLIENT = 1,
- }
+import {TYPE} from "./enums/type.enum";
 @Injectable()
 export class CompanyService {
     constructor(
@@ -19,7 +16,7 @@ export class CompanyService {
     async getHC():Promise<company[]>{
         const query = this.companyRepository.find({
             where: {
-                Type:1,
+                Type:TYPE.HOST,
               },
             relations: ['User']
         })
@@ -28,7 +25,7 @@ export class CompanyService {
     async getCC():Promise<company[]>{
         const query = this.companyRepository.find({
             where: {
-                Type:2,
+                Type:TYPE.CLIENT,
               },
             relations: ['User']
         })

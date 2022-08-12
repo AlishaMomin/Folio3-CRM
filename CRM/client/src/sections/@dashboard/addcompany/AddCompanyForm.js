@@ -85,10 +85,10 @@ export default function AddCompanyForm() {
                     const results = response.data;
                     if (results.status)
                     {
-                        if (results.type === 0){
+                        if (results.type === '0'){
                             navigate('/dashboard/AdminHome', { replace: true });
                           }
-                          else if (results.type === 1){
+                          else if (results.type === '1'){
                             navigate('/dashboard/HostDashboard', { replace: true });
                           }
                     }

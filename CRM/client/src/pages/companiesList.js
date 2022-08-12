@@ -208,7 +208,7 @@ export default function CompaniesList() {
                     row.User2Name = row.User[1].Name;
                     row.User1ContactNumber = row.User[0].ContactNumber;
                     row.User2ContactNumber = row.User[1].ContactNumber;
-                    if (row.Isdelete === 0 || row.Isdelete === "active")
+                    if (row.Isdelete === '0' || row.Isdelete === "active")
                     {
                       row.Isdelete = "active"
                     }

@@ -2,10 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { orderCreateDto } from './dto/order-create.dto'; 
-import { orderUpdateDto } from './dto/order-update.dto'; 
 import { order } from './entity/order.entity';
-
-
+import { invoicestatus } from './enums/invoicestatus.enum';
 @Injectable()
 export class OrderService {
     constructor(
@@ -13,19 +11,43 @@ export class OrderService {
         private orderRepository: Repository<order>,
     ){}
 
-    getO():Promise<order[]>{
-        return this.orderRepository.find();
+    getOC(Id:number):Promise<order[]>{
+        return this.orderRepository.find({  
+            where :{
+                Buyer:
+                {
+                    Company:
+                    {
+                        Id:Id
+                    }
+                }
+        },
+        });
     }
+
+    getOH(Id:number):Promise<order[]>{
+        return this.orderRepository.find({  
+            where :{
+                Seller:
+                {
+                    Company:
+                    {
+                        Id:Id
+                    }
+                },
+                InvoiceStatus:invoicestatus.UNPAID,
+        },
+        });
+    }
+
     createO(OrderCreateDto:orderCreateDto){
         return this.orderRepository.save(OrderCreateDto);
     }
-    updateO(OrderUpdatedDto:orderUpdateDto,Id:number){
-        return this.orderRepository.update(Id,OrderUpdatedDto);
-    }
+    
     getOById(Id:number){
         return this.orderRepository.findOne({
             where:{
-                Id
+                Id:Id,
             },
             relations: ['Orderline.Product']
         });

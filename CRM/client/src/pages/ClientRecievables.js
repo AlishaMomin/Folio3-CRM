@@ -25,9 +25,8 @@ import Label from '../components/Label';
 import Scrollbar from '../components/Scrollbar';
 import Iconify from '../components/Iconify';
 import SearchNotFound from '../components/SearchNotFound';
-import { UserMoreMenu } from '../sections/@dashboard/clientrecievables';
 import {UserListHead,UserListToolbar} from '../sections/@dashboard/frequentComponents';
-
+import {Popover} from '../sections/@dashboard/Popovers';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
@@ -83,6 +82,9 @@ export default function ClientRecievables() {
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  const [Title, setTitle] = useState('');
+  const [Navigation,setNavigation] = useState("");
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -95,15 +97,29 @@ export default function ClientRecievables() {
         getData();
     }, []);
     const getData = async () => {
+    let Urlo = "";
+    const CompanyId = localStorage.getItem('ID');
+    if (parseInt(localStorage.getItem('ROLE'),10) === 2)
+    {
+      setTitle("Recievables")
+      Urlo = `http://localhost:5000/order/h/${CompanyId}`;
+      setNavigation("/dashboard/addhostcompany"); 
+    }
+    if (parseInt(localStorage.getItem('ROLE'),10) === 3)
+    {
+      setTitle("Transactions")
+      Urlo = `http://localhost:5000/order/c/${CompanyId}`;
+      setNavigation("/dashboard/addclientcompany"); 
+    }
         try {
-           const response = await axios.get("http://localhost:5000/order")
+           const response = await axios.get(Urlo);
               console.log("Data recieved");
               console.log(response.data);
               setRecievables(response.data);
         } catch (err) {
           console.log(err);
         }
-      }
+      };
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
@@ -149,11 +165,11 @@ export default function ClientRecievables() {
   const isUserNotFound = filteredUsers.length === 0;
 
   return (
-    <Page title="Client Recievables">
+    <Page title={Title}>
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            RECIEVABLES
+          {Title}
           </Typography>
         </Stack>
 
@@ -193,15 +209,18 @@ export default function ClientRecievables() {
                         <TableCell align="left">{TotalAmount}</TableCell>
                         <TableCell align="left">{DateOfOrder}</TableCell>
                         <TableCell align="left">{LastDate}</TableCell>                          
-                        <TableCell align="left">
+                        <TableCell align="left" >
                           <Label variant="ghost" color={(InvoiceStatus === 'unpaid' && 'error') || 'success'}>
                             {sentenceCase(InvoiceStatus)}
                           </Label>
                         </TableCell>
 
-                        <TableCell align="right">
-                          <UserMoreMenu  
+                        <TableCell align="left" padding= "default" size = "string">
+                          {/* <UserMoreMenu  
                           ID = {Id}
+                          /> */}
+                          <Popover 
+                          ID = {Id} 
                           />
                         </TableCell>
                       </TableRow>

@@ -15,7 +15,6 @@ import AddCompany from "./pages/AddCompany";
 import CompaniesList from "./pages/companiesList";
 import HostDashboard from "./pages/HostDashboard";
 import ClientDashboard from './pages/ClientDashboard';
-import ClientTransactions from "./pages/ClientTransactions";
 import ClientRecievables from "./pages/ClientRecievables";
 import HostProduct from "./pages/HostProduct";
 // ----------------------------------------------------------------------
@@ -37,7 +36,7 @@ export default function Router() {
         { path: 'blog', element: <Blog /> },
         { path: 'addhostcompany', element: <AddCompany /> },
         { path: 'addclientcompany', element: <AddCompany /> },
-        { path: 'clienttransactions', element: <ClientTransactions />},
+        { path: 'clienttransactions', element: <ClientRecievables />},
         { path: 'clientrecievables', element: <ClientRecievables /> },
         
       ],

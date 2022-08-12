@@ -1,0 +1,108 @@
+import { useRef, useState } from 'react';
+import {useReactToPrint} from "react-to-print" ;
+import { Link as RouterLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+// material
+import { alpha } from '@mui/material/styles';
+import { Box, MenuItem, Stack, Button, IconButton,ListItemText ,Tooltip} from '@mui/material';
+
+// components
+import Iconify from '../../../components/Iconify';
+import { PaymentForm } from '../clienttransactions';
+import MenuPopover from '../../../components/MenuPopover';
+import Orderline from '../../../pages/Orderline';
+
+// ----------------------------------------------------------------------
+Popover.propTypes = {
+  ID: PropTypes.number,
+};
+export default function Popover({ID}) {
+  const anchorRef = useRef(null);
+  const [openOrderline, setOpenOrderline] = useState(false);
+  const [openPayment, setOpenPayment] = useState(false);
+  console.log(ID,"OrderlinePopover")
+  const handleOpenOrderline = () => {
+    setOpenOrderline(true);
+  };
+
+  const handleOpenPayment = () => {
+    setOpenPayment(true);
+  };
+
+  const handleClose = () => {
+    setOpenOrderline(false);
+    setOpenPayment(false);
+  };
+  const componentRef=useRef();
+  const handleprint =useReactToPrint({
+    content:()=>componentRef.current,
+  });
+
+  return (
+    <>
+    <Tooltip title="View Details">
+        <IconButton
+          ref={anchorRef}
+          onClick={handleOpenOrderline}
+          sx={{
+            padding: 0,
+            width: 44,
+            height: 44,
+            ...(openOrderline && {
+              bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.action.focusOpacity),
+            }),
+          }}
+        >
+            <Iconify icon="eva:eye-outline" />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Pay Order">
+        <IconButton
+          ref={anchorRef}
+          onClick={handleOpenPayment}
+          sx={{
+            padding: 0,
+            width: 44,
+            height: 44,
+            ...(openPayment && {
+              bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.action.focusOpacity),
+            }),
+          }}
+        >
+            <Iconify icon="fa6-brands:cc-amazon-pay"/>
+        </IconButton>
+      </Tooltip>
+      <MenuPopover
+        open={openOrderline}
+        onClose={handleClose}
+        anchorEl={anchorRef.current}
+        sx={{
+          mt: 1.5,
+          ml: 0.75,
+          width: 1000,
+          '& .MuiMenuItem-root': { px: 1, typography: 'body2', borderRadius: 0.75 },
+        }}
+      >
+        <Orderline ID = {ID}/>
+        {/* <Orderline ref={componentRef}/> */}
+        <Button variant="contained" onClick= {handleprint} component={RouterLink} to="" startIcon={<Iconify icon="eva:plus-fill" />}>
+            Print Invoice
+          </Button>
+        {/* <PaymentForm/> */}
+      </MenuPopover>
+      <MenuPopover
+        open={openPayment}
+        onClose={handleClose}
+        anchorEl={anchorRef.current}
+        sx={{
+          mt: 1.5,
+          ml: 0.75,
+          width: 360,
+          '& .MuiMenuItem-root': { px: 1, typography: 'body2', borderRadius: 0.75 },
+        }}
+      >
+        <PaymentForm/>
+      </MenuPopover>
+    </>
+  );
+}

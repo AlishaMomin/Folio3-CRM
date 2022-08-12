@@ -18,10 +18,10 @@ export default function UserMoreMenu({ ID, action }) {
   const [isOpen, setIsOpen] = useState(false);
   const onSubmit = (e) => {
     console.log(ID,action)
-    const updateIsDelete = {Isdelete:1};
+    const updateIsDelete = {Isdelete:'1'};
     if (action === "banned")
     {
-      updateIsDelete.Isdelete = 0;
+      updateIsDelete.Isdelete = '0';
     }
     
     try {

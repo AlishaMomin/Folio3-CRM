@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText } from '@mui/material';
 // component
 import Iconify from '../../../components/Iconify';
-import OrderlinePopover from '../Popovers/OrderlinePopover';
-
+import OrderlinePopover from '../Popovers/Popover';
+import PaymentPopover from '../Popovers/PaymentPopover'
 // ----------------------------------------------------------------------
 
 UserMoreMenu.propTypes = {
@@ -16,33 +16,48 @@ export default function UserMoreMenu({ID}) {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   console.log(ID,"UserMoreMenu")
+  const PaymentButton = () =>{
+    
+  if (parseInt(localStorage.getItem('ROLE'),10) === 3)
+  {
+    console.log("Yahan bhi aja bhai")
+    return (
+    <MenuItem component={RouterLink} to="#" sx={{ color: 'text.secondary' }}>
+    
+    {/* <ListItemText primary="View" primaryTypographyProps={{ variant: 'body2' }} /> */}
+      <PaymentPopover/>
+    </MenuItem>
+      )
+  }
+  }
   return (
     <>
-      <IconButton ref={ref} onClick={() => setIsOpen(true)}>
+      {/* <IconButton ref={ref} onClick={() => setIsOpen(true)}>
         <Iconify icon="eva:more-vertical-fill" width={20} height={20} />
-      </IconButton>
+      </IconButton> */}
 
-      <Menu
+      <IconButton
         open={isOpen}
         anchorEl={ref.current}
         onClose={() => setIsOpen(false)}
         PaperProps={{
-          sx: { width: 200, maxWidth: '100%' },
+          sx: { width: 80, maxWidth: '100%' },
         }}
         
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         
       >
-        
-        <MenuItem component={RouterLink} to="#" sx={{ color: 'text.secondary' }}>
-          
+        {/* <MenuItem component={RouterLink} to="#" sx={{ color: 'text.secondary' }}>
+           */}
           {/* <ListItemText primary="View" primaryTypographyProps={{ variant: 'body2' }} /> */}
           <OrderlinePopover 
           ID = {ID}
           />
-        </MenuItem>
-      </Menu>
+        {/* </MenuItem> */}
+        {PaymentButton()}
+        
+      </IconButton>
     </>
   );
 }
