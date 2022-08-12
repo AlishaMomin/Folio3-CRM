@@ -37,7 +37,29 @@ export default function Popover({ID}) {
   const handleprint =useReactToPrint({
     content:()=>componentRef.current,
   });
-
+  const paymenticon = () =>{
+    if (parseInt(localStorage.getItem('ROLE'),10) === 3)
+    {
+      return (
+        <Tooltip title="Pay Order">
+        <IconButton
+          ref={anchorRef}
+          onClick={handleOpenPayment}
+          sx={{
+            padding: 0,
+            width: 44,
+            height: 44,
+            ...(openPayment && {
+              bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.action.focusOpacity),
+            }),
+          }}
+        >
+            <Iconify icon="fa6-brands:cc-amazon-pay"/>
+        </IconButton>
+      </Tooltip>
+      )
+    }
+  }
   return (
     <>
     <Tooltip title="View Details">
@@ -56,22 +78,7 @@ export default function Popover({ID}) {
             <Iconify icon="eva:eye-outline" />
         </IconButton>
       </Tooltip>
-      <Tooltip title="Pay Order">
-        <IconButton
-          ref={anchorRef}
-          onClick={handleOpenPayment}
-          sx={{
-            padding: 0,
-            width: 44,
-            height: 44,
-            ...(openPayment && {
-              bgcolor: (theme) => alpha(theme.palette.primary.main, theme.palette.action.focusOpacity),
-            }),
-          }}
-        >
-            <Iconify icon="fa6-brands:cc-amazon-pay"/>
-        </IconButton>
-      </Tooltip>
+      {paymenticon()}
       <MenuPopover
         open={openOrderline}
         onClose={handleClose}
