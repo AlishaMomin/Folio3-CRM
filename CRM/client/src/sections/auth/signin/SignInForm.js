@@ -40,7 +40,7 @@ export default function SignInForm() {
         .then((response) => {
           console.log("Data recieved");
           const results = response.data; 
-
+          
           localStorage.setItem('ROLE',response.data[0].roleId);
           localStorage.setItem('ID',response.data[0].companyId);
           // condition to check roles

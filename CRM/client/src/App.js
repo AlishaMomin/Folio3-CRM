@@ -15,6 +15,7 @@ export default function App() {
       <ScrollToTop />
       <BaseOptionChartStyle />
       <Router />
+      {/* <ProtectedAdminRouter/> */}
       {/*  */}
     </ThemeProvider>
   );

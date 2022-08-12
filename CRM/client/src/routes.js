@@ -20,39 +20,40 @@ import HostProduct from "./pages/HostProduct";
 // ----------------------------------------------------------------------
 
 export default function Router() {
-  return useRoutes([
-    {
-      path: '/dashboard',
-      element: <DashboardLayout />,
-      children: [
-        // { path: 'app', element: <DashboardApp /> },
-        { path: 'hostdashboard', element: <HostDashboard /> },
-        { path: 'clientdashboard', element: <ClientDashboard /> },
-        { path: 'user', element: <User /> },
-        { path: 'adminhome', element: <CompaniesList /> },
-        { path: 'clientcompanies', element: <CompaniesList /> },
-        { path: 'products', element: <Products /> },
-        { path: 'hostproducts', element: <HostProduct /> },
-        { path: 'blog', element: <Blog /> },
-        { path: 'addhostcompany', element: <AddCompany /> },
-        { path: 'addclientcompany', element: <AddCompany /> },
-        { path: 'clienttransactions', element: <ClientRecievables />},
-        { path: 'clientrecievables', element: <ClientRecievables /> },
-        
-      ],
-    },
-    {
-      path: '/',
-      element: <LogoOnlyLayout />,
-      children: [
-        { path: '/', element: <Navigate to="/signin" /> },
-        { path: 'login', element: <Login /> },
-        { path: 'register', element: <Register /> },
-        { path: 'signin', element: <Signin /> }, 
-        { path: '404', element: <NotFound /> },
-        { path: '*', element: <Navigate to="/404" /> },
-      ],
-    },
-    { path: '*', element: <Navigate to="/404" replace /> },
-  ]);
+  
+    return useRoutes([
+      {
+        path: '/dashboard',
+        element: <DashboardLayout />,
+        children: [
+          // { path: 'app', element: <DashboardApp /> },
+          { path: 'hostdashboard', element: <HostDashboard /> },
+          { path: 'clientdashboard', element: <ClientDashboard /> },
+          { path: 'user', element: <User /> },
+          { path: 'adminhome', element: <CompaniesList /> },
+          { path: 'clientcompanies', element: <CompaniesList /> },
+          { path: 'products', element: <Products /> },
+          { path: 'hostproducts', element: <HostProduct /> },
+          { path: 'blog', element: <Blog /> },
+          { path: 'addhostcompany', element: <AddCompany /> },
+          { path: 'addclientcompany', element: <AddCompany /> },
+          { path: 'clienttransactions', element: <ClientRecievables />},
+          { path: 'clientrecievables', element: <ClientRecievables /> },
+          
+        ],
+      },
+      {
+        path: '/',
+        element: <LogoOnlyLayout />,
+        children: [
+          { path: '/', element: <Navigate to="/signin" /> },
+          { path: 'login', element: <Login /> },
+          { path: 'register', element: <Register /> },
+          { path: 'signin', element: <Signin /> }, 
+          { path: '404', element: <NotFound /> },
+          { path: '*', element: <Navigate to="/404" /> },
+        ],
+      },
+      { path: '*', element: <Navigate to="/404" replace /> },
+    ]);  
 }
