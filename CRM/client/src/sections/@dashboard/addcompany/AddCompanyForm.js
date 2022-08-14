@@ -86,10 +86,10 @@ export default function AddCompanyForm() {
                     if (results.status)
                     {
                         if (results.type === '0'){
-                            navigate('/dashboard/AdminHome', { replace: true });
+                            navigate('/admin/home', { replace: true });
                           }
                           else if (results.type === '1'){
-                            navigate('/dashboard/HostDashboard', { replace: true });
+                            navigate('/host/dashboard', { replace: true });
                           }
                     }
                     else

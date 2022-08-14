@@ -37,7 +37,7 @@ export default function PaymentForm() {
   } = methods;
 
   const onSubmit = async () => {
-    navigate('/dashboard/clienttransactions', { replace: true });
+    navigate('/client/transactions', { replace: true });
   };
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>

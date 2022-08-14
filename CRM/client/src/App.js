@@ -7,7 +7,8 @@ import ThemeProvider from './theme';
 // components
 import ScrollToTop from './components/ScrollToTop';
 import { BaseOptionChartStyle } from './components/chart/BaseOptionChart';
-// import { AuthProvider } from './contexts/JWTAuthContext';
+import { AuthProvider } from './context/JWTAuthContext';
+
 // routes
 import routes from './routes';
 
@@ -19,7 +20,9 @@ export default function App() {
     <ThemeProvider>
       <ScrollToTop />
       <BaseOptionChartStyle />
-      {content}
+      <AuthProvider>
+        {content}
+        </AuthProvider>
       {/* <Router /> */}
       {/* <ProtectedAdminRouter/> */}
       {/*  */}

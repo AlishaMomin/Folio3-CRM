@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
@@ -12,9 +12,7 @@ import useResponsive from '../../hooks/useResponsive';
 import Logo from '../../components/Logo';
 import Scrollbar from '../../components/Scrollbar';
 import NavSection from '../../components/NavSection';
-import AdminNavSection from '../../components/AdminNavSection';
-import HostNavSection from '../../components/HostNavSection';
-import ClientNavSection from '../../components/ClientNavSection';
+
 //
 import navConfig from './NavConfig';
 import adminNavConfig from './adminNavConfig';
@@ -48,11 +46,16 @@ DashboardSidebar.propTypes = {
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar, userRole }) {
   const { pathname } = useLocation();
+  const [UserRole, setUserRole] = useState('');
+  const [UserName, setUserName] = useState('');
 
   const isDesktop = useResponsive('up', 'lg');
   console.log('userRole', userRole);
 
   useEffect(() => {
+    
+    setUserRole(localStorage.getItem('RoleName'))
+    setUserName(localStorage.getItem('Name'))
     if (isOpenSidebar) {
       onCloseSidebar();
     }
@@ -62,18 +65,18 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar, userRo
     console.log("CHECKKK", userRole);
     if (userRole > 0 && userRole < 2) {
       return (
-        <AdminNavSection adminNavConfig={adminNavConfig} />
+      <NavSection navConfig={adminNavConfig} />
       )
 
     }
     if (userRole > 1 && userRole < 3) {
       console.log("skcbsisc")
       return (
-        <HostNavSection hostNavConfig={hostNavConfig} />
+        <NavSection navConfig={hostNavConfig} />
       )
     }
     if (userRole > 2 && userRole < 4) {
-      return (<ClientNavSection clientNavConfig={clientNavConfig} />)
+      return (<NavSection navConfig={clientNavConfig} />)
     }
   }
   const renderContent = (
@@ -93,10 +96,10 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar, userRo
             <Avatar src={account.photoURL} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
+                {UserName}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {account.role}
+                {UserRole}
               </Typography>
             </Box>
           </AccountStyle>

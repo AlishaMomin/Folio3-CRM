@@ -7,20 +7,15 @@ const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 
 const clientNavConfig = [
   {
-    title: 'Client Dashboard',
-    path: '/dashboard/clientdashboard',
+    title: 'Dashboard',
+    path: '/client/dashboard',
     icon: getIcon('eva:pie-chart-2-fill'),
   },
   {
-    title: 'Client Transactions',
-    path: '/dashboard/clienttransactions',
+    title: 'Transactions',
+    path: '/client/transactions',
     icon: getIcon('eva:file-text-fill'),
   },
-  {
-    title: 'LogOut',
-    path: '/signin',
-    icon: getIcon('eva:lock-fill'),
-  }
 ];
 
 export default clientNavConfig;

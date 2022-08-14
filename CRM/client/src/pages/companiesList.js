@@ -112,13 +112,13 @@ export default function CompaniesList() {
     {
       setTitle("Home")
       Urlo = "http://localhost:5000/company/h";
-      setNavigation("/dashboard/addhostcompany"); 
+      setNavigation("/host/addcompany"); 
     }
     else
     {
       setTitle("Companies")
       Urlo = "http://localhost:5000/company/c";
-      setNavigation("/dashboard/addclientcompany"); 
+      setNavigation("/client/addcompany"); 
     }
     try {
        const response = await axios.get(Urlo)

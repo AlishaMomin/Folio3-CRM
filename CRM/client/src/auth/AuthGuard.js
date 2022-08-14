@@ -1,6 +1,7 @@
-import useAuth from 'app/hooks/useAuth';
-import { flat } from '../utils/utils';
 import { Navigate, useLocation } from 'react-router-dom';
+
+import useAuth from '../hooks/useAuth';
+import { flat } from '../utils/utils';
 import AllPages from '../routes';
 
 const userHasPermission = (pathname, user, routes) => {
@@ -15,16 +16,17 @@ const userHasPermission = (pathname, user, routes) => {
 };
 
 const AuthGuard = ({ children }) => {
-  let {
+  const {
     isAuthenticated,
-    // user
+    user
   } = useAuth();
   const { pathname } = useLocation();
 
     const routes = flat(AllPages);
-
+    console.log(user)
+    console.log(isAuthenticated,"sc")
     const hasPermission = userHasPermission(pathname, user, routes);
-    let authenticated = isAuthenticated && hasPermission;
+    const authenticated = isAuthenticated && hasPermission;
 
   // // IF YOU NEED ROLE BASED AUTHENTICATION,
   // // UNCOMMENT ABOVE LINES
@@ -37,7 +39,7 @@ const AuthGuard = ({ children }) => {
       {authenticated ? (
         children
       ) : (
-        <Navigate replace to="/session/signin" state={{ from: pathname }} />
+        <Navigate replace to="/signin" state={{ from: pathname }} />
       )}
     </>
   );

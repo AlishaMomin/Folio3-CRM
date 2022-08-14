@@ -5,9 +5,10 @@ import ClientRecievables from "../pages/ClientRecievables";
 import HostProduct from "../pages/HostProduct";
 
 const hostRoutes = [
-    { path: 'hostdashboard', element: <HostDashboard /> },
-    { path: 'hostproducts', element: <HostProduct /> },
-    { path: 'addhostcompany', element: <AddCompany /> },
-    { path: 'clientrecievables', element: <ClientRecievables /> },
+    { path: '/host/dashboard', element: <HostDashboard />,auth: 'host' },
+    { path: '/host/products', element: <HostProduct /> ,auth: 'host'},
+    { path: '/host/addcompany', element: <AddCompany /> ,auth: 'host'},
+    { path: '/host/companies', element: <CompaniesList /> ,auth:'host'},
+    { path: '/host/recievables', element: <ClientRecievables /> ,auth: 'host'},
 ];
 export default hostRoutes;

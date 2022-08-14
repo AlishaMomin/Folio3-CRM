@@ -21,7 +21,7 @@ export class AuthService {
     }
 
     async login( User: any ){
-        const payload = { Email: User.Email, sub: User.Id,RoleName: User.Role.RoleName};  
+        const payload = { Email: User.Email, sub: User.Id,RoleName: User. Role.RoleName, Name: User.Name} ;  
         if (User.Company != null)
         {
             return[{

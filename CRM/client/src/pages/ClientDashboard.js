@@ -24,7 +24,7 @@ export default function ClientDashboard() {
     const theme = useTheme();
 
     return (
-        <Page title="Client Dashboard">
+        <Page title="Dashboard">
             <Container maxWidth="xl">
                 <Typography variant="h4" sx={{ mb: 5 }}>
                     Welcome to the Client Dashboard

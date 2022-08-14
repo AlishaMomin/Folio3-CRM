@@ -7,15 +7,9 @@ const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 
 const adminNavConfig = [
   {
-    title: 'Admin Home',
-    path: '/dashboard/adminhome',
+    title: 'Admin',
+    path: '/admin/home',
     icon: getIcon('eva:people-fill'),
-  },
-
-  {
-    title: 'LogOut',
-    path: '/signin',
-    icon: getIcon('eva:lock-fill'),
   },
 ];
 

@@ -83,7 +83,7 @@ export default function ClientRecievables() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const [Title, setTitle] = useState('');
-  const [Navigation,setNavigation] = useState("");
+  const [Navigation,setNavigation] = useState(""); // feels unnecessary
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -103,13 +103,13 @@ export default function ClientRecievables() {
     {
       setTitle("Recievables")
       Urlo = `http://localhost:5000/order/h/${CompanyId}`;
-      setNavigation("/dashboard/addhostcompany"); 
+      setNavigation("/host/addcompany"); // feels unnecessary
     }
     if (parseInt(localStorage.getItem('ROLE'),10) === 3)
     {
       setTitle("Transactions")
       Urlo = `http://localhost:5000/order/c/${CompanyId}`;
-      setNavigation("/dashboard/addclientcompany"); 
+      setNavigation("/client/addcompany"); // feels unnecessary
     }
         try {
            const response = await axios.get(Urlo);
