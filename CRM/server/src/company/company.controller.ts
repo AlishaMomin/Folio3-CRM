@@ -46,16 +46,42 @@ export class CompanyController {
         const products = query['Product'].length;
         let sales = 0;
         let orders = 0;
-
+        let PaymentType = [{label:"CASH",value:0},{label:"CHEQUE",value:0},{label:"ONLINE",value:0}];
         for (let i=0 ;i < query['User'].length;i++)
         {
             orders = orders + query['User'][i]['OrderSell'].length;
             for (let j=0;j < query['User'][i]['OrderSell'].length;j++)
             {
-                sales = sales + Number(query['User'][i]['OrderSell'][j].TotalAmount);
+                if (query['User'][i]['OrderSell'][j]['InvoiceStatus'] === 'paid')
+                {
+                    if (query['User'][i]['OrderSell'][j]['TransactionType'] === 'cash')
+                    {
+                        PaymentType[0]['value']++;
+                    }
+                    else if (query['User'][i]['OrderSell'][j]['TransactionType'] === 'cheque')
+                    {
+                        PaymentType[1]['value']++;
+                    }
+                    else if (query['User'][i]['OrderSell'][j]['TransactionType'] === 'online')
+                    {
+                        PaymentType[2]['value']++;
+                    }
+                }
+                sales = sales + Number(query['User'][i]['OrderSell'][j]['TotalAmount']);
             }
         }
-        return {clients,products,sales,orders};
+        let Products = []
+        for (let i= 0;i<query['Product'].length;i++)
+        {
+            let quantity = 0;
+            for (let j = 0; j < query['Product'][i]['Orderline'].length;j++)
+            {
+                quantity = quantity + Number(query['Product'][i]['Orderline'][j]['Quantity']);
+            }
+            Products.push({label:query['Product'][i]['Name'],value:quantity})
+        }
+        // return query;
+        return {clients,products,sales,orders,Products,PaymentType};
     }
 
     // @Delete('/:Id')
