@@ -110,14 +110,14 @@ export default function CompaniesList() {
     {
       setTitle("Home")
       Urlo = "http://localhost:5000/company/h";
-      setNavigation("/host/addcompany"); 
+      setNavigation("/admin/addcompany"); 
     }
     else
     {
       const CompanyId = localStorage.getItem('ID');
       setTitle("Companies")
       Urlo = `http://localhost:5000/company/c/${CompanyId}`;
-      setNavigation("/client/addcompany"); 
+      setNavigation("/host/addcompany"); 
     }
     try {
        const response = await axios.get(Urlo)

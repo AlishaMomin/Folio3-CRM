@@ -38,7 +38,6 @@ export class CompanyService {
         return this.companyRepository.save(CompanyCreateDto);
     }
     updateIsDeleteC(CompanyUpdatedDto:any,Id:number){
-        // CompanyUpdatedDto.Isdelete = CompanyUpdatedDto['1'];
         console.log(CompanyUpdatedDto)
         return this.companyRepository.update(Id,CompanyUpdatedDto);
     }

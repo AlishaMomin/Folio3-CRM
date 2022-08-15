@@ -11,19 +11,21 @@ import { Roles } from 'src/auth/roles.decorator';
 @Controller('company')
 export class CompanyController {
     constructor(private companyservice: CompanyService){}
-    // @Roles(Role.Admin)
-    // @UseGuards(AuthGuard('jwt'),RolesGuard)
+    @Roles(Role.Admin)
+    @UseGuards(AuthGuard('jwt'),RolesGuard)
     @Get('/h')
     async gethostcompany(){
         return await this.companyservice.getHC();
     }
-    
+    @Roles(Role.Host)
+    @UseGuards(AuthGuard('jwt'),RolesGuard)
     @Get('/c/:Id')
     async getclientcompany(@Param('Id')Id:number){
         return await this.companyservice.getCC(Id);
     }
     
-    
+    @Roles(Role.Admin,Role.Host)
+    @UseGuards(AuthGuard('jwt'),RolesGuard)
     @Post()
     postcompany(@Body() CompanyCreateDto:companyCreateDto){
         return this.companyservice.createC(CompanyCreateDto);
