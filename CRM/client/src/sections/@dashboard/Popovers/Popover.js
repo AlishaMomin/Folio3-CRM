@@ -33,10 +33,7 @@ export default function Popover({ID}) {
     setOpenOrderline(false);
     setOpenPayment(false);
   };
-  const componentRef=useRef();
-  const handleprint =useReactToPrint({
-    content:()=>componentRef.current,
-  });
+  
   const paymenticon = () =>{
     if (parseInt(localStorage.getItem('ROLE'),10) === 3)
     {
@@ -91,11 +88,6 @@ export default function Popover({ID}) {
         }}
       >
         <Orderline ID = {ID}/>
-        {/* <Orderline ref={componentRef}/> */}
-        <Button variant="contained" onClick= {handleprint} component={RouterLink} to="" startIcon={<Iconify icon="eva:plus-fill" />}>
-            Print Invoice
-          </Button>
-        {/* <PaymentForm/> */}
       </MenuPopover>
       <MenuPopover
         open={openPayment}
