@@ -22,10 +22,13 @@ export class CompanyService {
         })
         return query;
     }
-    async getCC():Promise<company[]>{
+    async getCC(Id:number):Promise<company[]>{
         const query = this.companyRepository.find({
             where: {
                 Type:TYPE.CLIENT,
+                HostCompany:{
+                    Id:Id
+                }
               },
             relations: ['User']
         })

@@ -69,7 +69,7 @@ function applySortFilter(array, comparator, query) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function ClientRecievables() {
+export default function Transactions() {
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -103,13 +103,13 @@ export default function ClientRecievables() {
     {
       setTitle("Recievables")
       Urlo = `http://localhost:5000/order/h/${CompanyId}`;
-      setNavigation("/host/addcompany"); // feels unnecessary
+      // setNavigation("/host/addcompany"); // feels unnecessary
     }
     if (parseInt(localStorage.getItem('ROLE'),10) === 3)
     {
       setTitle("Transactions")
       Urlo = `http://localhost:5000/order/c/${CompanyId}`;
-      setNavigation("/client/addcompany"); // feels unnecessary
+      // setNavigation("/client/addcompany"); // feels unnecessary
     }
         try {
            const response = await axios.get(Urlo);

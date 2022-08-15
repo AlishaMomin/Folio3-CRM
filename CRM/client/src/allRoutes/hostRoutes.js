@@ -1,7 +1,7 @@
 import AddCompany from "../pages/AddCompany";
 import CompaniesList from "../pages/companiesList";
 import HostDashboard from "../pages/HostDashboard";
-import ClientRecievables from "../pages/ClientRecievables";
+import Transactions from "../pages/Transactions";
 import HostProduct from "../pages/HostProduct";
 
 const hostRoutes = [
@@ -9,6 +9,6 @@ const hostRoutes = [
     { path: '/host/products', element: <HostProduct /> ,auth: 'host'},
     { path: '/host/addcompany', element: <AddCompany /> ,auth: 'host'},
     { path: '/host/companies', element: <CompaniesList /> ,auth:'host'},
-    { path: '/host/recievables', element: <ClientRecievables /> ,auth: 'host'},
+    { path: '/host/recievables', element: <Transactions /> ,auth: 'host'},
 ];
 export default hostRoutes;

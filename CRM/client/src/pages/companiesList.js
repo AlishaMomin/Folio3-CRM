@@ -82,8 +82,6 @@ export default function CompaniesList() {
   const [filterName, setFilterName] = useState('');
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
-
   //-----------------------------------------------------
   const [Title, setTitle] = useState('');
   const [Navigation,setNavigation] = useState("");
@@ -116,8 +114,9 @@ export default function CompaniesList() {
     }
     else
     {
+      const CompanyId = localStorage.getItem('ID');
       setTitle("Companies")
-      Urlo = "http://localhost:5000/company/c";
+      Urlo = `http://localhost:5000/company/c/${CompanyId}`;
       setNavigation("/client/addcompany"); 
     }
     try {

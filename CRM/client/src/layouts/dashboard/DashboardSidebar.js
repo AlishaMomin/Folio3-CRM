@@ -5,7 +5,6 @@ import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import { Box, Link, Button, Drawer, Typography, Avatar, Stack } from '@mui/material';
 // mock
-import account from '../../_mock/account';
 // hooks
 import useResponsive from '../../hooks/useResponsive';
 // components
@@ -13,11 +12,11 @@ import Logo from '../../components/Logo';
 import Scrollbar from '../../components/Scrollbar';
 import NavSection from '../../components/NavSection';
 
-//
-import navConfig from './NavConfig';
+// imports of nav components
 import adminNavConfig from './adminNavConfig';
 import hostNavConfig from './hostNavConfig';
 import clientNavConfig from './clientNavConfig';
+
 // ----------------------------------------------------------------------
 
 const DRAWER_WIDTH = 280;
@@ -93,7 +92,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar, userRo
       <Box sx={{ mb: 5, mx: 2.5 }}>
         <Link underline="none" component={RouterLink} to="#">
           <AccountStyle>
-            <Avatar src={account.photoURL} alt="photoURL" />
+            <Avatar src={'/static/mock-images/avatars/avatar_default.jpg'} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
                 {UserName}

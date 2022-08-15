@@ -18,9 +18,9 @@ export class CompanyController {
         return await this.companyservice.getHC();
     }
     
-    @Get('/c')
-    async getclientcompany(){
-        return await this.companyservice.getCC();
+    @Get('/c/:Id')
+    async getclientcompany(@Param('Id')Id:number){
+        return await this.companyservice.getCC(Id);
     }
     
     
