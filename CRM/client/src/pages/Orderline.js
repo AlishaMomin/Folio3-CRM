@@ -246,12 +246,6 @@ export default function Orderline({ ID }) {
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
-          <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-            <Typography variant="h6" gutterBottom>
-              Total amount = $ {TotalAmount}
-            </Typography>
-
-          </Stack>
         </Card>
         <div>
           &nbsp;
