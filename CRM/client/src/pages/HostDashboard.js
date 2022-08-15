@@ -1,6 +1,7 @@
 // @mui
 import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography } from '@mui/material';
+import axios from 'axios';
 import { useState,useEffect } from 'react';
 // components
 import Page from '../components/Page';
@@ -23,7 +24,27 @@ import {
 
 export default function HostDashboard() {
     const theme = useTheme();
-
+    const [noOfClients, setnoOfClients] = useState(0);
+    const [noOfOrders, setnoOfOrders] = useState(0);
+    const [noOfProducts, setnoOfProducts] = useState(0);
+    const [Sales, setSales] = useState(0);
+    useEffect(() => {
+        getData();
+      }, []);
+      const getData = async () => {
+        try {
+            const CompanyId = localStorage.getItem('ID');
+            const response = await axios.get(`http://localhost:5000/company/${CompanyId}`);
+            console.log("Data recieved");
+            console.log(response.data);
+            setnoOfClients(response.data.clients);
+            setnoOfProducts(response.data.products);
+            setnoOfOrders(response.data.orders);
+            setSales(response.data.sales);
+        } catch (err) {
+          console.log(err);
+        }
+    }
     return (
         <Page title="Dashboard">
             <Container maxWidth="xl">
@@ -33,19 +54,19 @@ export default function HostDashboard() {
 
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6} md={3}>
-                        <AppWidgetSummary title="Total Sales" total={714000} icon={'ant-design:android-filled'} />
+                        <AppWidgetSummary title="Total Sales" total={Sales} icon={'ant-design:android-filled'} />
                     </Grid>
 
                     <Grid item xs={12} sm={6} md={3}>
-                        <AppWidgetSummary title="Clients" total={1352831} color="info" icon={'ant-design:apple-filled'} />
+                        <AppWidgetSummary title="Clients" total={noOfClients} color="info" icon={'ant-design:apple-filled'} />
                     </Grid>
 
                     <Grid item xs={12} sm={6} md={3}>
-                        <AppWidgetSummary title="Orders" total={1723315} color="warning" icon={'ant-design:windows-filled'} />
+                        <AppWidgetSummary title="Orders" total={noOfOrders} color="warning" icon={'ant-design:windows-filled'} />
                     </Grid>
 
                     <Grid item xs={12} sm={6} md={3}>
-                        <AppWidgetSummary title="Products" total={234} color="error" icon={'ant-design:bug-filled'} />
+                        <AppWidgetSummary title="Products" total={noOfProducts} color="error" icon={'ant-design:bug-filled'} />
                     </Grid>
 
                     <Grid item xs={12} md={6} lg={8}>
@@ -68,28 +89,28 @@ export default function HostDashboard() {
                             chartData={[
                                 {
                                     name: 'Team A',
-                                    type: 'line',
-                                    fill: 'solid',
-                                    data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
-                                },
-                                {
-                                    name: 'Team B',
                                     type: 'area',
                                     fill: 'gradient',
-                                    data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
+                                    data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
                                 },
-                                {
-                                    name: 'Team C',
-                                    type: 'line',
-                                    fill: 'solid',
-                                    data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
-                                },
-                                {
-                                    name: 'Team D',
-                                    type: 'line',
-                                    fill: 'solid',
-                                    data: [23, 34, 39, 41, 38, 77, 84, 26, 59, 36, 39],
-                                },
+                                // {
+                                //     name: 'Team B',
+                                //     type: 'area',
+                                //     fill: 'gradient',
+                                //     data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
+                                // },
+                                // {
+                                //     name: 'Team C',
+                                //     type: 'line',
+                                //     fill: 'solid',
+                                //     data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
+                                // },
+                                // {
+                                //     name: 'Team D',
+                                //     type: 'line',
+                                //     fill: 'solid',
+                                //     data: [23, 34, 39, 41, 38, 77, 84, 26, 59, 36, 39],
+                                // },
                             ]}
                         />
                     </Grid>

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Request } from 'express';
-import { Repository } from 'typeorm';
+import { Repository, SelectQueryBuilder } from 'typeorm';
 import { companyUpdateDto } from './dto/company-update.dto';
 import { companyCreateDto } from './dto/company-create.dto';
 import { company } from './entity/company.entity';
@@ -41,8 +41,20 @@ export class CompanyService {
         console.log(CompanyUpdatedDto)
         return this.companyRepository.update(Id,CompanyUpdatedDto);
     }
-    showCById(Id:number){
-        return this.companyRepository.findOne({where:{Id}});
+    async showCById(Id:number):Promise<company>{
+        const query = this.companyRepository.findOne({
+            where:{
+                Id
+            },
+            relations:['User.Orders.Orderline','ClientCompany','Product']
+        });
+        return query;
+
+        // const companies = this.companyRepository.createQueryBuilder('Company')
+        // .select('Count(Company.Id)  AS "clients"')
+        // .where('hostCompanyId ='+ Id)
+        // .getRawOne();
+        // return companies;
     }
     deleteC(Id:number){
         return this.companyRepository.delete(Id);

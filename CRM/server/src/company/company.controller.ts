@@ -30,19 +30,37 @@ export class CompanyController {
     postcompany(@Body() CompanyCreateDto:companyCreateDto){
         return this.companyservice.createC(CompanyCreateDto);
     }
+
+    @Roles(Role.Admin,Role.Host)
+    @UseGuards(AuthGuard('jwt'),RolesGuard)
     @Patch('/:Id')
     updateIsDelete(@Body() CompanyUpdatedDto:any,
     @Param('Id',ParseIntPipe) Id:number){
         return this.companyservice.updateIsDeleteC(CompanyUpdatedDto,Id);
     }
+    
     @Get('/:Id')
-    getcompanyById(@Param('Id')Id:number){
-        return this.companyservice.showCById(Id);
+    async getcompanyById(@Param('Id')Id:number){
+        const query = await this.companyservice.showCById(Id);
+        const clients = query['ClientCompany'].length;
+        const products = query['Product'].length;
+        let sales = 0;
+        let orders = 0;
+        for (let i=0 ;i < query['User'].length;i++)
+        {
+            orders = orders + query['User'][i]['Orders'].length;
+            for (let j=0;j < query['User'][i]['Orders'].length;j++)
+            {
+                sales = sales + Number(query['User'][i]['Orders'][j].TotalAmount);
+            }
+        }
+        return {clients,products,sales,orders};
     }
-    @Delete('/:Id')
-    deletecompany(@Param('Id',ParseIntPipe)Id:number){
-        return this.companyservice.deleteC(Id);
-    }
+
+    // @Delete('/:Id')
+    // deletecompany(@Param('Id',ParseIntPipe)Id:number){
+    //     return this.companyservice.deleteC(Id);
+    // }
 
 
 }
