@@ -10,6 +10,7 @@ import { user } from './entity/user.entity';
 import { validator } from 'validator';
 import { userSigninDto } from './dto/user-signin.dto';
 import { company } from 'src/company/entity/company.entity';
+import {ISDELETE} from "src/company/enums/Isdelete.enum";
 @Injectable()
 export class UserService {
     constructor(
@@ -50,7 +51,11 @@ export class UserService {
 
     async adduser(UserCreateDto:any):Promise<any>{
         
-        const userExist = await this.userRepository.findOne({where: {Email:UserCreateDto.Email}});
+        const userExist = await this.userRepository.findOne({
+            where: {
+                Email:UserCreateDto.Email
+            }
+        });
         if(!userExist){
             console.log(UserCreateDto)
             const userSave = this.userRepository.save(UserCreateDto);
@@ -66,7 +71,12 @@ export class UserService {
 
     async SignIn(UserSigninDto:userSigninDto):Promise<user>{
 
-        return await this.userRepository.findOne({where: {Email: UserSigninDto.Email, Password:UserSigninDto.Password}})
+        return await this.userRepository.findOne({
+            where: {
+            Email: UserSigninDto.Email,
+            Password:UserSigninDto.Password,
+        }
+        })
         .then((result)=>{
             if (result){
                 return result;
@@ -86,14 +96,21 @@ export class UserService {
         return this.userRepository.update(Id,UserUpdatedDto);
     }
     async showUByEmail(Email: string): Promise<user> {
-        const query =  await this.userRepository.findOne({where :{Email: Email},
+        const query =  await this.userRepository.findOne({
+            where :{
+                Email: Email,
+            },
             relations: ['Role','Company']
         });
         return query;
     }
 
     showUById(Id:number){
-        return this.userRepository.findOne({where:{Id}});
+        return this.userRepository.findOne({
+            where:{
+                Id,
+            }
+        });
     }
 
 

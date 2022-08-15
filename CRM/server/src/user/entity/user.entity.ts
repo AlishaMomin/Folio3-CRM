@@ -32,10 +32,10 @@ export class user {
     Role:role
 
     @OneToMany(()=>order,(Order)=>Order.Buyer)
-    Order:order[]
+    OrderBuy:order[]
 
     @OneToMany(()=>order,(Order)=>Order.Seller)
-    Orders:order[]
+    OrderSell:order[]
 
     
 }

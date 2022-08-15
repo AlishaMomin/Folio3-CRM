@@ -14,7 +14,7 @@ export class AuthService {
         const user = await this.UserService.showUByEmail(Email);
         console.log(user);
         
-        if (user && user.Password === Password) {
+        if (user && user.Password === Password && (user.Company === null || user.Company.Isdelete === '0')) {
             return user;    
         }
         return null;

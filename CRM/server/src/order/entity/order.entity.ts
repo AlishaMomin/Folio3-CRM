@@ -42,9 +42,9 @@ export class order{
     @OneToMany(()=>orderline,(Orderline)=>Orderline.Order)
     Orderline:orderline[]
 
-    @ManyToOne(()=>user,(Buyer)=>Buyer.Order)
+    @ManyToOne(()=>user,(Buyer)=>Buyer.OrderBuy)
     Buyer:user
 
-    @ManyToOne(()=>user,(Seller)=>Seller.Orders)
+    @ManyToOne(()=>user,(Seller)=>Seller.OrderSell)
     Seller:user
 }

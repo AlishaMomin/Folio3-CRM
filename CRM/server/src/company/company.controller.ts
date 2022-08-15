@@ -46,12 +46,13 @@ export class CompanyController {
         const products = query['Product'].length;
         let sales = 0;
         let orders = 0;
+
         for (let i=0 ;i < query['User'].length;i++)
         {
-            orders = orders + query['User'][i]['Orders'].length;
-            for (let j=0;j < query['User'][i]['Orders'].length;j++)
+            orders = orders + query['User'][i]['OrderSell'].length;
+            for (let j=0;j < query['User'][i]['OrderSell'].length;j++)
             {
-                sales = sales + Number(query['User'][i]['Orders'][j].TotalAmount);
+                sales = sales + Number(query['User'][i]['OrderSell'][j].TotalAmount);
             }
         }
         return {clients,products,sales,orders};
