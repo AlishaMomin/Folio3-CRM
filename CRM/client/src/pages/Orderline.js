@@ -1,6 +1,6 @@
 import { filter } from 'lodash';
 import { sentenceCase } from 'change-case';
-import { useEffect, useState  } from 'react';
+import React, { useRef, forwardRef, useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import {
@@ -20,6 +20,7 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { useReactToPrint } from 'react-to-print';
 // components
 import Page from '../components/Page';
 import Label from '../components/Label';
@@ -34,7 +35,7 @@ import { UserListHead } from '../sections/@dashboard/frequentComponents';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-//   { id: 'name', label: 'name', alignRight: false },  
+  //   { id: 'name', label: 'name', alignRight: false },  
   { id: 'ProductName', label: 'Product', alignRight: false },
   { id: 'Quantity', label: 'Quantity', alignRight: false },
   { id: 'PerUnitPrice', label: 'Price Per Unit', alignRight: false },
@@ -61,7 +62,7 @@ function getComparator(order, orderBy) {
 }
 
 function applySortFilter(array, comparator, query) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
+  const stabilizedThis = array ? array.map((el, index) => [el, index]) : [];
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
@@ -70,7 +71,7 @@ function applySortFilter(array, comparator, query) {
   if (query) {
     return filter(array, (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1);
   }
-  return stabilizedThis.map((el) => el[0]);
+  return stabilizedThis ? stabilizedThis.map((el) => el[0]) : [];
 }
 
 Orderline.propTypes = {
@@ -79,7 +80,7 @@ Orderline.propTypes = {
 export default function Orderline({ ID }) {
   const [page, setPage] = useState(0);
 
-  const [TotalAmount,setTotalAmount] = useState(0);
+  const [TotalAmount, setTotalAmount] = useState(0);
 
   const [order, setOrder] = useState('asc');
 
@@ -97,26 +98,26 @@ export default function Orderline({ ID }) {
     setOrderBy(property);
   };
   const [OrderLine, setOrderLine] = useState([]);
-    useEffect(() => {
-        getData();
-        console.log("Orderline ka data", OrderLine);
-    }, []);
-    const getData = async () => {
-        try {
-           const response = await axios.get(`http://localhost:5000/order/${ID}`)
-              console.log("Data recieved");
-              console.log(response.data);
-              setTotalAmount(response.data.TotalAmount);
-              setOrderLine(response.data.Orderline);
-        } catch (err) {
-          console.log(err);
-        }
-      }
+  useEffect(() => {
+    getData();
+    console.log("Orderline ka data", OrderLine);
+  }, []);
+  const getData = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/order/${ID}`)
+      console.log("Data recieved");
+      console.log(response.data);
+      setTotalAmount(response.data.TotalAmount);
+      setOrderLine(response.data.Orderline);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = OrderLine.map((n) => n.ProductName);
+      const newSelecteds = OrderLine ? OrderLine.map((n) => n.ProductName) : [];
       setSelected(newSelecteds);
       return;
     }
@@ -157,17 +158,21 @@ export default function Orderline({ ID }) {
 
   const isUserNotFound = filteredUsers.length === 0;
 
+  const componentRef = useRef();
+  const handleprint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
   return (
-    <Page title="Orderline">
+    // <Page title="Orderline">
+    <Page ref={componentRef} title="Order" style={{ backgroundColor: "#F8F8F8" }}>
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h4" gutterBottom>
-            ORDERLINE
-          </Typography>
-        </Stack>
+        <Typography variant="h4" gutterBottom style={{ marginLeft: "13px" }}>
+          Order
+        </Typography>
 
         <Card>
-          
+
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
@@ -175,7 +180,7 @@ export default function Orderline({ ID }) {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={OrderLine.length}
+                  rowCount={OrderLine ? OrderLine.length : 0}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
@@ -183,7 +188,7 @@ export default function Orderline({ ID }) {
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                     row.ProductName = row.Product.Name
-                    const { id,ProductName, Quantity, PerUnitPrice, Amount,} = row;
+                    const { id, ProductName, Quantity, PerUnitPrice, Amount, } = row;
                     const isItemSelected = selected.indexOf(id) !== -1;
 
                     return (
@@ -196,7 +201,7 @@ export default function Orderline({ ID }) {
                         aria-checked={isItemSelected}
                       >
                         <TableCell padding="checkbox">
-                        {/* <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, Name)} /> */}
+                          {/* <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, Name)} /> */}
                         </TableCell>
                         <TableCell align="left">{ProductName}</TableCell>
                         <TableCell align="left">{Quantity}</TableCell>
@@ -208,8 +213,8 @@ export default function Orderline({ ID }) {
                         </TableCell> */}
                       </TableRow>
 
-                      
-                      
+
+
                     );
                   })}
                   {emptyRows > 0 && (
@@ -235,20 +240,31 @@ export default function Orderline({ ID }) {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={OrderLine.length}
+            count={OrderLine ? OrderLine.length : 0}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
           <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-          <Typography variant="h6" gutterBottom>
-            Total amount = $ {TotalAmount}
-          </Typography> 
-          
-        </Stack>
+            <Typography variant="h6" gutterBottom>
+              Total amount = $ {TotalAmount}
+            </Typography>
+
+          </Stack>
         </Card>
-        
+        <div>
+          &nbsp;
+        </div>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+          <Typography variant="h6" gutterBottom style={{ textAlign: 'center' }}>
+            Total amount = $ {TotalAmount}
+          </Typography>
+          <Button variant="contained" onClick={handleprint} startIcon={<Iconify icon="eva:plus-fill" />}>
+            Print Invoice
+          </Button>
+        </Stack>
+
 
       </Container>
     </Page>
