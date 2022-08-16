@@ -1,8 +1,8 @@
 import Transactions from '../pages/Transactions';
-import ClientDashboard from '../pages/ClientDashboard';
+import HostDashboard from '../pages/Dashboard';
 
 const clientRoutes = [
-    { path: '/client/dashboard', element: <ClientDashboard /> ,auth:'client'},
+    { path: '/client/dashboard', element: <HostDashboard /> ,auth:'client'},
     { path: '/client/transactions', element: <Transactions />,auth:'client'},
     
 ];

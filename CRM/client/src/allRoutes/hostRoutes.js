@@ -1,6 +1,6 @@
 import AddCompany from "../pages/AddCompany";
 import CompaniesList from "../pages/companiesList";
-import HostDashboard from "../pages/HostDashboard";
+import HostDashboard from "../pages/Dashboard";
 import Transactions from "../pages/Transactions";
 import HostProduct from "../pages/HostProduct";
 

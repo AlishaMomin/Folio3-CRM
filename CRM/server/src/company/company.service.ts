@@ -41,7 +41,10 @@ export class CompanyService {
         console.log(CompanyUpdatedDto)
         return this.companyRepository.update(Id,CompanyUpdatedDto);
     }
-    async showCById(Id:number):Promise<company>{
+
+
+
+    async showHCById(Id:number):Promise<company>{
         const query = this.companyRepository.findOne({
             where:{
                 Id
@@ -49,12 +52,17 @@ export class CompanyService {
             relations:['User.OrderSell','ClientCompany.User.OrderBuy.Orderline.Product','Product.Orderline']
         });
         return query;
+    }
 
-        // const companies = this.companyRepository.createQueryBuilder('Company')
-        // .select('Count(Company.Id)  AS "clients"')
-        // .where('hostCompanyId ='+ Id)
-        // .getRawOne();
-        // return companies;
+
+    async showCCById(Id:number):Promise<company>{
+        const query = this.companyRepository.findOne({
+            where:{
+                Id
+            },
+            relations:['User.OrderBuy.Orderline.Product','HostCompany.Product']
+        });
+        return query;
     }
     deleteC(Id:number){
         return this.companyRepository.delete(Id);
