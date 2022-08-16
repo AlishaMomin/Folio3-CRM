@@ -24,9 +24,9 @@ import {
 
 export default function HostDashboard() {
     const theme = useTheme();
-    const [noOfClients, setnoOfClients] = useState(0);
+    const [ClientInterest, setClientInterest] = useState([]);
     const [noOfOrders, setnoOfOrders] = useState(0);
-    const [noOfProducts, setnoOfProducts] = useState(0);
+    const [ProductsList, setProductsList] = useState([]);
     const [Sales, setSales] = useState(0);
     const [Products,setProducts] = useState([]);
     const [PaymentTypes,setPaymentTypes] = useState([]);
@@ -39,8 +39,8 @@ export default function HostDashboard() {
             const response = await axios.get(`http://localhost:5000/company/${CompanyId}`);
             console.log("Data recieved");
             console.log(response.data);
-            setnoOfClients(response.data.clients);
-            // setnoOfProducts(response.data.products);
+            setClientInterest(response.data.ClientInterest);
+            setProductsList(response.data.ProductsList);
             setnoOfOrders(response.data.orders);
             setSales(response.data.sales);
             setProducts(response.data.Products)
@@ -62,7 +62,7 @@ export default function HostDashboard() {
                     </Grid>
 
                     <Grid item xs={12} sm={6} md={3}>
-                        <AppWidgetSummary title="Clients" total={noOfClients} color="info" icon={'ant-design:apple-filled'} />
+                        <AppWidgetSummary title="Clients" total={ClientInterest.length} color="info" icon={'ant-design:apple-filled'} />
                     </Grid>
 
                     <Grid item xs={12} sm={6} md={3}>
@@ -140,14 +140,10 @@ export default function HostDashboard() {
 
                     <Grid item xs={12} md={6} lg={4}>
                         <AppCurrentSubject
-                            title="Current Subject"
-                            chartLabels={['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math']}
-                            chartData={[
-                                { name: 'Series 1', data: [80, 50, 30, 40, 100, 20] },
-                                { name: 'Series 2', data: [20, 30, 40, 80, 20, 80] },
-                                { name: 'Series 3', data: [44, 76, 78, 13, 43, 10] },
-                            ]}
-                            chartColors={[...Array(6)].map(() => theme.palette.text.secondary)}
+                            title="Clients Interests"
+                            chartLabels={ProductsList}
+                            chartData={ClientInterest}
+                            chartColors={[...Array(ProductsList.length)].map(() => theme.palette.text.secondary)}
                         />
                     </Grid>
                 </Grid>

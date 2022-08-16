@@ -42,8 +42,18 @@ export class CompanyController {
     @Get('/:Id')
     async getcompanyById(@Param('Id')Id:number){
         const query = await this.companyservice.showCById(Id);
-        const clients = query['ClientCompany'].length;
-        const products = query['Product'].length;
+        let Products = []
+        let ProductsList = [];
+        for (let i= 0;i<query['Product'].length;i++)
+        {
+            let quantity = 0;
+            for (let j = 0; j < query['Product'][i]['Orderline'].length;j++)
+            {
+                quantity = quantity + Number(query['Product'][i]['Orderline'][j]['Quantity']);
+            }
+            ProductsList.push(query['Product'][i]['Name']);
+            Products.push({label:query['Product'][i]['Name'],value:quantity});
+        }
         let sales = 0;
         let orders = 0;
         let PaymentType = [{label:"CASH",value:0},{label:"CHEQUE",value:0},{label:"ONLINE",value:0}];
@@ -70,18 +80,50 @@ export class CompanyController {
                 sales = sales + Number(query['User'][i]['OrderSell'][j]['TotalAmount']);
             }
         }
-        let Products = []
-        for (let i= 0;i<query['Product'].length;i++)
+
+
+        let ClientInterest = [];
+        for (let i=0 ;i < query['ClientCompany'].length;i++)
         {
-            let quantity = 0;
-            for (let j = 0; j < query['Product'][i]['Orderline'].length;j++)
+            let data = [];
+            let name = query['ClientCompany'][i]['Name']
+            for (let m = 0;m < query['ClientCompany'][i]['User'].length;m++)
             {
-                quantity = quantity + Number(query['Product'][i]['Orderline'][j]['Quantity']);
+                for (let j=0;j < query['ClientCompany'][i]['User'][m]['OrderBuy'].length;j++)
+                {
+                    for (let k = 0; k < query['ClientCompany'][i]['User'][m]['OrderBuy'][j]['Orderline'].length;k++)
+                    {
+                        for (let l = 0;l < ProductsList.length;l++)
+                        {
+                            if (data[l] == null)
+                            {
+                                data[l] = 0;
+                            }
+                            if (query['ClientCompany'][i]['User'][m]['OrderBuy'][j]['Orderline'][k]['Product'] !== undefined && ProductsList[l] === query['ClientCompany'][i]['User'][m]['OrderBuy'][j]['Orderline'][k]['Product']['Name'])
+                            {
+                                console.log(query['ClientCompany'][i]['User'][m]['OrderBuy'][j]['Orderline'][k]['Product']['Name'])
+                                data[l] = data[l] + query['ClientCompany'][i]['User'][m]['OrderBuy'][j]['Orderline'][k]['Quantity'];
+                            }
+                        }
+                        
+                    }
+                }
+                
             }
-            Products.push({label:query['Product'][i]['Name'],value:quantity})
+            if (data.length !== ProductsList.length)
+            {
+                for (let j = 0;j< ProductsList.length;j++)
+                {
+                    data[j] = 0;
+                }
+            }
+            ClientInterest.push({name,data});
+
         }
+
+
         // return query;
-        return {clients,products,sales,orders,Products,PaymentType};
+        return {sales,orders,Products,PaymentType,ClientInterest,ProductsList};
     }
 
     // @Delete('/:Id')

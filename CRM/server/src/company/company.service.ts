@@ -46,7 +46,7 @@ export class CompanyService {
             where:{
                 Id
             },
-            relations:['User.OrderSell','ClientCompany','Product.Orderline']
+            relations:['User.OrderSell','ClientCompany.User.OrderBuy.Orderline.Product','Product.Orderline']
         });
         return query;
 
