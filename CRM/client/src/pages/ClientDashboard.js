@@ -11,7 +11,7 @@ import {
     AppNewsUpdate,
     AppOrderTimeline,
     AppCurrentVisits,
-    AppWebsiteVisits,
+    TimePeriodProgress,
     AppTrafficBySite,
     AppWidgetSummary,
     AppCurrentSubject,
@@ -48,7 +48,7 @@ export default function ClientDashboard() {
                     </Grid>
 
                     <Grid item xs={12} md={6} lg={8}>
-                        <AppWebsiteVisits
+                        <TimePeriodProgress
                             title="Website Visits"
                             subheader="(+43%) than last year"
                             chartLabels={[
@@ -124,7 +124,7 @@ export default function ClientDashboard() {
                         />
                     </Grid>
 
-                    <Grid item xs={12} md={6} lg={4}>
+                    {/* <Grid item xs={12} md={6} lg={4}>
                         <AppCurrentSubject
                             title="Current Subject"
                             chartLabels={['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math']}
@@ -135,7 +135,7 @@ export default function ClientDashboard() {
                             ]}
                             chartColors={[...Array(6)].map(() => theme.palette.text.secondary)}
                         />
-                    </Grid>
+                    </Grid> */}
                 </Grid>
             </Container>
         </Page>

@@ -12,7 +12,7 @@ import {
     AppNewsUpdate,
     AppOrderTimeline,
     AppCurrentVisits,
-    AppWebsiteVisits,
+    TimePeriodProgress,
     AppTrafficBySite,
     AppWidgetSummary,
     AppCurrentSubject,
@@ -30,6 +30,8 @@ export default function HostDashboard() {
     const [Sales, setSales] = useState(0);
     const [Products,setProducts] = useState([]);
     const [PaymentTypes,setPaymentTypes] = useState([]);
+    const [Dates,setDates] = useState([]);
+    const [SalesData,setSalesData] = useState([]);
     useEffect(() => {
         getData();
       }, []);
@@ -45,6 +47,8 @@ export default function HostDashboard() {
             setSales(response.data.sales);
             setProducts(response.data.Products)
             setPaymentTypes(response.data.PaymentType)
+            setDates(response.data.Dates)
+            setSalesData(response.data.SalesData)
         } catch (err) {
           console.log(err);
         }
@@ -74,47 +78,22 @@ export default function HostDashboard() {
                     </Grid>
 
                     <Grid item xs={12} md={6} lg={8}>
-                        <AppWebsiteVisits
-                            title="Website Visits"
-                            subheader="(+43%) than last year"
-                            chartLabels={[
-                                '2003/01/01',
-                                '2003/02/01',
-                                '2003/03/01',
-                                '2003/04/01',
-                                '2003/05/01',
-                                '2003/06/01',
-                                '2003/07/01',
-                                '2003/08/01',
-                                '2003/09/01',
-                                '2003/10/01',
-                                '2003/11/01',
-                            ]}
+                        <TimePeriodProgress
+                            title="Annual Sale"
+                            chartLabels={Dates}
                             chartData={[
+                                // {
+                                //     name: 'Annual Sale',
+                                //     type: 'bar',
+                                //     fill: 'fill',
+                                //     data: SalesData,
+                                // },
                                 {
-                                    name: 'Team A',
+                                    name: 'Annual Sale',
                                     type: 'area',
                                     fill: 'gradient',
-                                    data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
+                                    data: SalesData,
                                 },
-                                // {
-                                //     name: 'Team B',
-                                //     type: 'area',
-                                //     fill: 'gradient',
-                                //     data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
-                                // },
-                                // {
-                                //     name: 'Team C',
-                                //     type: 'line',
-                                //     fill: 'solid',
-                                //     data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
-                                // },
-                                // {
-                                //     name: 'Team D',
-                                //     type: 'line',
-                                //     fill: 'solid',
-                                //     data: [23, 34, 39, 41, 38, 77, 84, 26, 59, 36, 39],
-                                // },
                             ]}
                         />
                     </Grid>

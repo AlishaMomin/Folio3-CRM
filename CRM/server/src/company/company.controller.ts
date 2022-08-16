@@ -56,6 +56,25 @@ export class CompanyController {
         }
         let sales = 0;
         let orders = 0;
+        let dateObj = new Date();
+        
+        
+        let Dates = [];
+        let SalesData = [];
+        for (let i=0;i<12;i++)
+        {
+            let year  = dateObj.getFullYear();
+            let monthvalue = (dateObj.getMonth() -10  + i);
+            if (monthvalue<1 )
+            {
+                monthvalue+=12;
+                year = year-1;
+            }
+            let month = String(monthvalue).padStart(2, '0');
+            let day = String(1).padStart(2, '0');
+            
+            Dates.push(year + '-' + month + '-' + day);
+        }
         let PaymentType = [{label:"CASH",value:0},{label:"CHEQUE",value:0},{label:"ONLINE",value:0}];
         for (let i=0 ;i < query['User'].length;i++)
         {
@@ -75,6 +94,17 @@ export class CompanyController {
                     else if (query['User'][i]['OrderSell'][j]['TransactionType'] === 'online')
                     {
                         PaymentType[2]['value']++;
+                    }
+                }
+                for (let k = 0; k < 11;k++)
+                {
+                    if (SalesData[k] == null)
+                    {
+                        SalesData[k] = 0;
+                    }
+                    if (Dates[k] <= query['User'][i]['OrderSell'][j]['DateOfOrder'] && Dates[k+1] > query['User'][i]['OrderSell'][j]['DateOfOrder'])
+                    {
+                        SalesData[k] = SalesData[k] + Number(query['User'][i]['OrderSell'][j]['TotalAmount']);
                     }
                 }
                 sales = sales + Number(query['User'][i]['OrderSell'][j]['TotalAmount']);
@@ -101,7 +131,6 @@ export class CompanyController {
                             }
                             if (query['ClientCompany'][i]['User'][m]['OrderBuy'][j]['Orderline'][k]['Product'] !== undefined && ProductsList[l] === query['ClientCompany'][i]['User'][m]['OrderBuy'][j]['Orderline'][k]['Product']['Name'])
                             {
-                                console.log(query['ClientCompany'][i]['User'][m]['OrderBuy'][j]['Orderline'][k]['Product']['Name'])
                                 data[l] = data[l] + query['ClientCompany'][i]['User'][m]['OrderBuy'][j]['Orderline'][k]['Quantity'];
                             }
                         }
@@ -120,10 +149,9 @@ export class CompanyController {
             ClientInterest.push({name,data});
 
         }
-
-
+        let removedDate  = Dates.shift();
         // return query;
-        return {sales,orders,Products,PaymentType,ClientInterest,ProductsList};
+        return {sales,orders,Products,PaymentType,ClientInterest,ProductsList,Dates,SalesData};
     }
 
     // @Delete('/:Id')
