@@ -12,21 +12,26 @@ export class ProductService {
         private productRepository: Repository<product>,
     ){}
 
-    getP():Promise<product[]>{
-        return this.productRepository.find();
+    // getP():Promise<product[]>{
+    //     return this.productRepository.find();
+    // }
+    // createP(ProductCreateDto:productCreateDto){
+    //     return this.productRepository.save(ProductCreateDto);
+    // }
+    // updateP(ProductUpdatedDto:productUpdateDto,Id:number){
+    //     return this.productRepository.update(Id,ProductUpdatedDto);
+    // }
+    showPById(companyId:number){
+        return this.productRepository.find({where:{
+                Company:{
+                    Id:companyId
+                }
+        }
+    });
     }
-    createP(ProductCreateDto:productCreateDto){
-        return this.productRepository.save(ProductCreateDto);
-    }
-    updateP(ProductUpdatedDto:productUpdateDto,Id:number){
-        return this.productRepository.update(Id,ProductUpdatedDto);
-    }
-    showPById(Id:number){
-        return this.productRepository.findOne({where:{Id}});
-    }
-    deleteP(Id:number){
-        return this.productRepository.delete(Id);
-    }
+    // deleteP(Id:number){
+    //     return this.productRepository.delete(Id);
+    // }
 
 
 

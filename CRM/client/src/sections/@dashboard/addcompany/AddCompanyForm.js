@@ -26,7 +26,6 @@ export default function AddCompanyForm() {
             Name: Yup.string().required('Company name required'),
             Type: Yup.number(),
             Isdelete: Yup.number(),
-            // id get 
         }),
 
         Contact1: Yup.object().shape({
@@ -74,7 +73,6 @@ export default function AddCompanyForm() {
     });
 
     const postData = async (body) => {
-        console.log(body,"mai pagal hogaye ho");
         axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
         axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
         try {

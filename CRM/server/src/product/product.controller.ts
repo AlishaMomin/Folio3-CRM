@@ -9,28 +9,28 @@ import { ProductService } from './product.service';
 export class ProductController {
     constructor(private productservice:ProductService){}
 
-    @Get()
-    getproduct(){
-        return this.productservice.getP();
-    }
-    @Post()
-    postproduct(@Body() ProductCreateDto:productCreateDto){
-        return this.productservice.createP(ProductCreateDto);
-    }
-    @Patch('/:Id')
-    update(@Body() ProductUpdatedDto:productUpdateDto,
-    @Param('Id',ParseIntPipe) Id:number){
-        return this.productservice.updateP(ProductUpdatedDto,Id);
-    }
+    // @Get()
+    // getproduct(){
+    //     return this.productservice.getP();
+    // }
+    // @Post()
+    // postproduct(@Body() ProductCreateDto:productCreateDto){
+    //     return this.productservice.createP(ProductCreateDto);
+    // }
+    // @Patch('/:Id')
+    // update(@Body() ProductUpdatedDto:productUpdateDto,
+    // @Param('Id',ParseIntPipe) Id:number){
+    //     return this.productservice.updateP(ProductUpdatedDto,Id);
+    // }
 
     @Get('/:Id')
     getProductById(@Param('Id')Id:number){
         return this.productservice.showPById(Id);
     }
 
-    @Delete('/:Id')
-    deleteProduct(@Param('Id',ParseIntPipe)Id:number){
-        return this.productservice.deleteP(Id);
-    }
+    // @Delete('/:Id')
+    // deleteProduct(@Param('Id',ParseIntPipe)Id:number){
+    //     return this.productservice.deleteP(Id);
+    // }
 
 }

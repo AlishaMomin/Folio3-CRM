@@ -147,26 +147,39 @@ export class CompanyController {
             ClientInterest.push({name,data});
         }
         let removedDate  = Dates.shift();
-        // return query;
         return {sales,orders,Products,PaymentType,ClientInterest,ProductsList,Dates,SalesData};
     }
 
 
     @Get('/cd/:Id')
     async displayclientcompanyById(@Param('Id')Id:number){
+
         const query = await this.companyservice.showCCById(Id);
+
         let purchase = 0;
+
         let unpaidOrders = 0;
+
         let orders = 0;
+
         let Dates = [];
+        
         let PurchaseData = [];
+
         let dateObj = new Date();
+
         let overdueOrders = 0;
+
         let currentDate = String(dateObj.getDate()).padStart(2, '0') + '-' + String(dateObj.getMonth() + 1).padStart(2, '0') + '-' + dateObj.getFullYear();
+
         let Products = []
+
         let ProductsList = [];
+
         let PaymentType = [{label:"CASH",value:0},{label:"CHEQUE",value:0},{label:"ONLINE",value:0}];
+
         let paymentStatus = [{label:"Paid",value:0},{label:"Due",value:0}];
+
         for (let i= 0;i<query['HostCompany']['Product'].length;i++)
         {
             ProductsList.push(query['HostCompany']['Product'][i]['Name']);
@@ -248,16 +261,12 @@ export class CompanyController {
         }
         for (let i = 0;i<ProductsList.length;i++)
         {
+            if (data[i] == null)
+            {
+                data[i] = 0;
+            }
             Products.push({label:ProductsList[i],value:data[i]});
         }
-        
-        // return query;
         return {purchase,orders,PaymentType,Dates,PurchaseData,unpaidOrders,overdueOrders,currentDate,Products,paymentStatus};
     }
-    // @Delete('/:Id')
-    // deletecompany(@Param('Id',ParseIntPipe)Id:number){
-    //     return this.companyservice.deleteC(Id);
-    // }
-
-
 }

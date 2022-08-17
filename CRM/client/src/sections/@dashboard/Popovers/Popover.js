@@ -15,8 +15,9 @@ import Orderline from '../../../pages/Orderline';
 // ----------------------------------------------------------------------
 Popover.propTypes = {
   ID: PropTypes.number,
+  STATUS:PropTypes.string,
 };
-export default function Popover({ID}) {
+export default function Popover({ID,STATUS}) {
   const anchorRef = useRef(null);
   const [openOrderline, setOpenOrderline] = useState(false);
   const [openPayment, setOpenPayment] = useState(false);
@@ -35,7 +36,7 @@ export default function Popover({ID}) {
   };
   
   const paymenticon = () =>{
-    if (parseInt(localStorage.getItem('ROLE'),10) === 3)
+    if (parseInt(localStorage.getItem('ROLE'),10) === 3 && STATUS === 'unpaid')
     {
       return (
         <Tooltip title="Pay Order">
@@ -100,7 +101,7 @@ export default function Popover({ID}) {
           '& .MuiMenuItem-root': { px: 1, typography: 'body2', borderRadius: 0.75 },
         }}
       >
-        <PaymentForm/>
+        <PaymentForm ID = {ID}/>
       </MenuPopover>
     </>
   );

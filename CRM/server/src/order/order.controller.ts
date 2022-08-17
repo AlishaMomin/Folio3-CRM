@@ -19,19 +19,24 @@ export class OrderController {
     }
 
     
-    @Post()
-    postorder(@Body() OrderCreateDto:orderCreateDto){
-        return this.orderservice.createO(OrderCreateDto);
-    }
+    // @Post()
+    // postorder(@Body() OrderCreateDto:orderCreateDto){
+    //     return this.orderservice.createO(OrderCreateDto);
+    // }
     
     @Get('/:Id')
     getorderById(@Param('Id')Id:number){
         return this.orderservice.getOById(Id);
     }
-
-
-    @Delete('/:Id')
-    deleteorder(@Param('Id',ParseIntPipe)Id:number){
-        return this.orderservice.deleteO(Id);
+    
+    @Patch('/:Id')
+    updatepayment(@Body() OrderUpdatedPaymentDto:any,
+    @Param('Id',ParseIntPipe) Id:number){
+        return this.orderservice.updateOrderPayment(OrderUpdatedPaymentDto,Id);
     }
+
+    // @Delete('/:Id')
+    // deleteorder(@Param('Id',ParseIntPipe)Id:number){
+    //     return this.orderservice.deleteO(Id);
+    // }
 }

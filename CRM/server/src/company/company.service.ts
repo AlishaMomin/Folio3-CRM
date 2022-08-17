@@ -37,6 +37,8 @@ export class CompanyService {
     createC(CompanyCreateDto:companyCreateDto){
         return this.companyRepository.save(CompanyCreateDto);
     }
+
+
     updateIsDeleteC(CompanyUpdatedDto:any,Id:number){
         console.log(CompanyUpdatedDto)
         return this.companyRepository.update(Id,CompanyUpdatedDto);

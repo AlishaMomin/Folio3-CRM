@@ -22,10 +22,11 @@ export class order{
         type: "enum",
         enum: transactiontype,
         default: transactiontype.ONLINE,
+        nullable: true,
     })
     TransactionType: transactiontype
 
-    @Column()
+    @Column({nullable: true})
     ReferenceNo: string;
 
     @Column()

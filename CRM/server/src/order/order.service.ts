@@ -52,6 +52,12 @@ export class OrderService {
             relations: ['Orderline.Product']
         });
     }
+
+    updateOrderPayment(OrderUpdatedPaymentDto:any,Id:number){
+        console.log(OrderUpdatedPaymentDto)
+        return this.orderRepository.update(Id,OrderUpdatedPaymentDto);
+    }
+
     deleteO(Id:number){
         return this.orderRepository.delete(Id);
     }

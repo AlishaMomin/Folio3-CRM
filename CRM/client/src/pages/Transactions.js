@@ -103,13 +103,11 @@ export default function Transactions() {
     {
       setTitle("Recievables")
       Urlo = `http://localhost:5000/order/h/${CompanyId}`;
-      // setNavigation("/host/addcompany"); // feels unnecessary
     }
     if (parseInt(localStorage.getItem('ROLE'),10) === 3)
     {
       setTitle("Transactions")
       Urlo = `http://localhost:5000/order/c/${CompanyId}`;
-      // setNavigation("/client/addcompany"); // feels unnecessary
     }
         try {
            const response = await axios.get(Urlo);
@@ -221,6 +219,7 @@ export default function Transactions() {
                           /> */}
                           <Popover 
                           ID = {Id} 
+                          STATUS = {InvoiceStatus}
                           />
                         </TableCell>
                       </TableRow>

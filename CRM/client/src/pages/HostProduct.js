@@ -91,7 +91,8 @@ export default function AdminHome() {
     }, []);
     const getData = async () => {
         try {
-           const response = await axios.get("http://localhost:5000/product")
+            const companyId = parseInt(localStorage.getItem('ID'),10);
+           const response = await axios.get(`http://localhost:5000/product/${companyId}`)
               console.log("Data recieved");
               console.log(response.data);
               setProduct(response.data);
