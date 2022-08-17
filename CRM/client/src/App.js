@@ -23,9 +23,6 @@ export default function App() {
       <AuthProvider>
         {content}
         </AuthProvider>
-      {/* <Router /> */}
-      {/* <ProtectedAdminRouter/> */}
-      {/*  */}
     </ThemeProvider>
   );
 }

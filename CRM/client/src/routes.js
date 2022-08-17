@@ -8,10 +8,6 @@ import hostRoutes from './allRoutes/hostRoutes';
 import clientRoutes from './allRoutes/clientRoutes';
 import AuthGuard from './auth/AuthGuard';
 
-//
-import Blog from './pages/Blog';
-import User from './pages/User';
-import Products from './pages/Products';
 // ----------------------------------------------------------------------
 
 // export default function Router() {
@@ -25,9 +21,6 @@ const routes = [
           ...adminRoutes,
           ...hostRoutes,
           ...clientRoutes,
-          { path: 'user', element: <User /> },
-          { path: 'products', element: <Products /> },
-          { path: 'blog', element: <Blog /> },
         ],
       },
       ...publicRoutes

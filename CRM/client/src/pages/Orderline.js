@@ -258,8 +258,6 @@ export default function Orderline({ ID }) {
             Print Invoice
           </Button>
         </Stack>
-
-
       </Container>
     </Page>
   );
