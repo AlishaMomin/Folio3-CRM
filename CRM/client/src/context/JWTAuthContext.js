@@ -30,6 +30,8 @@ const setSession = (accessToken) => {
         localStorage.removeItem('EMAILID')
         localStorage.removeItem('Name')
         localStorage.removeItem('RoleName')
+        localStorage.removeItem('CompanyName')
+        localStorage.removeItem('HostCompanyName')
         delete axios.defaults.headers.common.Authorization
     }
 }
@@ -91,6 +93,8 @@ export const AuthProvider = ({ children }) => {
                 localStorage.setItem('EMAILID',jwtDecode(accessToken).Email)
                 localStorage.setItem('Name',jwtDecode(accessToken).Name)
                 localStorage.setItem('RoleName',jwtDecode(accessToken).RoleName)
+                localStorage.setItem('CompanyName',response.data[0].companyName)
+                localStorage.setItem('HostCompanyName',response.data[0].hostCompanyName)
                 let roleo = '';
                 if (response.data[0].roleId === 1)
                 {

@@ -100,7 +100,7 @@ export class UserService {
             where :{
                 Email: Email,
             },
-            relations: ['Role','Company']
+            relations: ['Role','Company.HostCompany']
         });
         return query;
     }

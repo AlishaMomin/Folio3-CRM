@@ -15,7 +15,8 @@ export class OrderController {
 
     @Get('/c/:Id')
     getTransactionsorder(@Param('Id')Id:number){
-        return this.orderservice.getOC(Id);
+        const query = this.orderservice.getOC(Id);
+        return query;
     }
 
     

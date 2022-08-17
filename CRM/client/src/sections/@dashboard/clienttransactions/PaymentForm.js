@@ -53,13 +53,12 @@ export default function PaymentForm({ ID }) {
   } = methods;
 
   const updateData = async (body) => {
-    console.log(body,"Line 56 paymentForm");
     try {
         await axios.patch(`http://localhost:5000/order/${ID}`, body)
             .then((response) => {
                 console.log("Data recieved");
                 console.log(response.data);
-                alert("Paid Successfully");
+                alert("Status updated successfully");
                 window.location.reload();
             })
 

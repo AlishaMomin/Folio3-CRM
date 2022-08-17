@@ -11,15 +11,15 @@ import { Link, Stack, IconButton, InputAdornment, Container, Typography } from '
 import { LoadingButton } from '@mui/lab';
 // components
 import Iconify from '../../../components/Iconify';
-import { FormProvider, RHFTextField, RHFCheckbox } from '../../../components/hook-form';
+import { FormProvider, RHFTextField} from '../../../components/hook-form';
 
 // ----------------------------------------------------------------------
 
 export default function AddCompanyForm() {
     const navigate = useNavigate();
 
-    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4})[ \\-])?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-
+    // const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-])|(\\([0-9]{2,3}\\)[ \\-])|([0-9]{2,4})[ \\-])?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+    const phoneRegExp = /^923\d{9}$|^03\d{9}$/
 
     const CompanySchema = Yup.object().shape({
         Company: Yup.object().shape({

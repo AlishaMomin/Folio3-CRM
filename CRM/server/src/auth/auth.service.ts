@@ -21,21 +21,39 @@ export class AuthService {
     }
 
     async login( User: any ){
-        const payload = { Email: User.Email, sub: User.Id,RoleName: User. Role.RoleName, Name: User.Name} ;  
+        const payload = { Email: User.Email, sub: User.Id,RoleName: User. Role.RoleName, Name: User.Name,} ;  
         if (User.Company != null)
         {
-            return[{
-                access_token: this.jwtService.sign(payload),
-                roleId: User.Role.Id,
-                companyId : User.Company.Id,
-            }]
+            if (User.Company.HostCompany != null)
+            {
+                console.log(User.Company.HostCompany.Name,"Line 29 auth service")
+                return[{
+                    access_token: this.jwtService.sign(payload),
+                    roleId: User.Role.Id,
+                    companyId : User.Company.Id,
+                    companyName: User.Company.Name,
+                    hostCompanyName:User.Company.HostCompany.Name,
+                }]
+            }
+            else
+            {
+                return[{
+                    access_token: this.jwtService.sign(payload),
+                    roleId: User.Role.Id,
+                    companyId : User.Company.Id,
+                    companyName: User.Company.Name,
+                    hostCompanyName:''
+                }]
+            }
         }
         else
         {
             return[{
                 access_token: this.jwtService.sign(payload),
                 roleId: User.Role.Id,
-                companyId : 0
+                companyId : 0,
+                companyName:'',
+                hostCompanyName:''
             }]
         }
     }

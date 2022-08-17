@@ -44,17 +44,35 @@ DashboardSidebar.propTypes = {
 };
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar, userRole }) {
+
   const { pathname } = useLocation();
+
   const [UserRole, setUserRole] = useState('');
+
   const [UserName, setUserName] = useState('');
 
+  const [UserCompany, setUserCompany] = useState('');
+
+  const [UserHostCompany, setUserHostCompany] = useState('');
+
   const isDesktop = useResponsive('up', 'lg');
+
   console.log('userRole', userRole);
 
   useEffect(() => {
-    
-    setUserRole(localStorage.getItem('RoleName'))
-    setUserName(localStorage.getItem('Name'))
+    setUserName(localStorage.getItem('Name'));
+
+    setUserCompany(localStorage.getItem('CompanyName'));
+
+
+    if (parseInt(localStorage.getItem('ROLE'),10) === 3)
+    {
+      setUserRole(`${localStorage.getItem('RoleName')} of ${localStorage.getItem('HostCompanyName')}`);
+    }
+    if (parseInt(localStorage.getItem('ROLE'),10) === 2 || parseInt(localStorage.getItem('ROLE'),2) === 1 )
+    {
+      setUserRole(localStorage.getItem('RoleName'));
+    }
     if (isOpenSidebar) {
       onCloseSidebar();
     }
@@ -95,7 +113,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar, userRo
             <Avatar src={'/static/mock-images/avatars/avatar_default.jpg'} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {UserName}
+                {UserName} - {UserCompany}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                 {UserRole}

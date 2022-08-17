@@ -29,16 +29,8 @@ import {UserListHead,UserListToolbar} from '../sections/@dashboard/frequentCompo
 import {Popover} from '../sections/@dashboard/Popovers';
 // ----------------------------------------------------------------------
 
-const TABLE_HEAD = [
-  { id: 'Name', label: 'Name', alignRight: false },  
-  { id: 'TotalAmount', label: 'Total Amount', alignRight: false },
-  { id: 'DateOfOrder', label: 'Date Of Order', alignRight: false },
-  { id: 'LastDate', label: 'Last Date', alignRight: false },
-  { id: 'InvoiceStatus', label: 'Status', alignRight: false },
-  { id: '' },
-];
-
 // ----------------------------------------------------------------------
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -83,16 +75,36 @@ export default function Transactions() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const [Title, setTitle] = useState('');
-  const [Navigation,setNavigation] = useState(""); // feels unnecessary
 
+  const [TABLE_HEAD, setTableHead] = useState([]);
+
+  
+  const TABLE_HEADHOST = [
+    { id: 'ClientName', label: 'Client Name', alignRight: false },  
+    { id: 'Name', label: 'Order', alignRight: false },  
+    { id: 'TotalAmount', label: 'Total Amount', alignRight: false },
+    { id: 'DateOfOrder', label: 'Date Of Order', alignRight: false },
+    { id: 'LastDate', label: 'Last Date', alignRight: false },
+    { id: 'InvoiceStatus', label: 'Status', alignRight: false },
+    { id: '' },
+  ];
+
+  const TABLE_HEADCLIENT = [
+    { id: 'Name', label: 'Order', alignRight: false },  
+    { id: 'TotalAmount', label: 'Total Amount', alignRight: false },
+    { id: 'DateOfOrder', label: 'Date Of Order', alignRight: false },
+    { id: 'LastDate', label: 'Last Date', alignRight: false },
+    { id: 'InvoiceStatus', label: 'Status', alignRight: false },
+    { id: '' },
+  ];
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
-  const [Recievables, setRecievables] = useState([]);
+  const [Transactions, setTransactions] = useState([]);
     useEffect(() => {
-        console.log("Product ka data", Recievables);
+        console.log("Product ka data", Transactions);
 
         getData();
     }, []);
@@ -103,25 +115,27 @@ export default function Transactions() {
     {
       setTitle("Recievables")
       Urlo = `http://localhost:5000/order/h/${CompanyId}`;
+      setTableHead(TABLE_HEADHOST)
     }
     if (parseInt(localStorage.getItem('ROLE'),10) === 3)
     {
       setTitle("Transactions")
       Urlo = `http://localhost:5000/order/c/${CompanyId}`;
+      setTableHead(TABLE_HEADCLIENT)
     }
-        try {
-           const response = await axios.get(Urlo);
-              console.log("Data recieved");
-              console.log(response.data);
-              setRecievables(response.data);
-        } catch (err) {
-          console.log(err);
-        }
-      };
+    try {
+        const response = await axios.get(Urlo);
+          console.log("Data recieved");
+          console.log(response.data);
+          setTransactions(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = Recievables.map((n) => n.Name);
+      const newSelecteds = Transactions.map((n) => n.Name);
       setSelected(newSelecteds);
       return;
     }
@@ -156,12 +170,11 @@ export default function Transactions() {
     setFilterName(event.target.value);
   };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - Recievables.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - Transactions.length) : 0;
 
-  const filteredUsers = applySortFilter(Recievables, getComparator(order, orderBy), filterName);
+  const filteredUsers = applySortFilter(Transactions, getComparator(order, orderBy), filterName);
 
   const isUserNotFound = filteredUsers.length === 0;
-
   return (
     <Page title={Title}>
       <Container>
@@ -173,7 +186,6 @@ export default function Transactions() {
 
         <Card>
           <UserListToolbar numSelected={selected.length} filterName={filterName} onFilterName={handleFilterByName} />
-
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
@@ -181,14 +193,18 @@ export default function Transactions() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={Recievables.length}
+                  rowCount={Transactions.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { Id,Name, TotalAmount,  DateOfOrder, LastDate, InvoiceStatus} = row;
+                    if (parseInt(localStorage.getItem('ROLE'),10) === 2)
+                    {
+                      row.ClientName = row.Buyer.Company.Name;
+                    }
+                    const { Id,Name, TotalAmount,  DateOfOrder, LastDate, InvoiceStatus,ClientName} = row;
                     const isItemSelected = selected.indexOf(Name) !== -1;
 
                     return (
@@ -203,10 +219,17 @@ export default function Transactions() {
                         <TableCell padding="checkbox">
                         {/* <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, Name)} /> */}
                         </TableCell>
+                        {(() => {
+                          if (parseInt(localStorage.getItem('ROLE'),10) === 2) {
+                            return (  
+                              <TableCell align="left">{ClientName}</TableCell>      
+                            )
+                          }
+                        })()}
                         <TableCell align="left">{Name}</TableCell>
                         <TableCell align="left">{TotalAmount}</TableCell>
                         <TableCell align="left">{DateOfOrder}</TableCell>
-                        <TableCell align="left">{LastDate}</TableCell>                          
+                        <TableCell align="left">{LastDate}</TableCell>                     
                         <TableCell align="left" >
                           <Label variant="ghost" color={(InvoiceStatus === 'unpaid' && 'error') || 'success'}>
                             {sentenceCase(InvoiceStatus)}
@@ -248,7 +271,7 @@ export default function Transactions() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={Recievables.length}
+            count={Transactions.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

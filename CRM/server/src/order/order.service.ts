@@ -21,7 +21,7 @@ export class OrderService {
                         Id:Id
                     }
                 }
-        },
+            },
         });
     }
 
@@ -37,6 +37,7 @@ export class OrderService {
                 },
                 InvoiceStatus:invoicestatus.UNPAID,
         },
+        relations:['Buyer.Company']
         });
     }
 
